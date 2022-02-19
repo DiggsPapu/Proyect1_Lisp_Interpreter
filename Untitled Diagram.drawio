@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-02-19T03:32:00.714Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 OPR/83.0.4254.62" etag="rNpoJ23S-S2kxUOoBYIX" version="16.5.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-02-19T04:02:14.454Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 OPR/83.0.4254.62" etag="Zc-Eobk9yWPsFzWqG0rX" version="16.5.6" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1068" dy="1621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="383" dy="1609" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -158,7 +158,7 @@
         <mxCell id="natZOX87_09Pyh3oMRrT-77" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="natZOX87_09Pyh3oMRrT-75" vertex="1">
           <mxGeometry y="60" width="340" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="natZOX87_09Pyh3oMRrT-78" value="+searchFunction(nameFunction: T): stack&#xa;-stackCreator(name:String,Scan:Scanner):void&#xa;+createFunction(nameFunction: T, stackInstructions: T): void&#xa;-returnFunction(): stack&#xa;&#xa;override&#xa;+add(name:T): void&#xa;+remove(name:T): void&#xa;+setFirst(name:T): void&#xa;+setLast(name:T): void&#xa;+getFirst(name:T): void&#xa;+getLast(name: T): void&#xa;+booleanContains(T): boolean&#xa;+addAll(name:T, stacklist:T): void&#xa;+voidClear(): void&#xa;+clone(): void&#xa;+get(name:T): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="natZOX87_09Pyh3oMRrT-75" vertex="1">
+        <mxCell id="natZOX87_09Pyh3oMRrT-78" value="+searchFunction(nameFunction: T): stack&#xa;+stackCreator(name:String,Scan:Scanner):void&#xa;+createFunction(nameFunction: T, stackInstructions: T): void&#xa;-returnFunction(): stack&#xa;&#xa;override&#xa;+add(name:T): void&#xa;+remove(name:T): void&#xa;+setFirst(name:T): void&#xa;+setLast(name:T): void&#xa;+getFirst(name:T): void&#xa;+getLast(name: T): void&#xa;+booleanContains(T): boolean&#xa;+addAll(name:T, stacklist:T): void&#xa;+voidClear(): void&#xa;+clone(): void&#xa;+get(name:T): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="natZOX87_09Pyh3oMRrT-75" vertex="1">
           <mxGeometry y="68" width="340" height="262" as="geometry" />
         </mxCell>
         <mxCell id="AochQKUZwjmsb-0F-WYE-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.019;entryY=0.625;entryDx=0;entryDy=0;entryPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="AochQKUZwjmsb-0F-WYE-1" target="natZOX87_09Pyh3oMRrT-46" edge="1">
