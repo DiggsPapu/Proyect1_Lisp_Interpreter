@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-02-23T18:26:48.337Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 OPR/83.0.4254.62" etag="p8C-qNczleQqnuNVgyjM" version="16.6.2" type="github">
+<mxfile host="app.diagrams.net" modified="2022-02-24T02:50:51.977Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 OPR/83.0.4254.62" etag="f9iDRZzY9vYWVzQrI1vq" version="16.6.2" type="github">
   <diagram id="XaqXBKrpCUasBcb4OH2j" name="Page-1">
     <mxGraphModel dx="610" dy="258" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -34,7 +34,7 @@
         <mxCell id="b2YBu33_yZtrS_XBUkd6-11" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="b2YBu33_yZtrS_XBUkd6-9">
           <mxGeometry y="58" width="340" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="b2YBu33_yZtrS_XBUkd6-12" value="+searchVariable(variableName: String): &#xa;+createVariable(variableName: String, variableData: T): void&#xa;-returnVariable(): void&#xa;&#xa;override&#xa;+add(variable:node): void&#xa;+remove(name: String): void&#xa;+setFirst(variableName: String, variableData: T): void&#xa;+setLast(variableName: String, variableData: T): void&#xa;+getFirst(): node&#xa;+getLast(): node&#xa;+booleanContains(T): boolean&#xa;+addAll(variableName: String, list:nodeList): void&#xa;+voidClear(variableName:String): void&#xa;+clone(): void&#xa;+get(variableName: String): node&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b2YBu33_yZtrS_XBUkd6-9">
+        <mxCell id="b2YBu33_yZtrS_XBUkd6-12" value="+searchVariable(variableName: String): &#xa;+createVariable(variableName: String, variableData: T): void&#xa;-returnVariable(): void&#xa;&#xa;override&#xa;+HashMap(): void&#xa;+get(key: T): T&#xa;+put(key:T, value: T): void&#xa;+remove(key:T): void&#xa;+keyset(): arrayList&#xa;+values(): arrayList&#xa;+containsKey(): boolean&#xa;+isEmpty(): boolean&#xa;+int(key:T, value: int): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b2YBu33_yZtrS_XBUkd6-9">
           <mxGeometry y="66" width="340" height="240" as="geometry" />
         </mxCell>
         <mxCell id="b2YBu33_yZtrS_XBUkd6-13" value="ArithmeticOperations" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
@@ -150,16 +150,16 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="b2YBu33_yZtrS_XBUkd6-38" value="FunctionStorage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
-          <mxGeometry x="770" y="130" width="340" height="330" as="geometry" />
+          <mxGeometry x="770" y="130" width="431" height="330" as="geometry" />
         </mxCell>
         <mxCell id="b2YBu33_yZtrS_XBUkd6-39" value="-key: String&#xa;-value: T" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b2YBu33_yZtrS_XBUkd6-38">
-          <mxGeometry y="26" width="340" height="34" as="geometry" />
+          <mxGeometry y="26" width="431" height="34" as="geometry" />
         </mxCell>
         <mxCell id="b2YBu33_yZtrS_XBUkd6-40" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="b2YBu33_yZtrS_XBUkd6-38">
-          <mxGeometry y="60" width="340" height="8" as="geometry" />
+          <mxGeometry y="60" width="431" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="b2YBu33_yZtrS_XBUkd6-41" value="+searchFunction(nameFunction: T): stack&#xa;+stackCreator(name:String,Scan:Scanner):void&#xa;+createFunction(nameFunction: T, stackInstructions: T): void&#xa;-returnFunction(): stack&#xa;&#xa;override&#xa;+HashMap(): void&#xa;+get(key: T): T&#xa;+put(key:T, value: T): void&#xa;+remove(key:T): void&#xa;+keyset(): arrayList&#xa;+values(): arrayList&#xa;+containsKey(): boolean&#xa;+isEmpty(): boolean&#xa;+int(key:T, value: int): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b2YBu33_yZtrS_XBUkd6-38">
-          <mxGeometry y="68" width="340" height="262" as="geometry" />
+        <mxCell id="b2YBu33_yZtrS_XBUkd6-41" value="+storageNewFunction(nameFunction: String, ArrayInstructions: String[]): void&#xa;-returnFunction(): stack&#xa;&#xa;override&#xa;+HashMap(): void&#xa;+get(key: T): T&#xa;+put(key:T, value: T): void&#xa;+remove(key:T): void&#xa;+keyset(): arrayList&#xa;+values(): arrayList&#xa;+containsKey(): boolean&#xa;+isEmpty(): boolean&#xa;+int(key:T, value: int): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b2YBu33_yZtrS_XBUkd6-38">
+          <mxGeometry y="68" width="431" height="262" as="geometry" />
         </mxCell>
         <mxCell id="b2YBu33_yZtrS_XBUkd6-42" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=1.002;exitY=0.248;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="b2YBu33_yZtrS_XBUkd6-16" target="b2YBu33_yZtrS_XBUkd6-32">
           <mxGeometry x="0.0119" y="13" width="160" relative="1" as="geometry">
