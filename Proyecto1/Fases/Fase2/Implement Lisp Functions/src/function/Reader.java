@@ -53,11 +53,7 @@ public class Reader {
 			System.out.print("Reconoce el case\n");
 			return "function";
 		}
-			
-		else if (evaluateExpresion("^[a-z]+@uvg.edu.gt$",scann)) //This is a professor
-			return "variable";
-		else if (evaluateExpresion("^[a-z]+_adm@uvg.edu.gt$",scann)) //This is an employee
-			return "exp";
+		
 		else {
 			return "none";
 		}
