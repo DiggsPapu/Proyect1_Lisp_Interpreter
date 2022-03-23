@@ -5,11 +5,11 @@ import java.lang.Math;
  *
  * @author marti
  */
-public class Artithmetic_Operations {
+public class Arithmetic_Operations {
     
     Stack<String> Stack;
     
-    public Artithmetic_Operations(String[] Tokens){
+    public Arithmetic_Operations(String[] Tokens){
         Stack = new Stack<String>();
         for (int i=0;i<Tokens.length;i++){
           Stack.push(Tokens[i]);
@@ -27,12 +27,12 @@ public class Artithmetic_Operations {
     }
   
   public void Evaluate(Stack<String> callStack){
-        String func = callStack.pop();
+        String func = callStack.pop(); /* This is the operator or function */
         if(func.equals("+")) {
-            float result = Add(callStack);
+            float result = Plus(callStack);
             Stack.push(String.valueOf(result));
         }else if(func.equals("-")) {
-            float result = Subs(callStack);
+            float result = Minus(callStack);
             Stack.push(String.valueOf(result));
         }else if(func.equals("*")) {
             float result = Multi(callStack);
@@ -46,13 +46,13 @@ public class Artithmetic_Operations {
         }
     }
   
-    public float Add(Stack<String> callStack){
+    public float Plus(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
         System.out.println(a+b);
         return(a+b);
     }
-    public float Subs(Stack<String> callStack){
+    public float Minus(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
         System.out.println(a-b);
