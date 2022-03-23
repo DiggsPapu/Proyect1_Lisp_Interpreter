@@ -14,7 +14,7 @@ public class Reader {
 	protected static final String LITERAL = "[a-zA-Z0-9]+";
 	protected static final String VALID_NAME = "[a-zA-Z][a-zA-Z0-9]*";
 	protected static final String WHIESPACE = "[\\s]+";
-	protected static final String NUMERIC_ATOM = "[\\d\\+\\-]?[\\d]*";
+	protected static final String NUMERIC_ATOM = "[\\d\\+\\-\\*\\/\\^]?[\\d]*";
 	protected static final String SYMBOL = "[().]";
 	protected static final String QUOTATION = "[\"]";
 	protected static final String ATOM = "ATOM";
