@@ -21,7 +21,7 @@ public class Main {
 		while (true) {
 			
 			String instruction =inputLector.nextLine();
-			System.out.print(instruction);
+			System.out.print(instruction+"\n");
 			/**
 			 * En caso de querer salir del programa
 			 * @returns break
