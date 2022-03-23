@@ -6,15 +6,16 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class Reader {
-	FunctionStorage functionStorage;
-	FunctionStorage variableStorage;
+	private FunctionStorage functionStorage;
+	private VariableStorage variableStorage;
 	
 	protected static final String LETTER = "[a-zA-Z]";
 	protected static final String LITERAL = "[a-zA-Z0-9]+";
-	protected static final String VALID_FUNCTION_NAME = "[a-zA-Z][a-zA-Z0-9]*";
+	protected static final String VALID_NAME = "[a-zA-Z][a-zA-Z0-9]*";
 	protected static final String WHIESPACE = "[\\s]+";
 	protected static final String NUMERIC_ATOM = "[\\d\\+\\-]?[\\d]*";
 	protected static final String SYMBOL = "[().]";
+	protected static final String QUOTATION = "[\"]";
 	protected static final String ATOM = "ATOM";
 	protected static final String LIST = "LIST";
 	protected static final String SETQ = "SETQ";
@@ -24,6 +25,22 @@ public class Reader {
 	protected static final String EQUAL = "EQUAL";
 	
 	
+	public FunctionStorage getFunctionStorage() {
+		return functionStorage;
+	}
+
+	public void setFunctionStorage(FunctionStorage functionStorage) {
+		this.functionStorage = functionStorage;
+	}
+
+	public VariableStorage getVariableStorage() {
+		return variableStorage;
+	}
+
+	public void setVariableStorage(VariableStorage variableStorage) {
+		this.variableStorage = variableStorage;
+	}
+
 	/**
 	 * It divides the text in valid tokens
 	 * @param command
@@ -40,7 +57,7 @@ public class Reader {
 		}
 		while (  i < command.length() ){
 			int j = i + 1;
-			if ( command.substring(i, j).matches(LETTER) || command.substring(i, j).matches(NUMERIC_ATOM) ){
+			if ( command.substring(i, j).matches(LETTER) || command.substring(i, j).matches(NUMERIC_ATOM)||command.substring(i, j).matches(QUOTATION) ){
 				while ( command.substring(i,j + 1).matches(LITERAL) || command.substring(i, j + 1).matches(NUMERIC_ATOM) ){
 					j++;
 				}
@@ -89,7 +106,17 @@ public class Reader {
 				System.out.print(array.get(k)+" ");
 			}
 			break;
-		} default:{
+		}
+		case 2: {
+			
+		}
+		case 3:{
+			
+		}
+		case 4:{
+			
+		}
+		default:{
 			
 		}
 //		
@@ -106,6 +133,41 @@ public class Reader {
 	}
 	}
 	
+	public void caseSETQ(LinkedList<String> array) {
+		if (VALID_NAME.equals(array.get(2))) {
+			// Para verificar que es valida 
+			if (SYMBOL.equals(array.get(3)) && SYMBOL.equals(array.get(array.size()-2)) && QUOTATION.equals(array.get(4)) &&  QUOTATION.equals(array.get(array.size()-3))) {
+				// Es para almacenar el valor tipo string
+				String value = new String();
+				//Para verificar que es valida la concatenacion
+				boolean valido = true;
+				//Para correr el array
+				for (int k = 4 ; k < array.size()-3; k++ ) {
+					if (!array.get(k).equals(QUOTATION) && valido) {
+						value.concat(array.get(k));
+						value.concat(" ");
+						if (k == array.size()-3) {
+							value.trim();
+						}
+					}
+					else {
+						valido = false;
+					}
+					
+				}
+				if (valido) {
+					getVariableStorage().CreateVariable(array.get(2), value);
+				}
+				
+				
+			}
+			else {
+				System.out.print("No es una sintaxis valida");
+			}
+		}else {
+			System.out.print("No es valida la sintaxis.");
+		}
+	}
 	
 	
 	
@@ -122,7 +184,8 @@ public class Reader {
 		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
-		lector.caseReader(scanner.nextLine());
+//		lector.caseReader(scanner.nextLine());
+
 		
 	}
 	
