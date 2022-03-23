@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.lang.Math;
 
 /**
  *
@@ -39,6 +40,9 @@ public class Artithmetic_Operations {
         }else if(func.equals("/")) {
             float result = Div(callStack);
             Stack.push(String.valueOf(result));
+        }else if(func.equals("^")) {
+            float result = Pow(callStack);
+            Stack.push(String.valueOf(result));
         }
     }
   
@@ -65,5 +69,11 @@ public class Artithmetic_Operations {
         float b = Float.parseFloat(callStack.pop());
         System.out.println(a/b);
         return(a/b);
+    }
+    public float Pow(Stack<String> callStack){
+        float a = Float.parseFloat(callStack.pop());
+        float b = Float.parseFloat(callStack.pop());
+        System.out.println(Math.pow(a, b));
+        return(Math.pow(a, b));
     }
   }
