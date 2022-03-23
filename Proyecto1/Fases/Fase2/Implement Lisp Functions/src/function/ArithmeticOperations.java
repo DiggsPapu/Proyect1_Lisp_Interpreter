@@ -1,33 +1,39 @@
+package function;
+
 import java.util.Stack;
 import java.lang.Math;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
  * @author marti
  */
+
 public class Arithmetic_Operations {
-    
+    float Final = 0 ;
     Stack<String> Stack;
     
-    public Arithmetic_Operations(String[] Tokens){
+    public Arithmetic_Operations(LinkedList<String> list){
         Stack = new Stack<String>();
+        String[] Tokens = list.toArray(new String[list.size()]);
         for (int i=0;i<Tokens.length;i++){
           Stack.push(Tokens[i]);
           if(Tokens[i].equals(")")) Interpret(); 
         }
     }
-    public void Interpret(){
+    private void Interpret(){
         String tok;
         Stack<String> EvaluateStack = new Stack<String>();
-        tok = Stack.pop(); /* This is the ) character */
+        tok = Stack.pop();
         while(!(tok=Stack.pop()).equals("(")){
           EvaluateStack.push(tok);
         }
         Evaluate(EvaluateStack);
     }
   
-  public void Evaluate(Stack<String> callStack){
-        String func = callStack.pop(); /* This is the operator or function */
+    private void Evaluate(Stack<String> callStack){
+        String func = callStack.pop();
         if(func.equals("+")) {
             float result = Plus(callStack);
             Stack.push(String.valueOf(result));
@@ -46,34 +52,37 @@ public class Arithmetic_Operations {
         }
     }
   
-    public float Plus(Stack<String> callStack){
+    private float Plus(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
-        System.out.println(a+b);
+        Final = a+b;
         return(a+b);
     }
-    public float Minus(Stack<String> callStack){
+    private float Minus(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
-        System.out.println(a-b);
+        Final = a-b;
         return(a-b);
     }
-    public float Multi(Stack<String> callStack){
+    private float Multi(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
-        System.out.println(a*b);
+        Final = a*b;
         return(a*b);
     }
-    public float Div(Stack<String> callStack){
+    private float Div(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
-        System.out.println(a/b);
+        Final = a/b;
         return(a/b);
     }
-    public float Pow(Stack<String> callStack){
+    private float Pow(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
-        System.out.println(Math.pow(a, b));
-        return(Math.pow(a, b));
+        Final = (float)Math.pow(a, b);
+        return((float)Math.pow(a, b));
+    }
+    public float Result(){
+        return Final;
     }
   }
