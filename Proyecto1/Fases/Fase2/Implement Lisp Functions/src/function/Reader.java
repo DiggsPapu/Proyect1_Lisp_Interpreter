@@ -14,11 +14,7 @@ public class Reader {
 	protected static final String LITERAL = "[a-zA-Z0-9]+";
 	protected static final String VALID_NAME = "[a-zA-Z][a-zA-Z0-9]*";
 	protected static final String WHIESPACE = "[\\s]+";
-<<<<<<< HEAD
-	protected static final String NUMERIC_ATOM = "[\\d\\+\\-]?[\\d]*";
-=======
 	protected static final String NUMERIC_ATOM = "[\\d\\+\\-\\*\\/\\^]?[\\d]*";
->>>>>>> fc447724fbb935177f26eaea38b5525a5873c3e5
 	protected static final String SYMBOL = "[().]";
 	protected static final String QUOTATION = "[\"]";
 	protected static final String ATOM = "ATOM";
@@ -78,11 +74,8 @@ public class Reader {
 	
 	public Integer getCase(LinkedList<String> lista) {
 		System.out.println(lista);
-<<<<<<< HEAD
-=======
-                Arithmetic_Operations AMOP = new Arithmetic_Operations(lista);
-                System.out.println(AMOP.Result());
->>>>>>> fc447724fbb935177f26eaea38b5525a5873c3e5
+		Arithmetic_Operations AMOP = new Arithmetic_Operations(lista);
+        System.out.println(AMOP.Result());
 		if (QUOTE.equals(lista.get(1).trim())) {
 			return 1;
 		}else if (DEFUN.equals(lista.get(1))) {

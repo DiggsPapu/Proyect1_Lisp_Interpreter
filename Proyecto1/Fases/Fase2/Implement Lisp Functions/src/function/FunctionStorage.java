@@ -18,11 +18,5 @@ public class FunctionStorage {
 		else {
 			functionS.put(functionName, arrayInstructions);
 		}
-<<<<<<< HEAD
-		
 	}
-
-=======
-	}
->>>>>>> fc447724fbb935177f26eaea38b5525a5873c3e5
 }

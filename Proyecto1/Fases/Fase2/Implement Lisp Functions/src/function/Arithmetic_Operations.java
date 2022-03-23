@@ -10,11 +10,11 @@ import java.util.List;
  * @author marti
  */
 
-public class ArithmeticOperations {
+public class Arithmetic_Operations {
     float Final = 0 ;
     Stack<String> Stack;
     
-    public ArithmeticOperations(LinkedList<String> list){
+    public Arithmetic_Operations(LinkedList<String> list){
         Stack = new Stack<String>();
         String[] Tokens = list.toArray(new String[list.size()]);
         for (int i=0;i<Tokens.length;i++){
