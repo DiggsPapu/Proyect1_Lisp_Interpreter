@@ -41,13 +41,17 @@ public class Reader {
 	public void setVariableStorage(VariableStorage variableStorage) {
 		this.variableStorage = variableStorage;
 	}
-
+	
+	public Reader() {
+		this.functionStorage = new FunctionStorage();
+		this.variableStorage = new VariableStorage();
+	}
+	
 	/**
 	 * It divides the text in valid tokens
 	 * @param command
 	 * @return
 	 */
-	
 	
 	public LinkedList <String> tokenize(String command){
 		int i = 0;
@@ -68,14 +72,12 @@ public class Reader {
 			}
 			i = j;
 		}
-		System.out.print(tokens.size());
+		System.out.print("tOKEN SIZE:"+ String.valueOf(tokens.size())+"\n" );
 		return tokens;
 	}
 	
 	public Integer getCase(LinkedList<String> lista) {
 		System.out.println(lista);
-		Arithmetic_Operations AMOP = new Arithmetic_Operations(lista);
-        System.out.println(AMOP.Result());
 		if (QUOTE.equals(lista.get(1).trim())) {
 			return 1;
 		}else if (DEFUN.equals(lista.get(1))) {
@@ -114,7 +116,7 @@ public class Reader {
 			
 		}
 		case 3:{
-			
+			caseSETQ(array);
 		}
 		case 4:{
 			
@@ -135,23 +137,37 @@ public class Reader {
 //		
 	}
 	}
-	
+//	.substring(0,array.get(array.size()-1).length()-1)
 	public void caseSETQ(LinkedList<String> array) {
-		if (VALID_NAME.equals(array.get(2))) {
+//		System.out.print(array.get(2).substring(0, array.get(2).length()-1).matches(VALID_NAME) && array.get(array.size()-1).matches(SYMBOL) );
+		if (array.get(2).substring(0, array.get(2).length()-1).matches(VALID_NAME) && array.get(array.size()-1).matches(SYMBOL) ) {
 			// Para verificar que es valida 
-			if (SYMBOL.equals(array.get(3)) && SYMBOL.equals(array.get(array.size()-2)) && QUOTATION.equals(array.get(4)) &&  QUOTATION.equals(array.get(array.size()-3))) {
+			System.out.print("Primer if\n");
+			System.out.print(array.get(3).matches(SYMBOL) && array.get(array.size()-2).matches(SYMBOL) && array.get(4).matches(QUOTATION) &&  array.get(array.size()-3).matches(QUOTATION));
+			if ( array.get(3).matches(SYMBOL) && array.get(array.size()-2).matches(SYMBOL) && array.get(4).matches(QUOTATION) &&  array.get(array.size()-3).matches(QUOTATION) ) {
+				System.out.print("SegundoIf\n");
 				// Es para almacenar el valor tipo string
 				String value = new String();
 				//Para verificar que es valida la concatenacion
 				boolean valido = true;
 				//Para correr el array
-				for (int k = 4 ; k < array.size()-3; k++ ) {
-					if (!array.get(k).equals(QUOTATION) && valido) {
-						value.concat(array.get(k));
-						value.concat(" ");
-						if (k == array.size()-3) {
+				for (int k = 5 ; k < array.size()-3; k++ ) {
+					//El if es para verificar si hay una quotation o si es valido
+					//Si hay un " entonces significa que no es valido y pasa al else para no almacenar mas valores.
+					if (!array.get(k).matches(QUOTATION) && valido) {
+						System.out.print("3er if");
+						//Se concatena el string
+						value=value+" "+array.get(k);
+						if (k == array.size()-4) {
 							value.trim();
+							System.out.print("Final if");
+							
 						}
+						System.out.print("vALOR"+value);
+					}else if(array.get(3).matches(SYMBOL) && array.get(array.size()-2).matches(SYMBOL) && NUMERIC_ATOM.equals(4)) {
+						Arithmetic_Operations AMOP = new Arithmetic_Operations(array);
+						System.out.println(AMOP.Result());
+						
 					}
 					else {
 						valido = false;
@@ -159,7 +175,10 @@ public class Reader {
 					
 				}
 				if (valido) {
+					//Es para almacenar el valor de la variable en el variable Storage
 					getVariableStorage().CreateVariable(array.get(2), value);
+				}else {
+					System.out.print("No es valida la sintaxis 2");
 				}
 				
 				
@@ -186,9 +205,8 @@ public class Reader {
 		Reader lector = new Reader();
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
-//		lector.caseReader(scanner.nextLine());
-
+//		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
+		lector.caseReader(scanner.nextLine());
 		
 	}
 	
