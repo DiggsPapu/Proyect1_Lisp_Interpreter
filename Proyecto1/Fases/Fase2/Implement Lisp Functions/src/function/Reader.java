@@ -14,7 +14,7 @@ public class Reader {
 	protected static final String LITERAL = "[a-zA-Z0-9]+";
 	protected static final String VALID_NAME = "[a-zA-Z][a-zA-Z0-9]*";
 	protected static final String WHIESPACE = "[\\s]+";
-	protected static final String NUMERIC_ATOM = "[\\d\\+\\-]?[\\d]*";
+	protected static final String NUMERIC_ATOM = "[\\+\\-]?[\\d]+[\\.\\d]*";
 	protected static final String OPERATIONS =  "[\\+\\-\\*\\^\\/]?";
 	protected static final String SYMBOL = "[().]";
 	protected static final String QUOTATION = "[\"]";
@@ -47,14 +47,8 @@ public class Reader {
 		this.functionStorage = new FunctionStorage();
 		this.variableStorage = new VariableStorage();
 	}
-	public boolean Operations(String scan) {
-		if (scan.matches(OPERATIONS)) {
-			System.out.print(true);
-			return true;
-		}
-		System.out.print(false);
-		return false;
-	}
+	
+	
 	/**
 	 * It divides the text in valid tokens
 	 * @param command
@@ -84,6 +78,9 @@ public class Reader {
 		return tokens;
 	}
 	
+	
+	
+	
 	public Integer getCase(LinkedList<String> lista) {
 		System.out.println(lista);
 		
@@ -103,7 +100,7 @@ public class Reader {
 			return 6;
 		}else if (COND.equals(lista.get(1))) {
 			return 7;
-		}else if(lista.get(1).matches(OPERATIONS)) {
+		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
 			if (caseOperation(lista)==null) {
 				return 8;
 			}
@@ -134,7 +131,7 @@ public class Reader {
 			break;
 		}
 		case 3:{
-			System.out.print("Entro a setq");
+			System.out.print("Entro a setq\n");
 			caseSETQ(array);
 			break;
 		}
@@ -142,7 +139,8 @@ public class Reader {
 			break;
 		}
 		case 8:{
-			System.out.print("La operacion no pudo realizarse");
+			//En el caso de que la operacion no se pudiera realizar
+			System.out.print("La operacion no pudo realizarse\n");
 			break;
 		}
 		case 9:{
@@ -174,7 +172,7 @@ public class Reader {
 				}
 				//En el caso de que no sea numero significa que es error del usuario
 				catch(Exception e) {
-					System.out.print("No es numero la variable");
+					System.out.print("No es numero la variable\n");
 					return null;
 				}
 				
@@ -190,7 +188,7 @@ public class Reader {
 				else if(lista.get(k+1).equals("(")) {
 				}
 				else {
-					System.out.print("El siguiente valor no es operaciones o parentesis abierto");
+					System.out.print("El siguiente valor no es operaciones o parentesis abierto\n");
 					return null;
 				}
 				
@@ -201,12 +199,12 @@ public class Reader {
 			}
 			//En caso de que no sea una key de variable es error de usuario
 			else if (lista.get(k).matches(VALID_NAME) && !getVariableStorage().getVariableStorage().containsKey(lista.get(k))|| lista.get(k).matches(QUOTATION)) {
-				System.out.print("no es key valida");
+				System.out.print("no es key valida\n");
 				return null;
 				
 			//En caso de que sea una operacion y el anterior no sea parentesis abierto es error	
 			}else if(lista.get(k).matches(OPERATIONS) && !lista.get(k-1).equals("(")) {
-				System.out.print("El anterior no es parentesis abierto");
+				System.out.print("El anterior no es parentesis abierto\n");
 				return null;
 			}
 			
@@ -238,15 +236,15 @@ public class Reader {
 					//El if es para verificar si hay una quotation o si es valido
 					//Si hay un " entonces significa que no es valido y pasa al else para no almacenar mas valores.
 					if (!array.get(k).matches(QUOTATION) && valido) {
-						System.out.print("3er if");
+						System.out.print("3er if\n");
 						//Se concatena el string
 						value=value+" "+array.get(k);
 						if (k == array.size()-4) {
 							value.trim();
-							System.out.print("Final if");
+							System.out.print("Final if\n");
 							
 						}
-						System.out.print("vALOR"+value);
+						System.out.print("VALOR: "+value+"\n");
 					}
 					else {
 						valido = false;
@@ -257,7 +255,7 @@ public class Reader {
 					//Es para almacenar el valor de la variable en el variable Storage
 					getVariableStorage().CreateVariable(array.get(2), value);
 				}else {
-					System.out.print("No es valida la sintaxis 2");
+					System.out.print("No es valida la sintaxis 2\n");
 				}
 				
 				
@@ -275,26 +273,28 @@ public class Reader {
 					System.out.print("El valor de la variable es: "+getVariableStorage().getVariableStorage().get(array.get(2))+"\n");
 				}
 				else {
-					System.out.print("No era valida la expresion");
+					System.out.print("No era valida la expresion\n");
+				}
+			}
+			else if(array.get(4).matches(NUMERIC_ATOM) && array.get(5).equals(")") && array.get(6).equals(")")) {
+				try {
+					Float.valueOf(array.get(4));
+					getVariableStorage().getVariableStorage().put(array.get(2), array.get(4));
+					System.out.print("El valor es: " + getVariableStorage().getVariableStorage().get(array.get(2))+"\n");
+				}
+				catch(Exception e) {
+					System.out.print("No era un valor valido\n");
 				}
 			}
 			else {
-				System.out.print("No es una sintaxis valida");
+				System.out.print("No es una sintaxis valida\n");
 			}
 		}else {
-			System.out.print("No es valida la sintaxis.");
+			System.out.print("No es valida la sintaxis.\n");
 		}
 	}
 	
 	
-	
-	private String[] splitingExpresion(String theScan) {
-		String[] functionArray = theScan.split("[(][ ]defun*");
-		for (int k=0;k<functionArray.length;k++) {
-			System.out.print(functionArray[k]+"\n");
-		}
-		return functionArray;
-	}
 	
 	public static void main(String[] args) {
 		Reader lector = new Reader();
@@ -302,6 +302,7 @@ public class Reader {
 		
 //		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
 		lector.caseReader(scanner.nextLine());
+		scanner.close();
 	}
 	
 }
