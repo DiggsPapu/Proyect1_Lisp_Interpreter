@@ -70,7 +70,7 @@ public class Reader {
 		}
 		while (  i < command.length() ){
 			int j = i + 1;
-			if ( command.substring(i, j).matches(LETTER) || command.substring(i, j).matches(NUMERIC_ATOM)||command.substring(i, j).matches(QUOTATION) ){
+			if ( command.substring(i, j).matches(LETTER) || command.substring(i, j).matches(NUMERIC_ATOM)||command.substring(i, j).matches(QUOTATION)||command.substring(i, j).matches(OPERATIONS) ){
 				while ( command.substring(i,j + 1).matches(LITERAL) || command.substring(i, j + 1).matches(NUMERIC_ATOM) ){
 					j++;
 				}
@@ -156,8 +156,12 @@ public class Reader {
 	}
 	
 	public LinkedList<String> caseOperation(LinkedList<String> lista) {
+		int oparenthesisCounter = 0;
+		int cparenthesisCounter = 0;
+		
 		//Para correr la lista de operaciones
 		for (int k = 0; k < lista.size() ; k++) {
+			System.out.print(lista.get(k));
 			//Si es una variable almacenada
 			if (getVariableStorage().getVariableStorage().containsKey(lista.get(k))) {
 				try {
@@ -168,32 +172,50 @@ public class Reader {
 					lista.remove(k+1);
 					
 				}
-				//En el caso de que no sea variable significa que es error del usuario
+				//En el caso de que no sea numero significa que es error del usuario
 				catch(Exception e) {
-					
+					System.out.print("No es numero la variable");
 					return null;
 				}
 				
 			}
 			//En el caso de que sea igual a parentesis abierto 
 			else if (lista.get(k).equals("(")) {
-				//Si difiere en ser el siguiente valor numero o parentesis abierto error.
-				if (!lista.get(k+1).matches(OPERATIONS)||!lista.get(k+1).equals("(")) {
+				oparenthesisCounter++;
+				//Si difiere en ser el siguiente valor operaciones.
+				if (lista.get(k+1).matches(OPERATIONS)) {
+					
+				}
+				//Si difiere en ser el siguiente valor parentesis abierto
+				else if(lista.get(k+1).equals("(")) {
+				}
+				else {
+					System.out.print("El siguiente valor no es operaciones o parentesis abierto");
 					return null;
 				}
 				
 			}
+			else if (lista.get(k).equals(")")) {
+				System.out.print("Entro a parentesis cerrado\n");
+				cparenthesisCounter++;
+			}
 			//En caso de que no sea una key de variable es error de usuario
-			else if (!getVariableStorage().getVariableStorage().containsKey(lista.get(k))) {
+			else if (lista.get(k).matches(VALID_NAME) && !getVariableStorage().getVariableStorage().containsKey(lista.get(k))|| lista.get(k).matches(QUOTATION)) {
+				System.out.print("no es key valida");
 				return null;
 				
 			//En caso de que sea una operacion y el anterior no sea parentesis abierto es error	
 			}else if(lista.get(k).matches(OPERATIONS) && !lista.get(k-1).equals("(")) {
+				System.out.print("El anterior no es parentesis abierto");
 				return null;
 			}
 			
 		}
-		
+		//No balanceados los parentesis
+		if (cparenthesisCounter!=oparenthesisCounter) {
+			System.out.print("\n"+cparenthesisCounter+" "+oparenthesisCounter);
+			return null;
+		}
 		//Si pasa todo esto entonces retornara la lista
 		return lista;
 	}
@@ -239,11 +261,22 @@ public class Reader {
 				}
 				
 				
-			}else if(array.get(3).matches(SYMBOL) && array.get(array.size()-2).matches(SYMBOL) && array.get(4).matches(NUMERIC_ATOM)) {
-				Arithmetic_Operations AMOP = new Arithmetic_Operations(array);
-				System.out.println(AMOP.Result());
-				getVariableStorage().CreateVariable(array.get(2), Float.toString(AMOP.Result()));
-				
+			}else if(array.get(3).matches(SYMBOL) && array.get(array.size()-2).matches(SYMBOL) && array.get(4).matches(OPERATIONS)) {
+				//Modificar la lista para que se adapte al caso de operaciones
+				System.out.print("Entro a variable numerica en setq\n");
+				LinkedList<String> operationsArray = new LinkedList<String>();
+				for (int k = 3 ; k < array.size()-1 ; k++) {
+					operationsArray.add(array.get(k));
+				}
+				if (caseOperation(operationsArray)!=null) {
+					Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(operationsArray));
+					System.out.print(operationsArray);
+					getVariableStorage().CreateVariable(array.get(2), String.valueOf(calc.Result()));
+					System.out.print("El valor de la variable es: "+getVariableStorage().getVariableStorage().get(array.get(2))+"\n");
+				}
+				else {
+					System.out.print("No era valida la expresion");
+				}
 			}
 			else {
 				System.out.print("No es una sintaxis valida");
