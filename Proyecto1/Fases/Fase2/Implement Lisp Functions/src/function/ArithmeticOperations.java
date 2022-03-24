@@ -1,15 +1,11 @@
 package function;
-
 import java.util.Stack;
-import java.lang.Math;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  *
  * @author marti
  */
-
 public class Arithmetic_Operations {
     float Final = 0 ;
     Stack<String> Stack;
@@ -86,3 +82,4 @@ public class Arithmetic_Operations {
         return Final;
     }
   }
+
