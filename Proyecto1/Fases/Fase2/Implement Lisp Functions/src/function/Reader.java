@@ -144,13 +144,13 @@ public class Reader {
                         lista.removeFirst();
                         lista.addFirst("=");
                         lista.addFirst("(");
-                        Arithmetic_Operations calc = new Arithmetic_Operations(lista);
+                        Operations calc = new Operations(lista);
                         System.out.print(calc.ResultComp());
 			return 8;      
                         
 		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
 			
-                        Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(lista));
+                        Operations calc = new Operations(caseOperation(lista));
                         if(calc.getOpType() == 1){
                         System.out.print(calc.Result());
                         }else{
@@ -332,7 +332,7 @@ public class Reader {
 					operationsArray.add(array.get(k));
 				}
 				if (caseOperation(operationsArray)!=null) {
-					Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(operationsArray));
+					Operations calc = new Operations(caseOperation(operationsArray));
 					System.out.print(operationsArray);
 					getVariableStorage().CreateVariable(array.get(2), String.valueOf(calc.Result()));
 					System.out.print("El valor de la variable es: "+getVariableStorage().getVariableStorage().get(array.get(2))+"\n");
