@@ -1,3 +1,5 @@
+package function;
+
 import java.util.Stack;
 import java.util.LinkedList;
 
@@ -5,6 +7,7 @@ import java.util.LinkedList;
  *
  * @author marti
  */
+
 public class Operations {
     float Final = 0 ;
     Stack<String> Stack;
