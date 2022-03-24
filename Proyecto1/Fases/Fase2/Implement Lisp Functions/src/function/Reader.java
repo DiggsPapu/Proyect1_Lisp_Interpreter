@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-
 public class Reader {
 	private FunctionStorage functionStorage;
 	private VariableStorage variableStorage;
@@ -16,7 +15,7 @@ public class Reader {
 	protected static final String VALID_NAME = "[a-zA-Z][a-zA-Z0-9]*";
 	protected static final String WHIESPACE = "[\\s]+";
 	protected static final String NUMERIC_ATOM = "[\\+\\-]?[\\d]+[\\.\\d]*";
-	protected static final String OPERATIONS =  "[\\+\\-\\*\\^\\/]?";
+	protected static final String OPERATIONS =  "[\\+\\-\\*\\^\\/\\<\\>]?";
 	protected static final String SYMBOL = "[().]";
 	protected static final String QUOTATION = "[\"]";
 	protected static final String ATOM = "ATOM";
@@ -25,16 +24,9 @@ public class Reader {
 	protected static final String QUOTE = "QUOTE";
 	protected static final String DEFUN = "DEFUN";
 	protected static final String COND = "COND";
-	protected static final String EQUAL = "EQUAL";
-	protected static final String MAYOR_MINUS = "[<>.]";
-	
-	public boolean Mayor(String scan) {
-		if (scan.matches(MAYOR_MINUS)) {
-			return true;
-		}
-		return false;
-	}
-	
+	//protected static final String EQUAL = "EQUAL";
+	//protected static final String MAYOR_MINUS = "[<>.]";
+		
 	public FunctionStorage getFunctionStorage() {
 		return functionStorage;
 	}
@@ -153,39 +145,20 @@ public class Reader {
 		}else if (LIST.equals(lista.get(1))) {
 			System.out.print("Ingreso a list\n");
 			return 5;
-			
-		}else if (EQUAL.equals(lista.get(1))) {
-			if (caseOperation(lista)==null) {
-				return 6;
-			}
-			else { 
-                        Comparator COMP = new Comparator(caseOperation(lista));
-                        System.out.print(COMP.Result());
-			return 7;
-                        }
+		
 		}else if (COND.equals(lista.get(1))) {
-			return 8;
+			return 7;
 		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
-			if (caseOperation(lista)==null) {
-				return 9;
-			}
-			else {
-				Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(lista));
-				System.out.print(calc.Result());
-				return 10;
-			}
-		}else if(lista.get(1).matches(MAYOR_MINUS)) {
-                        if (caseOperation(lista)==null) {
-				return 11;
-			}
-			else { 
-                        Comparator COMP = new Comparator(caseOperation(lista));
-                        System.out.print(COMP.Result());
-			return 12;
-                        }
-		}
-		
-		
+			
+                    Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(lista));
+                    if(calc.getOpType() == 1){
+                    System.out.print(calc.Result());
+                    }else{
+                    System.out.print(calc.ResultComp());
+                    }
+                    return 9;
+			
+                    }
 		else {
 			return (Integer) null;
 		}
@@ -430,11 +403,10 @@ public class Reader {
 		Scanner scanner = new Scanner(System.in);
 		
 //		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
-//		lector.caseReader(scanner.nextLine());
-//		
-//		lector.caseReader(scanner.nextLine());
+		lector.caseReader(scanner.nextLine());
+		
+		lector.caseReader(scanner.nextLine());
 
-		System.out.print(lector.Mayor(scanner.nextLine()));
 		scanner.close();
 	}
 	
