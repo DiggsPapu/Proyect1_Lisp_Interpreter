@@ -14,7 +14,8 @@ public class Reader {
 	protected static final String LITERAL = "[a-zA-Z0-9]+";
 	protected static final String VALID_NAME = "[a-zA-Z][a-zA-Z0-9]*";
 	protected static final String WHIESPACE = "[\\s]+";
-	protected static final String NUMERIC_ATOM = "[\\d\\+\\-\\*\\/\\^]?[\\d]*";
+	protected static final String NUMERIC_ATOM = "[\\d\\+\\-]?[\\d]*";
+	protected static final String OPERATIONS =  "[\\+\\-\\*\\^\\/]?";
 	protected static final String SYMBOL = "[().]";
 	protected static final String QUOTATION = "[\"]";
 	protected static final String ATOM = "ATOM";
@@ -46,7 +47,14 @@ public class Reader {
 		this.functionStorage = new FunctionStorage();
 		this.variableStorage = new VariableStorage();
 	}
-	
+	public boolean Operations(String scan) {
+		if (scan.matches(OPERATIONS)) {
+			System.out.print(true);
+			return true;
+		}
+		System.out.print(false);
+		return false;
+	}
 	/**
 	 * It divides the text in valid tokens
 	 * @param command
@@ -78,6 +86,7 @@ public class Reader {
 	
 	public Integer getCase(LinkedList<String> lista) {
 		System.out.println(lista);
+		
 		if (QUOTE.equals(lista.get(1).trim())) {
 			return 1;
 		}else if (DEFUN.equals(lista.get(1))) {
@@ -94,6 +103,15 @@ public class Reader {
 			return 6;
 		}else if (COND.equals(lista.get(1))) {
 			return 7;
+		}else if(lista.get(1).matches(OPERATIONS)) {
+			if (caseOperation(lista)==null) {
+				return 8;
+			}
+			else {
+				Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(lista));
+				System.out.print(calc.Result());
+				return 9;
+			}
 		}else {
 			return (Integer) null;
 		}
@@ -113,37 +131,80 @@ public class Reader {
 			break;
 		}
 		case 2: {
-			
+			break;
 		}
 		case 3:{
+			System.out.print("Entro a setq");
 			caseSETQ(array);
+			break;
 		}
 		case 4:{
-			
+			break;
+		}
+		case 8:{
+			System.out.print("La operacion no pudo realizarse");
+			break;
+		}
+		case 9:{
+			break;
 		}
 		default:{
+			break;
+		}
+		
+		}
+	}
+	
+	public LinkedList<String> caseOperation(LinkedList<String> lista) {
+		//Para correr la lista de operaciones
+		for (int k = 0; k < lista.size() ; k++) {
+			//Si es una variable almacenada
+			if (getVariableStorage().getVariableStorage().containsKey(lista.get(k))) {
+				try {
+					//Trata de convertirlo a numero float
+					Float.parseFloat(getVariableStorage().getVariableStorage().get(lista.get(k)));
+					//Si es numero se agrega y suplementa al valor que aparecia
+					lista.add(k, getVariableStorage().getVariableStorage().get(lista.get(k)));
+					lista.remove(k+1);
+					
+				}
+				//En el caso de que no sea variable significa que es error del usuario
+				catch(Exception e) {
+					
+					return null;
+				}
+				
+			}
+			//En el caso de que sea igual a parentesis abierto 
+			else if (lista.get(k).equals("(")) {
+				//Si difiere en ser el siguiente valor numero o parentesis abierto error.
+				if (!lista.get(k+1).matches(OPERATIONS)||!lista.get(k+1).equals("(")) {
+					return null;
+				}
+				
+			}
+			//En caso de que no sea una key de variable es error de usuario
+			else if (!getVariableStorage().getVariableStorage().containsKey(lista.get(k))) {
+				return null;
+				
+			//En caso de que sea una operacion y el anterior no sea parentesis abierto es error	
+			}else if(lista.get(k).matches(OPERATIONS) && !lista.get(k-1).equals("(")) {
+				return null;
+			}
 			
 		}
-//		
-//		case "variable":{
-//			
-//			
-//		}
-//
-//		case "exp":{
-//			
-//		}
-//		
-//		
+		
+		//Si pasa todo esto entonces retornara la lista
+		return lista;
 	}
-	}
+	
 //	.substring(0,array.get(array.size()-1).length()-1)
 	public void caseSETQ(LinkedList<String> array) {
 //		System.out.print(array.get(2).substring(0, array.get(2).length()-1).matches(VALID_NAME) && array.get(array.size()-1).matches(SYMBOL) );
 		if (array.get(2).substring(0, array.get(2).length()-1).matches(VALID_NAME) && array.get(array.size()-1).matches(SYMBOL) ) {
 			// Para verificar que es valida 
 			System.out.print("Primer if\n");
-			System.out.print(array.get(3).matches(SYMBOL) && array.get(array.size()-2).matches(SYMBOL) && array.get(4).matches(QUOTATION) &&  array.get(array.size()-3).matches(QUOTATION));
+//			System.out.print(array.get(3).matches(SYMBOL) && array.get(array.size()-2).matches(SYMBOL) && array.get(4).matches(QUOTATION) &&  array.get(array.size()-3).matches(QUOTATION));
 			if ( array.get(3).matches(SYMBOL) && array.get(array.size()-2).matches(SYMBOL) && array.get(4).matches(QUOTATION) &&  array.get(array.size()-3).matches(QUOTATION) ) {
 				System.out.print("SegundoIf\n");
 				// Es para almacenar el valor tipo string
@@ -164,10 +225,6 @@ public class Reader {
 							
 						}
 						System.out.print("vALOR"+value);
-					}else if(array.get(3).matches(SYMBOL) && array.get(array.size()-2).matches(SYMBOL) && NUMERIC_ATOM.equals(4)) {
-						Arithmetic_Operations AMOP = new Arithmetic_Operations(array);
-						System.out.println(AMOP.Result());
-						
 					}
 					else {
 						valido = false;
@@ -181,6 +238,11 @@ public class Reader {
 					System.out.print("No es valida la sintaxis 2");
 				}
 				
+				
+			}else if(array.get(3).matches(SYMBOL) && array.get(array.size()-2).matches(SYMBOL) && array.get(4).matches(NUMERIC_ATOM)) {
+				Arithmetic_Operations AMOP = new Arithmetic_Operations(array);
+				System.out.println(AMOP.Result());
+				getVariableStorage().CreateVariable(array.get(2), Float.toString(AMOP.Result()));
 				
 			}
 			else {
@@ -207,7 +269,6 @@ public class Reader {
 		
 //		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
 		lector.caseReader(scanner.nextLine());
-		
 	}
 	
 }
