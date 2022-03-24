@@ -25,7 +25,14 @@ public class Reader {
 	protected static final String DEFUN = "DEFUN";
 	protected static final String COND = "COND";
 	protected static final String EQUAL = "EQUAL";
+	protected static final String MAYOR_MINUS = "[<>.]";
 	
+	public boolean Mayor(String scan) {
+		if (scan.matches(MAYOR_MINUS)) {
+			return true;
+		}
+		return false;
+	}
 	
 	public FunctionStorage getFunctionStorage() {
 		return functionStorage;
@@ -108,6 +115,10 @@ public class Reader {
 			caseList(array);
 			break;
 		}
+		case 6:{
+//			caseEqual(array);
+			break;
+		}
 		case 8:{
 			//En el caso de que la operacion no se pudiera realizar
 			System.out.print("La operacion no pudo realizarse\n");
@@ -155,8 +166,50 @@ public class Reader {
 				System.out.print(calc.Result());
 				return 9;
 			}
-		}else {
+		}else if(lista.get(1).matches(MAYOR_MINUS)) {
+			return 10;
+		}
+		
+		
+		else {
 			return (Integer) null;
+		}
+	}
+	
+//	public boolean caseMayor_Minus(LinkedList<String> lista) {
+//		if ()
+//	}
+	
+	
+	
+	public boolean caseEqual(LinkedList<String> lista) {
+		//En caso cumpla con la sintaxis
+		if (lista.get(2).equals("*") && lista.get(4).equals("*") && lista.get(lista.size()-2).equals("*") && lista.get(lista.size()-4).equals("*")) {
+			System.out.print("Primer if\n");
+			
+			
+			
+			//En caso de que algun valor a comparar sea una variable
+			if (lista.get(3).matches(VALID_NAME) && getVariableStorage().getVariableStorage().containsKey(lista.get(3)) || lista.get(lista.size()-3).matches(VALID_NAME) && getVariableStorage().getVariableStorage().containsKey(lista.get(lista.size()-3))  ) {
+				System.out.print("Segundo if true\n");
+				//En caso de que sean verdaderos
+				if (lista.get(3).equals(lista.get(lista.size()-3)))
+				//En caso de que sea verdadera la igualdad
+				System.out.print(true);
+			}
+			else {
+				System.out.print(true);
+				//En dado caso sea falsa la igualdad
+			}
+			//En dado caso cumpla con la sintaxis
+			return true;
+		}
+		
+		
+		
+		//En caso de que no cumpla con la sintaxis
+		else {
+			return (Boolean) null;
 		}
 	}
 	
@@ -362,9 +415,11 @@ public class Reader {
 		Scanner scanner = new Scanner(System.in);
 		
 //		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
-		lector.caseReader(scanner.nextLine());
-		
-		lector.caseReader(scanner.nextLine());
+//		lector.caseReader(scanner.nextLine());
+//		
+//		lector.caseReader(scanner.nextLine());
+
+		System.out.print(lector.Mayor(scanner.nextLine()));
 		scanner.close();
 	}
 	
