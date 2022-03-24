@@ -1,4 +1,5 @@
 package function;
+
 import java.util.Stack;
 import java.util.LinkedList;
 
@@ -6,10 +7,12 @@ import java.util.LinkedList;
  *
  * @author marti
  */
+
 public class Arithmetic_Operations {
     float Final = 0 ;
     Stack<String> Stack;
-    
+    boolean Comparison_operation = false;
+  
     public Arithmetic_Operations(LinkedList<String> list){
         Stack = new Stack<String>();
         String[] Tokens = list.toArray(new String[list.size()]);
@@ -45,6 +48,15 @@ public class Arithmetic_Operations {
         }else if(func.equals("^")) {
             float result = Pow(callStack);
             Stack.push(String.valueOf(result));
+        }else if(func.equals(">")) {
+            Comparison_operation = true;
+            GreaterThan(callStack);
+        }else if(func.equals("<")) {
+            Comparison_operation = true;
+            SmallerThan(callStack);
+        }else if(func.equals("EQUAL")) {
+            Comparison_operation = true;
+            Equals(callStack);
         }
     }
   
@@ -78,8 +90,51 @@ public class Arithmetic_Operations {
         Final = (float)Math.pow(a, b);
         return((float)Math.pow(a, b));
     }
-    public float Result(){
-        return Final;
+    
+    boolean Finalbool = true ;
+ 
+    private boolean GreaterThan(Stack<String> callStack){
+        float a = Float.parseFloat(callStack.pop());
+        float b = Float.parseFloat(callStack.pop());
+        if (a > b){
+            Finalbool = true;
+        }else{
+            Finalbool = false;
+        }
+        return Finalbool;
     }
-  }
-
+    private boolean SmallerThan(Stack<String> callStack){
+        float a = Float.parseFloat(callStack.pop());
+        float b = Float.parseFloat(callStack.pop());
+        if (a < b){
+            Finalbool = true;
+        }else{
+            Finalbool = false;
+        }
+        return Finalbool;
+    }
+    private boolean Equals(Stack<String> callStack){
+        float a = Float.parseFloat(callStack.pop());
+        float b = Float.parseFloat(callStack.pop());
+        if (a == b){
+            Finalbool = true;
+        }else{
+            Finalbool = false;
+        }
+        return Finalbool;
+    }
+        public int getOpType(){
+            int Temp = 2;
+            if (Comparison_operation == false){
+                Temp = 1;
+            }else{
+                Temp = 0;
+            }
+            return Temp;
+        }
+        public float Result(){
+            return Final;
+    }
+        public boolean ResultComp(){
+            return Finalbool;
+        }
