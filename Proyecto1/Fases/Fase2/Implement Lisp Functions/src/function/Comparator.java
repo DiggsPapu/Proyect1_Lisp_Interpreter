@@ -1,3 +1,5 @@
+package function;
+
 import java.util.Stack;
 import java.util.LinkedList;
     
@@ -6,7 +8,7 @@ import java.util.LinkedList;
  * @author marti
  */
 public class Comparator {
-    boolean Final = false ;
+    boolean Final = true ;
     Stack<String> Stack;
     
     public Comparator(LinkedList<String> list){
@@ -29,12 +31,12 @@ public class Comparator {
   
     private void Evaluate(Stack<String> callStack){
         String func = callStack.pop();
-        if(func.equals("<")) {
-            boolean result = GreaterThan(callStack);
-            Stack.push(String.valueOf(result));
-        }else if(func.equals(">")) {
-            boolean result = SmallerThan(callStack);
-            Stack.push(String.valueOf(result));
+        if(func.equals(">")) {
+            GreaterThan(callStack);
+        }else if(func.equals("<")) {
+            SmallerThan(callStack);
+        }else if(func.equals("EQUAL")) {
+            Equals(callStack);
         }
     }
   
@@ -43,23 +45,32 @@ public class Comparator {
         float b = Float.parseFloat(callStack.pop());
         if (a > b){
             Final = true;
-            return(true);
         }else{
             Final = false;
-            return(false);
         }
+        return Final;
     }
     private boolean SmallerThan(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
         if (a < b){
             Final = true;
-            return(true);
         }else{
             Final = false;
-            return(false);
         }
+        return Final;
     }
+    private boolean Equals(Stack<String> callStack){
+        float a = Float.parseFloat(callStack.pop());
+        float b = Float.parseFloat(callStack.pop());
+        if (a == b){
+            Final = true;
+        }else{
+            Final = false;
+        }
+        return Final;
+    }
+    
 
     public boolean Result(){
         return Final;
