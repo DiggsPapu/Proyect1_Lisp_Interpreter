@@ -155,27 +155,34 @@ public class Reader {
 			return 5;
 			
 		}else if (EQUAL.equals(lista.get(1))) {
-			return 6;
-		}else if (COND.equals(lista.get(1))) {
+			if (caseOperation(lista)==null) {
+				return 6;
+			}
+			else { 
+                        Comparator COMP = new Comparator(caseOperation(lista));
+                        System.out.print(COMP.Result());
 			return 7;
+                        }
+		}else if (COND.equals(lista.get(1))) {
+			return 8;
 		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
 			if (caseOperation(lista)==null) {
-				return 8;
+				return 9;
 			}
 			else {
 				Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(lista));
 				System.out.print(calc.Result());
-				return 9;
-			}
-		}else if(lista.get(1).matches(MAYOR_MINUS)) {
-			if (caseOperation(lista)==null) {
 				return 10;
 			}
-			else { 
-			Comparator COMP = new Comparator(caseOperation(lista));
-			System.out.print(COMP.Result());
-			return 11;
+		}else if(lista.get(1).matches(MAYOR_MINUS)) {
+                        if (caseOperation(lista)==null) {
+				return 11;
 			}
+			else { 
+                        Comparator COMP = new Comparator(caseOperation(lista));
+                        System.out.print(COMP.Result());
+			return 12;
+                        }
 		}
 		
 		
