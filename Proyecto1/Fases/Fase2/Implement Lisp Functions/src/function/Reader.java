@@ -168,9 +168,14 @@ public class Reader {
 				return 9;
 			}
 		}else if(lista.get(1).matches(MAYOR_MINUS)) {
-                        Comparator COMP = new Comparator(caseOperation(lista));
-                    System.out.print(COMP.Result());
-			return 10;
+			if (caseOperation(lista)==null) {
+				return 10;
+			}
+			else { 
+			Comparator COMP = new Comparator(caseOperation(lista));
+			System.out.print(COMP.Result());
+			return 11;
+			}
 		}
 		
 		
