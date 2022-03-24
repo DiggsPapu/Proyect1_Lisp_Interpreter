@@ -81,40 +81,6 @@ public class Reader {
 	
 	
 	
-	public Integer getCase(LinkedList<String> lista) {
-		System.out.println(lista);
-		
-		if (QUOTE.equals(lista.get(1).trim())) {
-			return 1;
-		}else if (DEFUN.equals(lista.get(1))) {
-			return 2;
-		}else if (SETQ.equals(lista.get(1))) {
-			return 3;
-		}else if (ATOM.equals(lista.get(1))) {
-			return 4;
-			
-		}else if (LIST.equals(lista.get(1))) {
-			return 5;
-			
-		}else if (EQUAL.equals(lista.get(1))) {
-			return 6;
-		}else if (COND.equals(lista.get(1))) {
-			return 7;
-		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
-			if (caseOperation(lista)==null) {
-				return 8;
-			}
-			else {
-				Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(lista));
-				System.out.print(calc.Result());
-				return 9;
-			}
-		}else {
-			return (Integer) null;
-		}
-	}
-	
-	
 	
 	public void caseReader(String scan) {
 		LinkedList<String> array = new LinkedList<String>();
@@ -138,6 +104,10 @@ public class Reader {
 		case 4:{
 			break;
 		}
+		case 5:{
+			caseList(array);
+			break;
+		}
 		case 8:{
 			//En el caso de que la operacion no se pudiera realizar
 			System.out.print("La operacion no pudo realizarse\n");
@@ -152,6 +122,97 @@ public class Reader {
 		
 		}
 	}
+	
+	
+	
+	
+	public Integer getCase(LinkedList<String> lista) {
+		System.out.println(lista);
+		
+		if (QUOTE.equals(lista.get(1).trim())) {
+			return 1;
+		}else if (DEFUN.equals(lista.get(1))) {
+			return 2;
+		}else if (SETQ.equals(lista.get(1))) {
+			return 3;
+		}else if (ATOM.equals(lista.get(1))) {
+			return 4;
+			
+		}else if (LIST.equals(lista.get(1))) {
+			System.out.print("Ingreso a list\n");
+			return 5;
+			
+		}else if (EQUAL.equals(lista.get(1))) {
+			return 6;
+		}else if (COND.equals(lista.get(1))) {
+			return 7;
+		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
+			if (caseOperation(lista)==null) {
+				return 8;
+			}
+			else {
+				Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(lista));
+				System.out.print(calc.Result());
+				return 9;
+			}
+		}else {
+			return (Integer) null;
+		}
+	}
+	
+	
+	public LinkedList<String> caseList(LinkedList<String> lista){
+		LinkedList<String> list = new LinkedList<String>();
+		if (lista.get(0).equals("(") && lista.get(lista.size()-1).equals(")")) {
+			System.out.print("Primer if de linked list\n");
+			for(int k = 2 ; k < lista.size()-1 ; k++ ) {
+				System.out.print("List value actual: "+ lista.get(k)+"\n");
+				//En el caso de que sea un string definido entre comillas
+				if (lista.get(k).matches(QUOTATION)) {
+					k++;
+					String tempString = new String();
+					//En el caso de que sea un string, definido entre comillas
+					while (!lista.get(k).matches(QUOTATION) && k < lista.size()-1) {
+						//Se concatena
+						tempString = tempString + " " + lista.get(k);
+						//Significa que llego al final de la lista y concateno el parentesis cerrado, mal escrito entonces se retorna null.
+						if (k==lista.size()-2) {
+							return null;
+						}
+						//Se sube el contador
+						k++;
+					}
+					//Si se mantuvo entonces se add the string
+					list.add(tempString);
+					
+				
+				}
+				//En el caso cumpla con el patron de ser numerico entonces se add
+				else if (lista.get(k).matches(NUMERIC_ATOM)){
+					list.add(lista.get(k));
+				}
+				//En el caso de que sea un nombre valido y que exista en el almacenamiento de variables se busca y se add
+				else if (lista.get(k).matches(VALID_NAME) && getVariableStorage().getVariableStorage().containsKey(lista.get(k))) {
+					list.add(getVariableStorage().getVariableStorage().get(lista.get(k)));
+				}
+				//En el caso de que tenga o no un nombre valido y no este almacenado en el almacenamiento de variables
+				else if (lista.get(k).matches(VALID_NAME) || lista.get(k).matches(VALID_NAME) && !getVariableStorage().getVariableStorage().containsKey(lista.get(k))) {
+					return null;
+				}
+				else {
+					
+				}
+				
+			}
+			System.out.print("La lista final"+list+"\n");
+			return list;
+		}
+		//En el caso de que no cumpla con que tenga parentesis se devuelve nulo
+		return null;
+	}
+	
+	
+	
 	
 	public LinkedList<String> caseOperation(LinkedList<String> lista) {
 		int oparenthesisCounter = 0;
@@ -301,6 +362,8 @@ public class Reader {
 		Scanner scanner = new Scanner(System.in);
 		
 //		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
+		lector.caseReader(scanner.nextLine());
+		
 		lector.caseReader(scanner.nextLine());
 		scanner.close();
 	}
