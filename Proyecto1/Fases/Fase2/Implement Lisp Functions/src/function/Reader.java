@@ -24,8 +24,7 @@ public class Reader {
 	protected static final String QUOTE = "QUOTE";
 	protected static final String DEFUN = "DEFUN";
 	protected static final String COND = "COND";
-	//protected static final String EQUAL = "EQUAL";
-	//protected static final String MAYOR_MINUS = "[<>.]";
+	protected static final String EQUAL = "EQUAL";
 		
 	public FunctionStorage getFunctionStorage() {
 		return functionStorage;
@@ -47,14 +46,7 @@ public class Reader {
 		this.functionStorage = new FunctionStorage();
 		this.variableStorage = new VariableStorage();
 	}
-	
-	
-	/**
-	 * It divides the text in valid tokens
-	 * @param command
-	 * @return
-	 */
-	
+		
 	public LinkedList <String> tokenize(String command){
 		int i = 0;
 		LinkedList <String> tokens = new LinkedList <String>();
@@ -113,8 +105,6 @@ public class Reader {
 			break;
 		}
 		case 8:{
-			//En el caso de que la operacion no se pudiera realizar
-			System.out.print("La operacion no pudo realizarse\n");
 			break;
 		}
 		case 9:{
@@ -145,63 +135,36 @@ public class Reader {
 		}else if (LIST.equals(lista.get(1))) {
 			System.out.print("Ingreso a list\n");
 			return 5;
-		
+                        
 		}else if (COND.equals(lista.get(1))) {
 			return 7;
+                        
+                }else if (EQUAL.equals(lista.get(1))) {
+                        lista.removeFirst();
+                        lista.removeFirst();
+                        lista.addFirst("=");
+                        lista.addFirst("(");
+                        Arithmetic_Operations calc = new Arithmetic_Operations(lista);
+                        System.out.print(calc.ResultComp());
+			return 8;      
+                        
 		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
 			
-                    Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(lista));
-                    if(calc.getOpType() == 1){
-                    System.out.print(calc.Result());
-                    }else{
-                    System.out.print(calc.ResultComp());
-                    }
-                    return 9;
+                        Arithmetic_Operations calc = new Arithmetic_Operations(caseOperation(lista));
+                        if(calc.getOpType() == 1){
+                        System.out.print(calc.Result());
+                        }else{
+                        System.out.print(calc.ResultComp());
+                        }
+                        return 9;
 			
                     }
 		else {
 			return (Integer) null;
 		}
 	}
-	
-//	public boolean caseMayor_Minus(LinkedList<String> lista) {
-//		if ()
-//	}
-	
-	
-	
-	public boolean caseEqual(LinkedList<String> lista) {
-		//En caso cumpla con la sintaxis
-		if (lista.get(2).equals("*") && lista.get(4).equals("*") && lista.get(lista.size()-2).equals("*") && lista.get(lista.size()-4).equals("*")) {
-			System.out.print("Primer if\n");
-			
-			
-			
-			//En caso de que algun valor a comparar sea una variable
-			if (lista.get(3).matches(VALID_NAME) && getVariableStorage().getVariableStorage().containsKey(lista.get(3)) || lista.get(lista.size()-3).matches(VALID_NAME) && getVariableStorage().getVariableStorage().containsKey(lista.get(lista.size()-3))  ) {
-				System.out.print("Segundo if true\n");
-				//En caso de que sean verdaderos
-				if (lista.get(3).equals(lista.get(lista.size()-3)))
-				//En caso de que sea verdadera la igualdad
-				System.out.print(true);
-			}
-			else {
-				System.out.print(true);
-				//En dado caso sea falsa la igualdad
-			}
-			//En dado caso cumpla con la sintaxis
-			return true;
-		}
 		
 		
-		
-		//En caso de que no cumpla con la sintaxis
-		else {
-			return (Boolean) null;
-		}
-	}
-	
-	
 	public LinkedList<String> caseList(LinkedList<String> lista){
 		LinkedList<String> list = new LinkedList<String>();
 		if (lista.get(0).equals("(") && lista.get(lista.size()-1).equals(")")) {
