@@ -18,7 +18,7 @@ public class Reader {
 	protected static final String OPERATIONS =  "[\\+\\-\\*\\^\\/\\<\\>]?";
 	protected static final String SYMBOL = "[().]";
 	protected static final String QUOTATION = "[\"]";
-        //protected static final String CONS = "CONS";
+        protected static final String CONS = "CONS";
 	protected static final String ATOM = "ATOM";
 	protected static final String LIST = "LIST";
 	protected static final String SETQ = "SETQ";
@@ -148,6 +148,12 @@ public class Reader {
 			System.out.print("Ingreso a list\n");
 			return 5;
                         
+		}else if (CONS.equals(lista.get(1))) {
+                        Functionality_Operators FO= new Functionality_Operators();
+                        FO.create_Cons(lista);
+                        System.out.println(FO.getCons());
+			return 6;
+			
 		}else if (COND.equals(lista.get(1))) {
                         //Functionality_Operators FO= new Functionality_Operators();
 			return 7;
