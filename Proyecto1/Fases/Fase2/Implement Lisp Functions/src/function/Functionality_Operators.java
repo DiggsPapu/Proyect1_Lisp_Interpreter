@@ -11,12 +11,30 @@ import java.util.LinkedList;
   
 public class Functionality_Operators {
 
+    LinkedList<String> Atom = new LinkedList<String>();
+    
+    Functionality_Operators(){
+        
+    }
+    public void create_Atom(LinkedList<String> list){
+        if(list.size() == 5){
+            System.out.println("Error: ATOM fue definido como CONS (No debe tener dos variables)");
+        }else{
+            Atom = list;
+        }
+    }
+    public LinkedList<String> getAtom(){
+        return Atom;
+    }
+}
+//ejemplo (ATOM 1 2 3 4 5)
+//ejemplo (ATOM 1)
+//ejemplo (ATOM 1 2)
+  
+
     private FunctionStorage functionStorage;
     private VariableStorage variableStorage;
-    
-    public Functionality_Operators(){
-    }
-    
+   
    
     
     private static Object SaveOperands(LinkedList<String> list, FunctionStorage functionStorage, VariableStorage variableStorage){
