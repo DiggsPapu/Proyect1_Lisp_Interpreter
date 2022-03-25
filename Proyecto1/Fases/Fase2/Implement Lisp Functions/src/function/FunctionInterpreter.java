@@ -40,4 +40,4 @@ public class FunctionInterpreter {
     }
 }
 
-// ( defun nombre ( arg1 arg2 )( + arg1 arg2 ))
+// ( DEFUN nombre ( arg1 arg2 )( + arg1 arg2 ))
