@@ -3,16 +3,19 @@ package function;
 import java.util.HashMap;
 
 public class FunctionStorage {
-    HashMap Function;
+    HashMap<String, String[]> Function = new HashMap<String, String[]>();
 
-    public void storageNewFunction(String functionName, String[] arrayInstructions) {
+    public void storageNewFunction(String Key, String[] Instructions) {
 
-        if (Function.containsKey(functionName)) {
-                Function.replace(functionName, Function.get(functionName), arrayInstructions);
+        if (Function.containsKey(Key)) {
+                Function.replace(Key, Function.get(Key), Instructions);
         }
 
         else {
-                Function.put(functionName, arrayInstructions);
+                Function.put(Key, Instructions);
         }
+    }
+    public String[] getData(String Key){
+        return Function.get(Key);
     }
 }
