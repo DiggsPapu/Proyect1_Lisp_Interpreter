@@ -1,10 +1,14 @@
+package function;
+
 import java.util.LinkedList;
 
 /**
  *
  * @author marti
  */
- 
+
+  
+  
 public class Functionality_Operators {
 
     private FunctionStorage functionStorage;
@@ -13,7 +17,9 @@ public class Functionality_Operators {
     public Functionality_Operators(){
     }
     
-    private static Object Result(LinkedList<String> list, FunctionStorage functionStorage, VariableStorage variableStorage){
+   
+    
+    private static Object SaveOperands(LinkedList<String> list, FunctionStorage functionStorage, VariableStorage variableStorage){
         if(list.get(1).equals("COND")&& list.get(0).equals("(") && list.get(list.size()-1).equals(")")) {
             LinkedList <String> Temp = new LinkedList <String>();
                 int Counter = 3;
@@ -24,9 +30,8 @@ public class Functionality_Operators {
                 Temp.add(list.get(Counter));
                
             Operations OP = new Operations(Temp);
-            System.out.println(OP.ResultComp());
             
-            if(OP.getOpType == ">"&& OP.getOpType == "<" && OP.getOpType == "="){
+            if(OP.getOpType == ">"||){
 
                 //Si la lista matches el patron de que sea un nombre valido entonces devolver el valor almacenado
                 if(list.get(Counter).matches("[a-zA-Z][a-zA-Z0-9]*") && variableStorage.getVariableStorage().containsKey(list.get(Counter))){
@@ -38,10 +43,25 @@ public class Functionality_Operators {
                     System.out.print("Devolvio nulo");
                     return null;
 
-                }else if (list.get(Counter).equals("(") && list.get(Counter+1).matches("(")){
-                    Operations tempOP = new Operations();
+                }else if (list.get(Counter).equals("(") && list.get(Counter+1).matches("[\\+\\-\\*\\^\\/]")){
+                    LinkedList <String> Temp1 = new LinkedList <String>();
+                    Operations tempOP = new Operations(Temp1);
+                    return Operations.Result();
+                    
                                         
+                }else if (list.get(Counter).equals("(") && list.get(Counter+1).matches("[<>.]")){
+                    LinkedList <String> Temp1 = new LinkedList <String>();
+                    Operations tempOP = new Operations(Temp1);
+                    return Operations.ResultComp();
+                                 
                 }
+                
+        }else if (OP.getOpType == "<"){
+        
+        }else if(OP.getOpType == "="){
+
+        }else{
+            System.out.print("Error de Operando de comparación");      
         }
         return list;
     }
