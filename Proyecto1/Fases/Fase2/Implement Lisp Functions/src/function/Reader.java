@@ -4,9 +4,8 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Reader {
-	private FunctionStorage functionStorage;
 	private VariableStorage variableStorage;
-	FunctionInterpreter FI = new FunctionInterpreter();
+	public FunctionInterpreter FI = new FunctionInterpreter();
         
 	protected static final String LETTER = "[a-zA-Z]";
 	protected static final String LITERAL = "[a-zA-Z0-9]+";
@@ -16,7 +15,7 @@ public class Reader {
 	protected static final String OPERATIONS =  "[\\+\\-\\*\\^\\/\\<\\>]?";
 	protected static final String SYMBOL = "[().]";
 	protected static final String QUOTATION = "[\"]";
-        protected static final String CONS = "CONS";
+    protected static final String CONS = "CONS";
 	protected static final String ATOM = "ATOM";
 	protected static final String LIST = "LIST";
 	protected static final String SETQ = "SETQ";
@@ -25,13 +24,7 @@ public class Reader {
 	protected static final String COND = "COND";
 	protected static final String EQUAL = "EQUAL";
 		
-	public FunctionStorage getFunctionStorage() {
-		return functionStorage;
-	}
-
-	public void setFunctionStorage(FunctionStorage functionStorage) {
-		this.functionStorage = functionStorage;
-	}
+	
 
 	public VariableStorage getVariableStorage() {
 		return variableStorage;
@@ -42,7 +35,6 @@ public class Reader {
 	}
 	
 	public Reader() {
-		this.functionStorage = new FunctionStorage();
 		this.variableStorage = new VariableStorage();
 	}
 		
@@ -100,11 +92,10 @@ public class Reader {
 			break;
 		}
 		case 6:{
-//			caseEqual(array);
 			break;
 		}
         case 7:{
-        	Cond.SaveOperands(array, functionStorage, variableStorage);
+        	Cond.SaveOperands(array, FI.FS, variableStorage);
 			break;
                 }
 		case 8:{
@@ -177,7 +168,9 @@ public class Reader {
 			return 9;
 			
         }else if(lista.get(1).matches(VALID_NAME) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
-        	if(getFunctionStorage().getFunction().containsKey(lista.get(1))) {
+        	if(FI.FS.getFunction().containsKey(lista.get(1))) {
+        		System.out.print("Entro a valuacion de funcion\n");
+        		FI.prepareInstructions(lista, variableStorage);
         		return 10;
         	}else if(getVariableStorage().getVariableStorage().containsKey(lista.get(1))) {
         		return 11;
@@ -190,7 +183,8 @@ public class Reader {
 			return (Integer) null;
 		}
 	}
-		
+	
+	
 		
 	public LinkedList<String> caseList(LinkedList<String> lista){
 		LinkedList<String> list = new LinkedList<String>();
