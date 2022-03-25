@@ -129,35 +129,36 @@ public class Reader {
 		if (QUOTE.equals(lista.get(1).trim())) {
 			return 1;
                         
-		}else if (DEFUN.equals(lista.get(1))) {
+		}else if (DEFUN.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
                     FI.add_Function(lista);
-                    System.out.println(FI.getInstructions("nombre"));
+                    System.out.println(FI.getInstructions(lista.get(2)));
 			return 2;
                         
-		}else if (SETQ.equals(lista.get(1))) {
+		}else if (SETQ.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
 			return 3;
                         
-		}else if (ATOM.equals(lista.get(1))) {
+		}else if (ATOM.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
                         Functionality_Operators FO= new Functionality_Operators();
                         FO.create_Atom(lista);
                         System.out.println(FO.getAtom());
 			return 4;
 			
-		}else if (LIST.equals(lista.get(1))) {
+		}else if (LIST.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
 			System.out.print("Ingreso a list\n");
 			return 5;
                         
-		}else if (CONS.equals(lista.get(1))) {
+		}else if (CONS.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
                         Functionality_Operators FO= new Functionality_Operators();
                         FO.create_Cons(lista);
                         System.out.println(FO.getCons());
 			return 6;
 			
-		}else if (COND.equals(lista.get(1))) {
+		}else if (COND.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
                         //Functionality_Operators FO= new Functionality_Operators();
 			return 7;
-                        
-        }else if (EQUAL.equals(lista.get(1))) {
+			//(COND ((> 1 -3) (COND ((EQUALS 1 3) (SETQ VALUE(23))) ((< 4 3) ()) (t (+ 1 2)))) ((< 1 3) (9)) (t( + 1 2)))
+         //(DEFUN Promedio(arg1 arg2 arg3 arg4 arg5) (/ (+ arg1 (+ arg2(+ arg3 (+ arg4 arg5)))) 5))               
+        }else if (EQUAL.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
         	lista.removeFirst();
         	lista.removeFirst();
             lista.addFirst("=");
@@ -166,7 +167,7 @@ public class Reader {
             System.out.print(calc.ResultComp());
 			return 8;      
                         
-		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
+		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(") && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
 			Operations calc = new Operations(caseOperation(lista));
 		        if(calc.getOpType().equals(">") || calc.getOpType().equals("<") || calc.getOpType().equals("=")){
 		        System.out.print(calc.ResultComp());
@@ -175,7 +176,16 @@ public class Reader {
 		        }
 			return 9;
 			
-                    }
+        }else if(lista.get(1).matches(VALID_NAME) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
+        	if(getFunctionStorage().getFunction().containsKey(lista.get(1))) {
+        		return 10;
+        	}else if(getVariableStorage().getVariableStorage().containsKey(lista.get(1))) {
+        		return 11;
+        	}else {
+        		System.out.print("No es un nombre valido");
+        		return (Integer) null;
+        	}
+        }
 		else {
 			return (Integer) null;
 		}
