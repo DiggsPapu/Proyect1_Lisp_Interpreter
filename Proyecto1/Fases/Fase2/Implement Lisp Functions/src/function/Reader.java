@@ -9,7 +9,8 @@ import java.util.regex.Matcher;
 public class Reader {
 	private FunctionStorage functionStorage;
 	private VariableStorage variableStorage;
-	
+	FunctionInterpreter FI = new FunctionInterpreter();
+        
 	protected static final String LETTER = "[a-zA-Z]";
 	protected static final String LITERAL = "[a-zA-Z0-9]+";
 	protected static final String VALID_NAME = "[a-zA-Z][a-zA-Z0-9]*";
@@ -131,7 +132,7 @@ public class Reader {
 			return 1;
                         
 		}else if (DEFUN.equals(lista.get(1))) {
-                    FunctionInterpreter FI = new FunctionInterpreter(lista);
+                    FI.add_Function(lista);
                     System.out.println(FI.getInstructions("nombre"));
 			return 2;
                         
@@ -390,5 +391,4 @@ public class Reader {
 
 		scanner.close();
 	}
-	
 }
