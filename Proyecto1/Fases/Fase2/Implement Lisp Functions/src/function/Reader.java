@@ -103,7 +103,8 @@ public class Reader {
 //			caseEqual(array);
 			break;
 		}
-                case 7:{
+        case 7:{
+        	Cond.SaveOperands(array, functionStorage, variableStorage);
 			break;
                 }
 		case 8:{
@@ -156,13 +157,13 @@ public class Reader {
                         //Functionality_Operators FO= new Functionality_Operators();
 			return 7;
                         
-                }else if (EQUAL.equals(lista.get(1))) {
-                        lista.removeFirst();
-                        lista.removeFirst();
-                        lista.addFirst("=");
-                        lista.addFirst("(");
-                        Operations calc = new Operations(lista);
-                        System.out.print(calc.ResultComp());
+        }else if (EQUAL.equals(lista.get(1))) {
+        	lista.removeFirst();
+        	lista.removeFirst();
+            lista.addFirst("=");
+            lista.addFirst("(");
+            Operations calc = new Operations(lista);
+            System.out.print(calc.ResultComp());
 			return 8;      
                         
 		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {

@@ -23,7 +23,12 @@ public class Cond {
             int Counter = 3;
             while(!list.get(Counter).equals(")") ){
                 Temp.add(list.get(Counter));
+                if (Temp.getLast().equals("EQUAL")) {
+                	Temp.removeLast();
+                	Temp.add("=");
+                }
                 Counter++ ;
+                
             }
             //adds el parentesis cerrado
             Temp.add(list.get(Counter));
@@ -50,6 +55,10 @@ public class Cond {
             		cparenthesis++;
             	}
             	prueba.add(list.get(contador));
+            	if (prueba.getLast().equals("EQUAL")) {
+            		prueba.removeLast();
+            		prueba.add("=");
+            	}
             	System.out.print("Contador opar: "+ oparenthesis+"\n");
             	System.out.print("Contador cpar: "+ cparenthesis+"\n");
 
@@ -62,6 +71,10 @@ public class Cond {
             int Counter1 = contador+1;
             while(!list.get(Counter1).equals(")") ){
                 Temp1.add(list.get(Counter1));
+                if (Temp1.getLast().equals("EQUAL")) {
+            		Temp1.removeLast();
+            		Temp1.add("=");
+            	}
                 Counter1++ ;
             }
             Temp1.add(list.get(Counter1));
@@ -83,6 +96,10 @@ public class Cond {
             		cpa++;
             	}
             	prueba2.add(list.get(Counter2));
+            	if (prueba2.getLast().equals("EQUAL")) {
+            		prueba2.removeLast();
+            		prueba2.add("=");
+            	}
             	System.out.print("Contador opa: "+ opa+"\n");
             	System.out.print("Contador cpa: "+ cpa+"\n");
 
@@ -107,7 +124,11 @@ public class Cond {
             	if(prueba3.getLast().matches("[a-zA-Z][a-zA-Z0-9]*") && variableStorage.getVariableStorage().containsKey(prueba3.getLast())){
 	                prueba3.add(variableStorage.getVariableStorage().get(prueba3.getLast()));
 	                prueba3.remove(prueba3.size()-2);
-        		}
+        		}else if (prueba3.getLast().equals("EQUAL")) {
+            		prueba3.removeLast();
+            		prueba3.add("=");
+            	}
+            	
             	System.out.print("Contador opae: "+ opae+"\n");
             	System.out.print("Contador cpae: "+ cpae+"\n");
 
@@ -145,6 +166,9 @@ public class Cond {
 	            	if(ifList.getLast().matches("[a-zA-Z][a-zA-Z0-9]*") && variableStorage.getVariableStorage().containsKey(ifList.getLast())){
 		                ifList.add(variableStorage.getVariableStorage().get(ifList.getLast()));
 		                ifList.remove(ifList.size()-2);
+	        		}else if(ifList.getLast().equals("EQUAL")) {
+	        			ifList.removeLast();
+	        			ifList.add("=");
 	        		}
 	            	System.out.print("Contador opar: "+ op+"\n");
 	            	System.out.print("Contador cpar: "+ cp+"\n");
@@ -171,7 +195,7 @@ public class Cond {
 		                return tempOP.Result();
 		
 		
-		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[<>.]")){
+		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[<>.]")||ifList.get(k+1).equals("=")){
 		            	if(ifList.get(k).matches("[a-zA-Z][a-zA-Z0-9]*")){
 			                return null;
 		        		}
@@ -190,6 +214,7 @@ public class Cond {
 	        //Para saber si el segundo if del cond is true
 	        	//(SETQ VALUE( + 2 (* 3 (+ 4 7))))
 	        	 //(COND ((> 2 3) (+ 0 9)) ((> 233 4) (9)) (t (+ 1 2)) )
+	        	//(COND ((EQUAL 2 3) (EQUAL 0 9)) ((> 233 4) (9)) (t (+ 1 2)) )
 	        }else if (OP1.ResultComp()){
 	        	
 	        	System.out.print("Ingreso al else if\n");
@@ -212,7 +237,10 @@ public class Cond {
 	            	if(ifList.getLast().matches("[a-zA-Z][a-zA-Z0-9]*") && variableStorage.getVariableStorage().containsKey(ifList.getLast())){
 		                ifList.add(variableStorage.getVariableStorage().get(ifList.getLast()));
 		                ifList.remove(ifList.size()-2);
-	        		}
+	        		}else if (prueba.getLast().equals("EQUAL")) {
+	            		ifList.removeLast();
+	            		ifList.add("=");
+	            	}
 	            	System.out.print("Contador opar: "+ op+"\n");
 	            	System.out.print("Contador cpar: "+ cp+"\n");
 	            	System.out.print(Counter1+" "+ifList+"\n\n");
@@ -238,9 +266,12 @@ public class Cond {
 		                return tempOP.Result();
 		
 		
-		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[<>.]")){
+		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[<>.]")||ifList.get(k+1).equals("EQUAL")){
 		            	if(ifList.get(k).matches("[a-zA-Z][a-zA-Z0-9]*")){
 			                return null;
+		        		}else if(ifList.get(k).equals("EQUAL")) {
+		        			ifList.add(k, "=");
+		        			ifList.remove(k+1);
 		        		}
 		            	Operations tempOP = new Operations(ifList);
 		                System.out.print("\nLa desigualdad es: "+ tempOP.ResultComp());
@@ -263,6 +294,10 @@ public class Cond {
 	        	prueba3.removeLast();
 	        	
 	        	for (int k = 0 ; k < prueba3.size() ; k++) {
+	        		if(prueba3.get(k).equals("EQUAL")) {
+	        			prueba3.add(k, "=");
+	        			prueba3.remove(k+1);
+	        		}
 	        		//Si la lista matches el patron de que sea un nombre valido entonces devolver el valor almacenado
 	        		System.out.print("prueba3: "+ prueba3+"\n");
 		        	System.out.print(prueba3.get(k).equals("(") && prueba3.get(k+1).matches("[\\+\\-\\*\\^\\/]"));
@@ -281,10 +316,11 @@ public class Cond {
 		                return tempOP.Result();
 		
 		
-		            }else if (prueba3.get(k).equals("(") && prueba3.get(k+1).matches("[<>.]")){
+		            }else if (prueba3.get(k).equals("(") && prueba3.get(k+1).matches("[<>.]")||prueba3.get(k+1).equals("=")){
 		            	if(prueba3.get(k).matches("[a-zA-Z][a-zA-Z0-9]*")){
 			                return null;
 		        		}
+		            	
 		            	Operations tempOP = new Operations(prueba3);
 		                System.out.print("\nLa desigualdad es: "+ tempOP.ResultComp());
 		                return tempOP.ResultComp();
