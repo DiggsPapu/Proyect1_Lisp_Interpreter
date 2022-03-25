@@ -89,6 +89,7 @@ public class Reader {
 			break;
 		}
 		case 3:{
+			//SETQ DEFINICION DE VARIABLES
 			System.out.print("Entro a setq\n");
 			caseSETQ(array);
 			break;
@@ -97,14 +98,18 @@ public class Reader {
 			break;
 		}
 		case 5:{
+			//LIST LISTAS
 			caseList(array);
 			break;
 		}
 		case 6:{
-//			caseEqual(array);
+			//COND CONDICIONAL
+			System.out.print("Entro a cond");
+			System.out.print(array);
+			Functionality_Operators.SaveOperands(array, functionStorage, variableStorage);
 			break;
 		}
-                case 7:{
+		case 7:{
 			break;
                 }
 		case 8:{
@@ -119,7 +124,7 @@ public class Reader {
 		
 		}
 	}
-	
+	//(COND ((< 2 3) 23) ((EQUALS 1 2) 4) (t (+ 1 2)) )
 	
 	
 	
@@ -140,17 +145,7 @@ public class Reader {
 			return 5;
                         
 		}else if (COND.equals(lista.get(1))) {
-                        //Functionality_Operators FO= new Functionality_Operators();
-			return 7;
-                        
-                }else if (EQUAL.equals(lista.get(1))) {
-                        lista.removeFirst();
-                        lista.removeFirst();
-                        lista.addFirst("=");
-                        lista.addFirst("(");
-                        Operations calc = new Operations(lista);
-                        System.out.print(calc.ResultComp());
-			return 8;      
+            return 6;      
                         
 		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
 			Operations calc = new Operations(caseOperation(lista));
@@ -369,7 +364,6 @@ public class Reader {
 		Scanner scanner = new Scanner(System.in);
 		
 //		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
-		lector.caseReader(scanner.nextLine());
 		
 		lector.caseReader(scanner.nextLine());
 
