@@ -15,7 +15,7 @@ public class FunctionInterpreter {
     FunctionInterpreter(LinkedList<String> list){
         NombreKey = list.get(2);
         
-        LinkedList <String> Result = new LinkedList <String>();
+        LinkedList <String> Result = new LinkedList();
 
         int Counter = 4;
         // Add Arguments
@@ -23,7 +23,7 @@ public class FunctionInterpreter {
             Result.add(list.get(Counter));
             Counter++ ;
         }
-        // Add Numbre of Arguments
+        // Add Number of Arguments
         Result.addFirst(String.valueOf(Result.size()));
         Counter++;
         // Add Instructions
@@ -31,11 +31,11 @@ public class FunctionInterpreter {
             Result.add(list.get(Counter));
             Counter++ ;
         }
+        Result.add(list.get(Counter));
         
-        String[] Tokens = Result.toArray(new String[Result.size()]);
-        FS.storageNewFunction(NombreKey, Tokens);
+        FS.storageNewFunction(NombreKey, Result);
     }   
-    public String[] getInstructions(String Key){
+    public LinkedList<String> getInstructions(String Key){
         return FS.getData(Key);
     }
 }
