@@ -1,9 +1,12 @@
+package function;
+
 import java.util.LinkedList;
 
 /**
  *
  * @author marti
  */
+
 public class FunctionInterpreter {
     
     String NombreKey = "";    
@@ -27,7 +30,9 @@ public class FunctionInterpreter {
             Result.add(list.get(Counter));
             Counter++ ;
         }
-        
+        FunctionStorage FS = new FunctionStorage();
+        String[] Tokens = Result.toArray(new String[Result.size()]);
+        FS.storageNewFunction(NombreKey, Tokens);
     }   
 }
 
