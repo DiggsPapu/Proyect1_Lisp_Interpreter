@@ -21,13 +21,11 @@ public class FunctionInterpreter {
         int Counter2 = list.size()-5;
         int Counter3 = 0;
         int Counter4 = 0;
-        System.out.println(Counter+" "+Counter2+" "+Counter3);
         // Add Arguments
         
         while(Counter2 > 0){
             if(list.get(Counter2+4).equals("(")){
                 Counter3 ++;
-                System.out.println(Counter3);
             }
             Counter2 --;
         }
@@ -59,5 +57,5 @@ public class FunctionInterpreter {
     }
 }
 
-// ( DEFUN nombre ( arg1 arg2 arg3)( + arg1 (* arg2(/ arg4(+ arg6 arg3 )))))
-// ( DEFUN nombre ( arg1 arg2 arg4 arg5)( + arg1 arg2))
+//ejemplo ( DEFUN nombre ( arg1 arg2 arg3)( + arg1 (* arg2(/ arg4(+ arg6 arg3 )))))
+//ejemplo ( DEFUN nombre ( arg1 arg2 arg4 arg5)( + arg1 arg2))
