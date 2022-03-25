@@ -37,7 +37,7 @@ public class Reader {
 	public Reader() {
 		this.variableStorage = new VariableStorage();
 	}
-		
+	
 	public LinkedList <String> tokenize(String command){
 		int i = 0;
 		LinkedList <String> tokens = new LinkedList <String>();
@@ -88,14 +88,14 @@ public class Reader {
 			break;
 		}
 		case 5:{
-			caseList(array);
+			
 			break;
 		}
 		case 6:{
 			break;
 		}
         case 7:{
-        	Cond.SaveOperands(array, FI.FS, variableStorage);
+        	
 			break;
                 }
 		case 8:{
@@ -136,6 +136,7 @@ public class Reader {
 			
 		}else if (LIST.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
 			System.out.print("Ingreso a list\n");
+			caseList(lista);
 			return 5;
                         
 		}else if (CONS.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
@@ -145,7 +146,7 @@ public class Reader {
 			return 6;
 			
 		}else if (COND.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
-                        //Functionality_Operators FO= new Functionality_Operators();
+			Cond.SaveOperands(lista, FI.FS, variableStorage);
 			return 7;
 			//(COND ((> 1 -3) (COND ((EQUALS 1 3) (SETQ VALUE(23))) ((< 4 3) ()) (t (+ 1 2)))) ((< 1 3) (9)) (t( + 1 2)))
          //(DEFUN Promedio(arg1 arg2 arg3 arg4 arg5) (/ (+ arg1 (+ arg2(+ arg3 (+ arg4 arg5)))) 5))               
@@ -418,7 +419,8 @@ public class Reader {
 			
 			
 		}else if (COND.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
-                        //Functionality_Operators FO= new Functionality_Operators();
+			
+			Cond.SaveOperands(FI.prepareInstructions(lista, variableStorage), FI.FS, variableStorage);
 			
 			//(COND ((> 1 -3) (COND ((EQUALS 1 3) (SETQ VALUE(23))) ((< 4 3) ()) (t (+ 1 2)))) ((< 1 3) (9)) (t( + 1 2)))
          //(DEFUN Promedio(arg1 arg2 arg3 arg4 arg5) (/ (+ arg1 (+ arg2(+ arg3 (+ arg4 arg5)))) 5))               
