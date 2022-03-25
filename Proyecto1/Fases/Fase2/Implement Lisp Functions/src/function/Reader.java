@@ -18,6 +18,7 @@ public class Reader {
 	protected static final String OPERATIONS =  "[\\+\\-\\*\\^\\/\\<\\>]?";
 	protected static final String SYMBOL = "[().]";
 	protected static final String QUOTATION = "[\"]";
+        //protected static final String CONS = "CONS";
 	protected static final String ATOM = "ATOM";
 	protected static final String LIST = "LIST";
 	protected static final String SETQ = "SETQ";
@@ -66,7 +67,7 @@ public class Reader {
 			}
 			i = j;
 		}
-		System.out.print("tOKEN SIZE:"+ String.valueOf(tokens.size())+"\n" );
+		System.out.print("Token Size:"+ String.valueOf(tokens.size())+"\n" );
 		return tokens;
 	}
 	
@@ -138,6 +139,9 @@ public class Reader {
 			return 3;
                         
 		}else if (ATOM.equals(lista.get(1))) {
+                        Functionality_Operators FO= new Functionality_Operators();
+                        FO.create_Atom(lista);
+                        System.out.println(FO.getAtom());
 			return 4;
 			
 		}else if (LIST.equals(lista.get(1))) {
