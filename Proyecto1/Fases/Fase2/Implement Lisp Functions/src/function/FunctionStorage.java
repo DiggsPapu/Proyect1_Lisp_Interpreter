@@ -1,6 +1,7 @@
 package function;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  *
@@ -8,19 +9,19 @@ import java.util.HashMap;
  */
 
 public class FunctionStorage {
-    HashMap<String, String[]> Function = new HashMap<String, String[]>();
+    HashMap<String, LinkedList<String>> Function = new HashMap<String, LinkedList<String>>();
 
-    public void storageNewFunction(String Key, String[] Instructions) {
+    public void storageNewFunction(String Key, LinkedList<String> Instructions) {
 
         if (Function.containsKey(Key)) {
-                Function.replace(Key, Function.get(Key), Instructions);
+            Function.replace(Key, Function.get(Key), Instructions);
         }
 
         else {
-                Function.put(Key, Instructions);
+            Function.put(Key, Instructions);
         }
     }
-    public String[] getData(String Key){
+    public LinkedList<String> getData(String Key){
         return Function.get(Key);
     }
 }
