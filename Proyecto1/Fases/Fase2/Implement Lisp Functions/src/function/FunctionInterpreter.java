@@ -12,7 +12,10 @@ public class FunctionInterpreter {
     String NombreKey = "";    
     FunctionStorage FS = new FunctionStorage();
     
-    FunctionInterpreter(LinkedList<String> list){
+    FunctionInterpreter(){
+        
+    }
+    public void add_Function(LinkedList<String> list){
         NombreKey = list.get(2);
         
         LinkedList <String> Result = new LinkedList();
@@ -50,12 +53,12 @@ public class FunctionInterpreter {
         }
         Result.add(list.get(Counter));
         
-        FS.storageNewFunction(NombreKey, Result);
+        FS.storeNewFunction(NombreKey, Result);
     }   
     public LinkedList<String> getInstructions(String Key){
         return FS.getData(Key);
     }
 }
 
-//ejemplo ( DEFUN nombre ( arg1 arg2 arg3)( + arg1 (* arg2(/ arg4(+ arg6 arg3 )))))
-//ejemplo ( DEFUN nombre ( arg1 arg2 arg4 arg5)( + arg1 arg2))
+// ( DEFUN nombre ( arg1 arg2 arg3)( + arg1 (* arg2(/ arg4(+ arg6 arg3 )))))
+// ( DEFUN nombre ( arg1 arg2 arg4 arg5)( + arg1 arg2))
