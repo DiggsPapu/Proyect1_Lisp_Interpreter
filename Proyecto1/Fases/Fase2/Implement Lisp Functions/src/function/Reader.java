@@ -104,6 +104,9 @@ public class Reader {
 //			caseEqual(array);
 			break;
 		}
+                case 7:{
+			break;
+                }
 		case 8:{
 			break;
 		}
@@ -137,6 +140,7 @@ public class Reader {
 			return 5;
                         
 		}else if (COND.equals(lista.get(1))) {
+                        Functionality_Operators FO= new Functionality_Operators();
 			return 7;
                         
                 }else if (EQUAL.equals(lista.get(1))) {
@@ -149,13 +153,6 @@ public class Reader {
 			return 8;      
                         
 		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
-			
-                        Operations calc = new Operations(caseOperation(lista));
-                        if(calc.getOpType() == 1){
-                        System.out.print(calc.Result());
-                        }else{
-                        System.out.print(calc.ResultComp());
-                        }
                         return 9;
 			
                     }
