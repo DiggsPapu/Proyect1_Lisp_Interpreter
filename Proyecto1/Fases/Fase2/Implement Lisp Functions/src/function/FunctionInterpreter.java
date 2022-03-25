@@ -1,5 +1,6 @@
 package function;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -7,58 +8,20 @@ import java.util.LinkedList;
  * @author marti
  */
 
-public class FunctionInterpreter {
-    
-    String NombreKey = "";    
-    FunctionStorage FS = new FunctionStorage();
-    
-    FunctionInterpreter(){
-        
+public class FunctionStorage {
+    HashMap<String, LinkedList<String>> Function = new HashMap<String, LinkedList<String>>();
+
+    public void storeNewFunction(String Key, LinkedList<String> Instructions) {
+
+        if (Function.containsKey(Key)) {
+            Function.replace(Key, Function.get(Key), Instructions);
+        }
+
+        else {
+            Function.put(Key, Instructions);
+        }
     }
-    public void add_Function(LinkedList<String> list){
-        NombreKey = list.get(2);
-        
-        LinkedList <String> Result = new LinkedList();
-
-        int Counter = 3;
-        int Counter2 = list.size()-5;
-        int Counter3 = 0;
-        int Counter4 = 0;
-        // Add Arguments
-        
-        while(Counter2 > 0){
-            if(list.get(Counter2+4).equals("(")){
-                Counter3 ++;
-            }
-            Counter2 --;
-        }
-        
-        while(Counter3 > 0){
-            if(list.get(Counter).equals(")")){
-                Counter3 --;
-            }
-            Result.add(list.get(Counter));
-            Counter++ ;
-        }
-        // Add Number of Arguments
-        while(!list.get(Counter4).equals(")") ){
-            Counter4++ ;
-        }
-        Result.addFirst(String.valueOf(Counter4-4));
-
-        // Add Instructions
-        while(!list.get(Counter).equals(")") ){
-            Result.add(list.get(Counter));
-            Counter++ ;
-        }
-        Result.add(list.get(Counter));
-        
-        FS.storageNewFunction(NombreKey, Result);
-    }   
-    public LinkedList<String> getInstructions(String Key){
-        return FS.getData(Key);
+    public LinkedList<String> getData(String Key){
+        return Function.get(Key);
     }
 }
-
-// ( DEFUN nombre ( arg1 arg2 arg3)( + arg1 (* arg2(/ arg4(+ arg6 arg3 )))))
-// ( DEFUN nombre ( arg1 arg2 arg4 arg5)( + arg1 arg2))
