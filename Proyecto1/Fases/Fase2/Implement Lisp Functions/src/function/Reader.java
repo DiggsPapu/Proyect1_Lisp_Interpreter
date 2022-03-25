@@ -1,10 +1,7 @@
 package function;
 
-import java.util.regex.Pattern;
 import java.util.LinkedList;
-import java.util.HashMap;
 import java.util.Scanner;
-import java.util.regex.Matcher;
 
 public class Reader {
 	private FunctionStorage functionStorage;

@@ -15,7 +15,7 @@ public class FunctionInterpreter {
     FunctionInterpreter(LinkedList<String> list){
         NombreKey = list.get(2);
         
-        LinkedList <String> Result = new LinkedList();
+        LinkedList <String> Result = new LinkedList<String>();
 
         int Counter = 3;
         int Counter2 = list.size()-5;

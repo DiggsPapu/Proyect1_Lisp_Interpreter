@@ -11,9 +11,7 @@ import java.util.LinkedList;
   //Es el cond
 public class Cond {
 
-    private FunctionStorage functionStorage;
-    private VariableStorage variableStorage;
-    
+   
     
    
     
