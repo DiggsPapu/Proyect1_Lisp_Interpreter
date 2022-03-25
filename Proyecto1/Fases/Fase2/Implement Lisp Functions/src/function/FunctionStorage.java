@@ -1,22 +1,27 @@
 package function;
 
-import java.util.Stack;
 import java.util.HashMap;
+import java.util.LinkedList;
+
+/**
+ *
+ * @author marti
+ */
+
 public class FunctionStorage {
-	HashMap functionS;
-	
-	public void storageNewFunction(String functionName, String[] arrayInstructions) {
-		/**
-		 * To replace a function
-		 */
-		if (functionS.containsKey(functionName)) {
-			functionS.replace(functionName, functionS.get(functionName), arrayInstructions);
-		}
-		/**
-		 * To create a function
-		 */
-		else {
-			functionS.put(functionName, arrayInstructions);
-		}
-	}
+    HashMap<String, LinkedList<String>> Function = new HashMap<String, LinkedList<String>>();
+
+    public void storageNewFunction(String Key, LinkedList<String> Instructions) {
+
+        if (Function.containsKey(Key)) {
+            Function.replace(Key, Function.get(Key), Instructions);
+        }
+
+        else {
+            Function.put(Key, Instructions);
+        }
+    }
+    public LinkedList<String> getData(String Key){
+        return Function.get(Key);
+    }
 }

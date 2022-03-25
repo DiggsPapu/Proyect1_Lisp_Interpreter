@@ -18,6 +18,7 @@ public class Reader {
 	protected static final String OPERATIONS =  "[\\+\\-\\*\\^\\/\\<\\>]?";
 	protected static final String SYMBOL = "[().]";
 	protected static final String QUOTATION = "[\"]";
+        protected static final String CONS = "CONS";
 	protected static final String ATOM = "ATOM";
 	protected static final String LIST = "LIST";
 	protected static final String SETQ = "SETQ";
@@ -66,7 +67,7 @@ public class Reader {
 			}
 			i = j;
 		}
-		System.out.print("tOKEN SIZE:"+ String.valueOf(tokens.size())+"\n" );
+		System.out.print("Token Size:"+ String.valueOf(tokens.size())+"\n" );
 		return tokens;
 	}
 	
@@ -89,7 +90,6 @@ public class Reader {
 			break;
 		}
 		case 3:{
-			//SETQ DEFINICION DE VARIABLES
 			System.out.print("Entro a setq\n");
 			caseSETQ(array);
 			break;
@@ -98,20 +98,19 @@ public class Reader {
 			break;
 		}
 		case 5:{
-			//LIST LISTAS
 			caseList(array);
 			break;
 		}
 		case 6:{
-			//COND CONDICIONAL
-			System.out.print("Entro a cond");
-			System.out.print(array);
-			Functionality_Operators.SaveOperands(array, functionStorage, variableStorage);
+//			caseEqual(array);
 			break;
 		}
-		case 7:{
-			break;
-                }
+        case 7:{
+			System.out.print("Entro a cond");
+			Cond.SaveOperands(array, functionStorage, variableStorage);
+
+        	break;
+        }
 		case 8:{
 			break;
 		}
@@ -124,7 +123,7 @@ public class Reader {
 		
 		}
 	}
-	//(COND ((< 2 3) (23)) ((= 1 2) 4) (t (+ 1 2)) )
+	
 	
 	
 	
@@ -133,19 +132,43 @@ public class Reader {
 		
 		if (QUOTE.equals(lista.get(1).trim())) {
 			return 1;
+                        
 		}else if (DEFUN.equals(lista.get(1))) {
+                    FunctionInterpreter FI = new FunctionInterpreter(lista);
+                    System.out.println(FI.getInstructions("nombre"));
 			return 2;
+                        
 		}else if (SETQ.equals(lista.get(1))) {
 			return 3;
+                        
 		}else if (ATOM.equals(lista.get(1))) {
+                        Functionality_Operators FO= new Functionality_Operators();
+                        FO.create_Atom(lista);
+                        System.out.println(FO.getAtom());
 			return 4;
 			
 		}else if (LIST.equals(lista.get(1))) {
 			System.out.print("Ingreso a list\n");
 			return 5;
                         
+		}else if (CONS.equals(lista.get(1))) {
+                        Functionality_Operators FO= new Functionality_Operators();
+                        FO.create_Cons(lista);
+                        System.out.println(FO.getCons());
+			return 6;
+			
 		}else if (COND.equals(lista.get(1))) {
-            return 6;      
+                        //Functionality_Operators FO= new Functionality_Operators();
+			return 7;
+                        
+                }else if (EQUAL.equals(lista.get(1))) {
+                        lista.removeFirst();
+                        lista.removeFirst();
+                        lista.addFirst("=");
+                        lista.addFirst("(");
+                        Operations calc = new Operations(lista);
+                        System.out.print(calc.ResultComp());
+			return 8;      
                         
 		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
 			Operations calc = new Operations(caseOperation(lista));
@@ -364,8 +387,8 @@ public class Reader {
 		Scanner scanner = new Scanner(System.in);
 		
 //		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
-		
 		lector.caseReader(scanner.nextLine());
+		
 		lector.caseReader(scanner.nextLine());
 
 		scanner.close();
