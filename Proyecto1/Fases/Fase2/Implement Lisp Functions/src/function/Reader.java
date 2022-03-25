@@ -179,9 +179,6 @@ public class Reader {
 //	public boolean caseMayor_Minus(LinkedList<String> lista) {
 //		if ()
 //	}
-	
-	
-	
 	public boolean caseEqual(LinkedList<String> lista) {
 		//En caso cumpla con la sintaxis
 		if (lista.get(2).equals("*") && lista.get(4).equals("*") && lista.get(lista.size()-2).equals("*") && lista.get(lista.size()-4).equals("*")) {
