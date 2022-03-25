@@ -7,11 +7,11 @@ import java.util.LinkedList;
  *
  * @author marti
  */
-
 public class Operations {
     float Final = 0 ;
     Stack<String> Stack;
     boolean Comparison_operation = false;
+    String OPType = "None";
   
     public Operations(LinkedList<String> list){
         Stack = new Stack<String>();
@@ -36,27 +36,35 @@ public class Operations {
         if(func.equals("+")) {
             float result = Plus(callStack);
             Stack.push(String.valueOf(result));
+            OPType = "+";
         }else if(func.equals("-")) {
             float result = Minus(callStack);
             Stack.push(String.valueOf(result));
+            OPType = "-";
         }else if(func.equals("*")) {
             float result = Multi(callStack);
             Stack.push(String.valueOf(result));
+            OPType = "*";
         }else if(func.equals("/")) {
             float result = Div(callStack);
             Stack.push(String.valueOf(result));
+            OPType = "/";
         }else if(func.equals("^")) {
             float result = Pow(callStack);
             Stack.push(String.valueOf(result));
+            OPType = "^";
         }else if(func.equals(">")) {
             Comparison_operation = true;
             GreaterThan(callStack);
+            OPType = ">";
         }else if(func.equals("<")) {
             Comparison_operation = true;
             SmallerThan(callStack);
+            OPType = "<";
         }else if(func.equals("=")) {
             Comparison_operation = true;
             Equals(callStack);
+            OPType = "=";
         }
     }
   
@@ -123,14 +131,8 @@ public class Operations {
         }
         return Finalbool;
     }
-        public int getOpType(){
-            int Temp = 2;
-            if (Comparison_operation == false){
-                Temp = 1;
-            }else{
-                Temp = 0;
-            }
-            return Temp;
+        public String getOpType(){
+            return OPType;
         }
         public float Result(){
             return Final;
