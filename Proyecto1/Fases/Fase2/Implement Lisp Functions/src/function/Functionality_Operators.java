@@ -71,6 +71,54 @@ public class Functionality_Operators {
             Operations OP1 = new Operations(Temp1);
             System.out.print("El valor booleano del else if es: "+ OP1.ResultComp()+"\n");
             
+            
+          //Moverse al  else
+            int Counter2 = contador+1;
+            LinkedList<String> prueba2 = new LinkedList<String>();
+            int opa = 1;
+            int cpa = 0;		
+            while (Counter2<list.size() && opa!=cpa) {
+            	if (list.get(Counter2).equals("(")) {
+            		opa++;
+            		
+            	}else if (list.get(Counter2).equals(")")) {
+            		cpa++;
+            	}
+            	prueba2.add(list.get(Counter2));
+            	System.out.print("Contador opa: "+ opa+"\n");
+            	System.out.print("Contador cpa: "+ cpa+"\n");
+
+            	System.out.print(Counter2+" "+prueba2+"\n\n");
+            	Counter2++;
+            	
+            }
+           
+            LinkedList<String> prueba3 = new LinkedList<String>();
+            int opae = 1;
+            int cpae = 0;
+            prueba3.add(list.get(Counter2));
+            Counter2++;
+            while (Counter2<list.size() && opae!=cpae) {
+            	if (list.get(Counter2).equals("(")) {
+            		opae++;
+            		
+            	}else if (list.get(Counter2).equals(")")) {
+            		cpae++;
+            	}
+            	prueba3.add(list.get(Counter2));
+            	if(prueba3.getLast().matches("[a-zA-Z][a-zA-Z0-9]*") && variableStorage.getVariableStorage().containsKey(prueba3.getLast())){
+	                prueba3.add(variableStorage.getVariableStorage().get(prueba3.getLast()));
+	                prueba3.remove(prueba3.size()-2);
+        		}
+            	System.out.print("Contador opae: "+ opae+"\n");
+            	System.out.print("Contador cpae: "+ cpae+"\n");
+
+            	System.out.print(Counter2+" "+prueba3+"\n\n");
+            	Counter2++;
+            	
+            }
+            
+            
             //(SETQ VALUE( + 2 (* 3 (+ 4 7))))
             //(COND ((< 2 3) (+ 0 9)) ((> 233 4) 9) (t (+ 1 2)) )
             
@@ -126,7 +174,7 @@ public class Functionality_Operators {
 		
 		
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[<>.]")){
-		            	if(ifList.get(Counter).matches("[a-zA-Z][a-zA-Z0-9]*")){
+		            	if(ifList.get(k).matches("[a-zA-Z][a-zA-Z0-9]*")){
 			                return null;
 		        		}
 		            	Operations tempOP = new Operations(ifList);
@@ -142,7 +190,7 @@ public class Functionality_Operators {
 	
 	            
 	        //Para saber si el segundo if del cond is true
-	        	
+	        	//(SETQ VALUE( + 2 (* 3 (+ 4 7))))
 	        	 //(COND ((> 2 3) (+ 0 9)) ((> 233 4) (9)) (t (+ 1 2)) )
 	        }else if (OP1.ResultComp()){
 	        	
@@ -163,6 +211,10 @@ public class Functionality_Operators {
 	            		cp++;
 	            	}
 	            	ifList.add(list.get(Counter1));
+	            	if(ifList.getLast().matches("[a-zA-Z][a-zA-Z0-9]*") && variableStorage.getVariableStorage().containsKey(ifList.getLast())){
+		                ifList.add(variableStorage.getVariableStorage().get(ifList.getLast()));
+		                ifList.remove(ifList.size()-2);
+	        		}
 	            	System.out.print("Contador opar: "+ op+"\n");
 	            	System.out.print("Contador cpar: "+ cp+"\n");
 	            	System.out.print(Counter1+" "+ifList+"\n\n");
@@ -179,18 +231,20 @@ public class Functionality_Operators {
 		
 		
 		            }else if(ifList.get(k).matches("[a-zA-Z][a-zA-Z0-9]*") && !variableStorage.getVariableStorage().containsKey(ifList.get(k))){
-		                System.out.print("Devolvio nulo");
+		                System.out.print("No es un valor valido");
 		                return null;
 		
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[\\+\\-\\*\\^\\/]")){
-		            	
-		            	Operations tempOP = new Operations(ifList);
+		                Operations tempOP = new Operations(ifList);
 		                System.out.print("\nEl resultado es: "+tempOP.Result());
 		                return tempOP.Result();
 		
 		
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[<>.]")){
-		                Operations tempOP = new Operations(ifList);
+		            	if(ifList.get(k).matches("[a-zA-Z][a-zA-Z0-9]*")){
+			                return null;
+		        		}
+		            	Operations tempOP = new Operations(ifList);
 		                System.out.print("\nLa desigualdad es: "+ tempOP.ResultComp());
 		                return tempOP.ResultComp();
 		
@@ -200,32 +254,49 @@ public class Functionality_Operators {
 		
 		            }
 	        	}
-//	        //En el caso de que el else aplique dado que tiene la t de true.
-//	        }else if(list.get(Counter+2).equals("t")){
-//	        	//Si la lista matches el patron de que sea un nombre valido entonces devolver el valor almacenado
-//	            if(list.get(Counter).matches("[a-zA-Z][a-zA-Z0-9]*") && variableStorage.getVariableStorage().containsKey(list.get(Counter))){
-//	                System.out.print("El valor almacenado es: "+variableStorage.getVariableStorage().get(list.get(Counter))+"\n");
-//	                return variableStorage.getVariableStorage().get(list.get(Counter)); //Retorna el valore almacenado del almacenamiento de variables
-//	
-//	
-//	            }else if(list.get(Counter).matches("[a-zA-Z][a-zA-Z0-9]*") && !variableStorage.getVariableStorage().containsKey(list.get(Counter))){
-//	                System.out.print("Devolvio nulo");
-//	                return null;
-//	
-//	            }else if (list.get(Counter).equals("(") && list.get(Counter+1).matches("[\\+\\-\\*\\^\\/]")){
-//	                LinkedList <String> Temp1 = new LinkedList <String>();
-//	                Operations tempOP = new Operations(Temp1);
-//	                System.out.print(tempOP.Result());
-//	                return tempOP.Result();
-//	
-//	
-//	            }else if (list.get(Counter).equals("(") && list.get(Counter+1).matches("[<>.]")){
-//	                LinkedList <String> Temp1 = new LinkedList <String>();
-//	                Operations tempOP = new Operations(Temp1);
-//	                System.out.print(tempOP.Result());
-//	                return tempOP.ResultComp();
-//	
-//	            }
+	        	
+	       	//(SETQ VALUE( + 2 (* 3 (+ 4 7))))
+	        //(COND ((> 2 3) (+ 0 9)) ((< 233 4) (9)) (t (+ 1 2)) )
+	        }else if(prueba3.get(1).equals("t") && prueba3.get(0).equals("(") && prueba3.get(prueba3.size()-1).equals(")")){
+	        	
+	        	System.out.print("Ingreso al else\n");
+	        	prueba3.remove();
+	        	prueba3.remove();
+	        	prueba3.removeLast();
+	        	
+	        	for (int k = 0 ; k < prueba3.size() ; k++) {
+	        		//Si la lista matches el patron de que sea un nombre valido entonces devolver el valor almacenado
+	        		System.out.print("prueba3: "+ prueba3+"\n");
+		        	System.out.print(prueba3.get(k).equals("(") && prueba3.get(k+1).matches("[\\+\\-\\*\\^\\/]"));
+	        		if(prueba3.get(k).matches("[a-zA-Z][a-zA-Z0-9]*") && variableStorage.getVariableStorage().containsKey(prueba3.get(k))){
+		                System.out.print("El valor almacenado es: "+variableStorage.getVariableStorage().get(prueba3.get(k))+"\n");
+		                return variableStorage.getVariableStorage().get(prueba3.get(k)); //Retorna el valore almacenado del almacenamiento de variables
+		
+		
+		            }else if(prueba3.get(k).matches("[a-zA-Z][a-zA-Z0-9]*") && !variableStorage.getVariableStorage().containsKey(prueba3.get(k))){
+		                System.out.print("No es un valor valido");
+		                return null;
+		
+		            }else if (prueba3.get(k).equals("(") && prueba3.get(k+1).matches("[\\+\\-\\*\\^\\/]")){
+		                Operations tempOP = new Operations(prueba3);
+		                System.out.print("\nEl resultado es: "+tempOP.Result());
+		                return tempOP.Result();
+		
+		
+		            }else if (prueba3.get(k).equals("(") && prueba3.get(k+1).matches("[<>.]")){
+		            	if(prueba3.get(k).matches("[a-zA-Z][a-zA-Z0-9]*")){
+			                return null;
+		        		}
+		            	Operations tempOP = new Operations(prueba3);
+		                System.out.print("\nLa desigualdad es: "+ tempOP.ResultComp());
+		                return tempOP.ResultComp();
+		
+		            }else if (prueba3.get(k).equals("(") && prueba3.get(k+1).matches("[\\+\\-]?[\\d]+[\\.\\d]*")){
+		                System.out.print(prueba3.get(k+1));
+		                return prueba3.get(k+1);
+		
+		            }
+	        	}
 	        	
 	        }else{
 	            System.out.print("Error de Operando de comparacion");   
