@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-03-25T18:09:05.247Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36" etag="zEWmTh0IVvp22WPpRXtG" version="17.2.2" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-25T18:18:41.231Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36" etag="p4uyhQmk5o-iywccGiix" version="17.2.2" type="github">
   <diagram id="XaqXBKrpCUasBcb4OH2j" name="Page-1">
-    <mxGraphModel dx="827" dy="1811" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="444" dy="1370" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -44,16 +44,16 @@
           <mxGeometry y="66" width="340" height="68" as="geometry" />
         </mxCell>
         <mxCell id="J4qMtuSpSgjDcQ36NwNX-12" value="Operations" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="824" y="766" width="430" height="420" as="geometry" />
+          <mxGeometry x="824" y="766" width="430" height="368" as="geometry" />
         </mxCell>
-        <mxCell id="J4qMtuSpSgjDcQ36NwNX-13" value="-value1: double&#xa;-value2: double&#xa;-operator: String&#xa;-head: String&#xa;-counterNumber: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="J4qMtuSpSgjDcQ36NwNX-12" vertex="1">
+        <mxCell id="J4qMtuSpSgjDcQ36NwNX-13" value="-Final: float &#xa;-Finalbool: float&#xa;-Stack: Stack&lt;String&gt; &#xa;-Comparison_operation: boolean&#xa;-OPType: String " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="J4qMtuSpSgjDcQ36NwNX-12" vertex="1">
           <mxGeometry y="26" width="430" height="80" as="geometry" />
         </mxCell>
         <mxCell id="J4qMtuSpSgjDcQ36NwNX-14" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="J4qMtuSpSgjDcQ36NwNX-12" vertex="1">
           <mxGeometry y="106" width="430" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="J4qMtuSpSgjDcQ36NwNX-15" value="+verificatorOperation(variable1: double, variable2:double , symbol:string): void&#xa;+sum(variable1: double, variable2:double): double&#xa;+rest(variable1: double, variable2:double): double&#xa;+mult(variable1: double, variable2:double): double&#xa;+div(variable1: double, variable2:double): double&#xa;+getValue1(): double&#xa;+getValue2(): double&#xa;+setValue1(value1: double): void&#xa;+setValue2(value2: double): void&#xa;&#xa;override&#xa;+stack():void&#xa;+setHead(nodeHead)&#xa;+getHead()&#xa;+push(nodeValue: )&#xa;+pop():void&#xa;+peek():double&#xa;+isEmpty(): boolean&#xa;+count(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="J4qMtuSpSgjDcQ36NwNX-12" vertex="1">
-          <mxGeometry y="114" width="430" height="306" as="geometry" />
+        <mxCell id="J4qMtuSpSgjDcQ36NwNX-15" value="-Operations(list: Stack&lt;String&gt; ): &#xa;-Interpret(): void&#xa;-Evaluate(callStack: Stack&lt;String&gt; ): void&#xa;&#xa;-Plus(callStack: Stack&lt;String&gt; ): float&#xa;-Minus(callStack: Stack&lt;String&gt; ): float&#xa;-Multi(callStack: Stack&lt;String&gt; ): float&#xa;-Div(callStack: Stack&lt;String&gt; ): float&#xa;-Pow(callStack: Stack&lt;String&gt; ): float&#xa;-GreaterThan(callStack: Stack&lt;String&gt; ): boolean&#xa;-SmallerThan(callStack: Stack&lt;String&gt; ): boolean&#xa;-Equals(callStack: Stack&lt;String&gt; ): boolean&#xa;&#xa;-getOpType(): String&#xa;-Result(): float&#xa;-ResultComp(): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="J4qMtuSpSgjDcQ36NwNX-12" vertex="1">
+          <mxGeometry y="114" width="430" height="254" as="geometry" />
         </mxCell>
         <mxCell id="J4qMtuSpSgjDcQ36NwNX-20" value="LinkedList" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="1674" y="227" width="250" height="230" as="geometry" />
