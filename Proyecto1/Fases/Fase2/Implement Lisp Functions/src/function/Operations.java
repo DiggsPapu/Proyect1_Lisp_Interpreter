@@ -1,20 +1,19 @@
 package function;
 
 import java.util.Stack;
-import java.lang.Math;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  *
  * @author marti
  */
-
-public class Arithmetic_Operations {
+public class Operations {
     float Final = 0 ;
     Stack<String> Stack;
-    
-    public Arithmetic_Operations(LinkedList<String> list){
+    boolean Comparison_operation = false;
+    String OPType = "None";
+  
+    public Operations(LinkedList<String> list){
         Stack = new Stack<String>();
         String[] Tokens = list.toArray(new String[list.size()]);
         for (int i=0;i<Tokens.length;i++){
@@ -37,18 +36,35 @@ public class Arithmetic_Operations {
         if(func.equals("+")) {
             float result = Plus(callStack);
             Stack.push(String.valueOf(result));
+            OPType = "+";
         }else if(func.equals("-")) {
             float result = Minus(callStack);
             Stack.push(String.valueOf(result));
+            OPType = "-";
         }else if(func.equals("*")) {
             float result = Multi(callStack);
             Stack.push(String.valueOf(result));
+            OPType = "*";
         }else if(func.equals("/")) {
             float result = Div(callStack);
             Stack.push(String.valueOf(result));
+            OPType = "/";
         }else if(func.equals("^")) {
             float result = Pow(callStack);
             Stack.push(String.valueOf(result));
+            OPType = "^";
+        }else if(func.equals(">")) {
+            Comparison_operation = true;
+            GreaterThan(callStack);
+            OPType = ">";
+        }else if(func.equals("<")) {
+            Comparison_operation = true;
+            SmallerThan(callStack);
+            OPType = "<";
+        }else if(func.equals("=")) {
+            Comparison_operation = true;
+            Equals(callStack);
+            OPType = "=";
         }
     }
   
@@ -82,7 +98,46 @@ public class Arithmetic_Operations {
         Final = (float)Math.pow(a, b);
         return((float)Math.pow(a, b));
     }
-    public float Result(){
-        return Final;
+    
+    boolean Finalbool = true ;
+ 
+    private boolean GreaterThan(Stack<String> callStack){
+        float a = Float.parseFloat(callStack.pop());
+        float b = Float.parseFloat(callStack.pop());
+        if (a > b){
+            Finalbool = true;
+        }else{
+            Finalbool = false;
+        }
+        return Finalbool;
     }
-  }
+    private boolean SmallerThan(Stack<String> callStack){
+        float a = Float.parseFloat(callStack.pop());
+        float b = Float.parseFloat(callStack.pop());
+        if (a < b){
+            Finalbool = true;
+        }else{
+            Finalbool = false;
+        }
+        return Finalbool;
+    }
+    private boolean Equals(Stack<String> callStack){
+        float a = Float.parseFloat(callStack.pop());
+        float b = Float.parseFloat(callStack.pop());
+        if (a == b){
+            Finalbool = true;
+        }else{
+            Finalbool = false;
+        }
+        return Finalbool;
+    }
+        public String getOpType(){
+            return OPType;
+        }
+        public float Result(){
+            return Final;
+    }
+        public boolean ResultComp(){
+            return Finalbool;
+        }
+}
