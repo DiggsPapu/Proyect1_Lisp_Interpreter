@@ -140,7 +140,7 @@ public class Reader {
 			return 5;
                         
 		}else if (COND.equals(lista.get(1))) {
-                        Functionality_Operators FO= new Functionality_Operators();
+                        //Functionality_Operators FO= new Functionality_Operators();
 			return 7;
                         
                 }else if (EQUAL.equals(lista.get(1))) {
@@ -153,7 +153,13 @@ public class Reader {
 			return 8;      
                         
 		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
-                        return 9;
+			Operations calc = new Operations(caseOperation(lista));
+		        if(calc.getOpType().equals(">") || calc.getOpType().equals("<") || calc.getOpType().equals("=")){
+		        System.out.print(calc.Result());
+		        }else{
+		        System.out.print(calc.ResultComp());
+		        }
+			return 9;
 			
                     }
 		else {
