@@ -117,7 +117,7 @@ public class Reader {
 	public Integer getCase(LinkedList<String> lista) {
 		System.out.println(lista);
 		
-		if (QUOTE.equals(lista.get(1).trim())) {
+		if (QUOTE.equals(lista.get(1))) {
 			return 1;
                         
 		}else if (DEFUN.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
@@ -170,9 +170,13 @@ public class Reader {
         }else if(lista.get(1).matches(VALID_NAME) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
         	if(FI.FS.getFunction().containsKey(lista.get(1))) {
         		System.out.print("Entro a valuacion de funcion\n");
-        		FI.prepareInstructions(lista, variableStorage);
+        		System.out.print("Es nulo: "+FI.prepareInstructions(lista, variableStorage));
+        		FunctionExecution(FI.prepareInstructions(lista, variableStorage));
+        		
         		return 10;
         	}else if(getVariableStorage().getVariableStorage().containsKey(lista.get(1))) {
+        		
+        		System.out.print(getVariableStorage().getVariableStorage().get(lista.get(1)));
         		return 11;
         	}else {
         		System.out.print("No es un nombre valido");
@@ -382,13 +386,84 @@ public class Reader {
 	
 	
 	
+	public void FunctionExecution(LinkedList<String> lista) {
+		System.out.println("nulo 2:" +lista);
+		
+		if (QUOTE.equals(lista.get(1))) {
+			for (int k = 2; k < lista.size()-1 ; k++) {
+				System.out.print(lista.get(k)+" ");
+			}         
+		}else if (DEFUN.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
+                    FI.add_Function(lista);
+                    System.out.println(FI.getInstructions(lista.get(2)));
+			
+                        
+		}else if (SETQ.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
+			
+                        
+		}else if (ATOM.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
+                        Functionality_Operators FO= new Functionality_Operators();
+                        FO.create_Atom(lista);
+                        System.out.println(FO.getAtom());
+			
+			
+		}else if (LIST.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
+			System.out.print("Ingreso a list\n");
+			
+                        
+		}else if (CONS.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
+                        Functionality_Operators FO= new Functionality_Operators();
+                        FO.create_Cons(lista);
+                        System.out.println(FO.getCons());
+			
+			
+		}else if (COND.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
+                        //Functionality_Operators FO= new Functionality_Operators();
+			
+			//(COND ((> 1 -3) (COND ((EQUALS 1 3) (SETQ VALUE(23))) ((< 4 3) ()) (t (+ 1 2)))) ((< 1 3) (9)) (t( + 1 2)))
+         //(DEFUN Promedio(arg1 arg2 arg3 arg4 arg5) (/ (+ arg1 (+ arg2(+ arg3 (+ arg4 arg5)))) 5))               
+        }else if (EQUAL.equals(lista.get(1)) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
+        	lista.removeFirst();
+        	lista.removeFirst();
+            lista.addFirst("=");
+            lista.addFirst("(");
+            Operations calc = new Operations(lista);
+            System.out.print(calc.ResultComp());
+			
+                        
+		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(") && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
+			Operations calc = new Operations(caseOperation(lista));
+		        if(calc.getOpType().equals(">") || calc.getOpType().equals("<") || calc.getOpType().equals("=")){
+		        System.out.print(calc.ResultComp());
+		        }else{
+		        System.out.print(calc.Result());
+		        }
+			
+			
+        }else if(lista.get(1).matches(VALID_NAME) && lista.getLast().matches(SYMBOL) && lista.getFirst().matches(SYMBOL)) {
+        	if(FI.FS.getFunction().containsKey(lista.get(1))) {
+        		System.out.print("Entro a valuacion de funcion\n");
+        		FI.prepareInstructions(lista, variableStorage);
+        		
+        	}else if(getVariableStorage().getVariableStorage().containsKey(lista.get(1))) {
+        		System.out.print(getVariableStorage().getVariableStorage().get(lista.get(1)));
+        		
+        	}else {
+        		System.out.print("No es un nombre valido");
+        		
+        	}
+        }
+		else {
+			System.out.print("No son instrucciones validas");
+		}
+	}
+	
 	public static void main(String[] args) {
 		Reader lector = new Reader();
 		Scanner scanner = new Scanner(System.in);
 		
 //		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
 		lector.caseReader(scanner.nextLine());
-		
 		lector.caseReader(scanner.nextLine());
 
 		scanner.close();

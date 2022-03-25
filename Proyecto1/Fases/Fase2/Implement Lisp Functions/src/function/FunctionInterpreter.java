@@ -128,7 +128,6 @@ public class FunctionInterpreter {
 				co++;
 			}
     		copy.removeFirst();
-    		copy.removeLast();
     		System.out.print("\nPrimera correccion: "+copy+"\n");
     		if (paramCounter==1) {
     			for (int k =0; k<copy.size();k++) {
