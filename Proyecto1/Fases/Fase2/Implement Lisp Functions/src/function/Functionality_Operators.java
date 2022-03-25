@@ -21,6 +21,9 @@ public class Functionality_Operators {
         if(list.size() == 5){
             System.out.println("Error: ATOM fue definido como CONS (No debe tener dos variables)");
         }else{
+            list.removeFirst();
+            list.removeFirst();
+            list.addFirst("(");
             Atom = list;
         }
     }
@@ -31,6 +34,9 @@ public class Functionality_Operators {
         if(list.size() != 5){
             System.out.println("Error: CONS fue definido como ATOM (No debe tener mas o menos de dos variables)");
         }else{
+            list.removeFirst();
+            list.removeFirst();
+            list.addFirst("(");
             Cons = list;
         }
     }
@@ -40,4 +46,6 @@ public class Functionality_Operators {
 }
 //ejemplo (ATOM 1 2 3 4 5)
 //ejemplo (ATOM 1)
-//ejemplo (ATOM 1 2)
+//ejemplo (ATOM 1 2)//ejemplo (ATOM 1 2 3 4 5)
+//ejemplo (CONS 1)
+//ejemplo (CONS 1 2)

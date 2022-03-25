@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class Reader {
 	private FunctionStorage functionStorage;
 	private VariableStorage variableStorage;
-	
+	FunctionInterpreter FI = new FunctionInterpreter();
+        
 	protected static final String LETTER = "[a-zA-Z]";
 	protected static final String LITERAL = "[a-zA-Z0-9]+";
 	protected static final String VALID_NAME = "[a-zA-Z][a-zA-Z0-9]*";
@@ -102,12 +103,9 @@ public class Reader {
 //			caseEqual(array);
 			break;
 		}
-        case 7:{
-			System.out.print("Entro a cond");
-			Cond.SaveOperands(array, functionStorage, variableStorage);
-
-        	break;
-        }
+                case 7:{
+			break;
+                }
 		case 8:{
 			break;
 		}
@@ -131,7 +129,7 @@ public class Reader {
 			return 1;
                         
 		}else if (DEFUN.equals(lista.get(1))) {
-                    FunctionInterpreter FI = new FunctionInterpreter(lista);
+                    FI.add_Function(lista);
                     System.out.println(FI.getInstructions("nombre"));
 			return 2;
                         
