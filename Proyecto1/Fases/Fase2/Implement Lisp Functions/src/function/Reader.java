@@ -129,6 +129,8 @@ public class Reader {
 		if (QUOTE.equals(lista.get(1).trim())) {
 			return 1;
 		}else if (DEFUN.equals(lista.get(1))) {
+                    FunctionInterpreter FI = new FunctionInterpreter(lista);
+                    System.out.println((FI.getInstructions("nombre")));
 			return 2;
 		}else if (SETQ.equals(lista.get(1))) {
 			return 3;
