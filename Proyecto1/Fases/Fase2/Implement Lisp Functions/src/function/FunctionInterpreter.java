@@ -10,6 +10,7 @@ import java.util.LinkedList;
 public class FunctionInterpreter {
     
     String NombreKey = "";    
+    FunctionStorage FS = new FunctionStorage();
     
     FunctionInterpreter(LinkedList<String> list){
         NombreKey = list.get(2);
@@ -30,10 +31,13 @@ public class FunctionInterpreter {
             Result.add(list.get(Counter));
             Counter++ ;
         }
-        FunctionStorage FS = new FunctionStorage();
+        
         String[] Tokens = Result.toArray(new String[Result.size()]);
         FS.storageNewFunction(NombreKey, Tokens);
     }   
+    public String[] getInstructions(String Key){
+        return FS.getData(Key);
+    }
 }
 
 // ( defun nombre ( arg1 arg2 )( + arg1 arg2 ))
