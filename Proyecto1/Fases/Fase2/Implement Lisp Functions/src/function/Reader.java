@@ -155,9 +155,9 @@ public class Reader {
 		}else if(lista.get(1).matches(OPERATIONS)||lista.get(1).equals("(")) {
 			Operations calc = new Operations(caseOperation(lista));
 		        if(calc.getOpType().equals(">") || calc.getOpType().equals("<") || calc.getOpType().equals("=")){
-		        System.out.print(calc.Result());
-		        }else{
 		        System.out.print(calc.ResultComp());
+		        }else{
+		        System.out.print(calc.Result());
 		        }
 			return 9;
 			
