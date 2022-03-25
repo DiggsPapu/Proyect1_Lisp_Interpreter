@@ -2,6 +2,11 @@ package function;
 
 import java.util.HashMap;
 
+/**
+ *
+ * @author marti
+ */
+
 public class FunctionStorage {
     HashMap<String, String[]> Function = new HashMap<String, String[]>();
 
