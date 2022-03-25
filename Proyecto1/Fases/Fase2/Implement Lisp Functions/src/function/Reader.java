@@ -366,6 +366,7 @@ public class Reader {
 //		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
 		
 		lector.caseReader(scanner.nextLine());
+		lector.caseReader(scanner.nextLine());
 
 		scanner.close();
 	}

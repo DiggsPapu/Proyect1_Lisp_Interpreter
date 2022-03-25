@@ -71,7 +71,7 @@ public class Functionality_Operators {
             Operations OP1 = new Operations(Temp1);
             System.out.print("El valor booleano del else if es: "+ OP1.ResultComp()+"\n");
             
-            
+            //(SETQ VALUE( + 2 (* 3 (+ 4 7))))
             //(COND ((< 2 3) (+ 0 9)) ((> 233 4) 9) (t (+ 1 2)) )
             
             
@@ -93,7 +93,13 @@ public class Functionality_Operators {
 	            	}else if (list.get(Counter).equals(")")) {
 	            		cp++;
 	            	}
+		
 	            	ifList.add(list.get(Counter));
+	            	
+	            	if(ifList.getLast().matches("[a-zA-Z][a-zA-Z0-9]*") && variableStorage.getVariableStorage().containsKey(ifList.getLast())){
+		                ifList.add(variableStorage.getVariableStorage().get(ifList.getLast()));
+		                ifList.remove(ifList.size()-2);
+	        		}
 	            	System.out.print("Contador opar: "+ op+"\n");
 	            	System.out.print("Contador cpar: "+ cp+"\n");
 	            	System.out.print(Counter+" "+ifList+"\n\n");
@@ -110,19 +116,20 @@ public class Functionality_Operators {
 		
 		
 		            }else if(ifList.get(k).matches("[a-zA-Z][a-zA-Z0-9]*") && !variableStorage.getVariableStorage().containsKey(ifList.get(k))){
-		                System.out.print("Devolvio nulo");
+		                System.out.print("No es un valor valido");
 		                return null;
 		
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[\\+\\-\\*\\^\\/]")){
-		                LinkedList <String> temp = new LinkedList <String>();
 		                Operations tempOP = new Operations(ifList);
 		                System.out.print("\nEl resultado es: "+tempOP.Result());
 		                return tempOP.Result();
 		
 		
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[<>.]")){
-		                LinkedList <String> temp = new LinkedList <String>();
-		                Operations tempOP = new Operations(ifList);
+		            	if(ifList.get(Counter).matches("[a-zA-Z][a-zA-Z0-9]*")){
+			                return null;
+		        		}
+		            	Operations tempOP = new Operations(ifList);
 		                System.out.print("\nLa desigualdad es: "+ tempOP.ResultComp());
 		                return tempOP.ResultComp();
 		
@@ -144,7 +151,8 @@ public class Functionality_Operators {
 	        	int op = 1;
 	        	int cp = 0;
 	        	LinkedList<String> ifList = new LinkedList<String>();
-	        	
+
+	        	Counter1++;
 	        	ifList.add(list.get(Counter1));
 	        	Counter1++;
 	        	while (op!=cp && Counter1<list.size()) {
@@ -175,17 +183,20 @@ public class Functionality_Operators {
 		                return null;
 		
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[\\+\\-\\*\\^\\/]")){
-		                LinkedList <String> temp = new LinkedList <String>();
-		                Operations tempOP = new Operations(ifList);
-		                System.out.print(tempOP.Result());
+		            	
+		            	Operations tempOP = new Operations(ifList);
+		                System.out.print("\nEl resultado es: "+tempOP.Result());
 		                return tempOP.Result();
 		
 		
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[<>.]")){
-		                LinkedList <String> temp = new LinkedList <String>();
 		                Operations tempOP = new Operations(ifList);
-		                System.out.print("\nEl desigualdad es: "+ tempOP.ResultComp());
+		                System.out.print("\nLa desigualdad es: "+ tempOP.ResultComp());
 		                return tempOP.ResultComp();
+		
+		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[\\+\\-]?[\\d]+[\\.\\d]*")){
+		                System.out.print(ifList.get(k+1));
+		                return ifList.get(k+1);
 		
 		            }
 	        	}
