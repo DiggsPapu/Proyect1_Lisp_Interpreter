@@ -11,7 +11,7 @@ import java.util.LinkedList;
 public class FunctionStorage {
     HashMap<String, LinkedList<String>> Function = new HashMap<String, LinkedList<String>>();
 
-    public void storageNewFunction(String Key, LinkedList<String> Instructions) {
+    public void storeNewFunction(String Key, LinkedList<String> Instructions) {
 
         if (Function.containsKey(Key)) {
             Function.replace(Key, Function.get(Key), Instructions);
