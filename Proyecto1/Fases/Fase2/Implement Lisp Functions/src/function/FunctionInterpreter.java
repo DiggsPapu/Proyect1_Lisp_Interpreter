@@ -17,15 +17,34 @@ public class FunctionInterpreter {
         
         LinkedList <String> Result = new LinkedList();
 
-        int Counter = 4;
+        int Counter = 3;
+        int Counter2 = list.size()-5;
+        int Counter3 = 0;
+        int Counter4 = 0;
+        System.out.println(Counter+" "+Counter2+" "+Counter3);
         // Add Arguments
-        while(!list.get(Counter).equals(")") ){
+        
+        while(Counter2 > 0){
+            if(list.get(Counter2+4).equals("(")){
+                Counter3 ++;
+                System.out.println(Counter3);
+            }
+            Counter2 --;
+        }
+        
+        while(Counter3 > 0){
+            if(list.get(Counter).equals(")")){
+                Counter3 --;
+            }
             Result.add(list.get(Counter));
             Counter++ ;
         }
         // Add Number of Arguments
-        Result.addFirst(String.valueOf(Result.size()));
-        Counter++;
+        while(!list.get(Counter4).equals(")") ){
+            Counter4++ ;
+        }
+        Result.addFirst(String.valueOf(Counter4-4));
+
         // Add Instructions
         while(!list.get(Counter).equals(")") ){
             Result.add(list.get(Counter));
@@ -40,4 +59,5 @@ public class FunctionInterpreter {
     }
 }
 
-// ( DEFUN nombre ( arg1 arg2 )( + arg1 arg2 ))
+// ( DEFUN nombre ( arg1 arg2 arg3)( + arg1 (* arg2(/ arg4(+ arg6 arg3 )))))
+// ( DEFUN nombre ( arg1 arg2 arg4 arg5)( + arg1 arg2))
