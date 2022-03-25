@@ -116,14 +116,14 @@ public class Functionality_Operators {
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[\\+\\-\\*\\^\\/]")){
 		                LinkedList <String> temp = new LinkedList <String>();
 		                Operations tempOP = new Operations(ifList);
-		                System.out.print(tempOP.Result());
+		                System.out.print("\nEl resultado es: "+tempOP.Result());
 		                return tempOP.Result();
 		
 		
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[<>.]")){
 		                LinkedList <String> temp = new LinkedList <String>();
 		                Operations tempOP = new Operations(ifList);
-		                System.out.print(tempOP.Result());
+		                System.out.print("\nLa desigualdad es: "+ tempOP.ResultComp());
 		                return tempOP.ResultComp();
 		
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[\\+\\-]?[\\d]+[\\.\\d]*")){
@@ -184,7 +184,7 @@ public class Functionality_Operators {
 		            }else if (ifList.get(k).equals("(") && ifList.get(k+1).matches("[<>.]")){
 		                LinkedList <String> temp = new LinkedList <String>();
 		                Operations tempOP = new Operations(ifList);
-		                System.out.print(tempOP.Result());
+		                System.out.print("\nEl desigualdad es: "+ tempOP.ResultComp());
 		                return tempOP.ResultComp();
 		
 		            }
