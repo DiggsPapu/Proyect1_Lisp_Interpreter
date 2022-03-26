@@ -17,6 +17,7 @@ public class Functionality_Operators {
     Functionality_Operators(){
         
     }
+    
     public void create_Atom(LinkedList<String> list){
         if(list.size() == 5){
             System.out.println("Error: ATOM fue definido como CONS (No debe tener dos variables)");

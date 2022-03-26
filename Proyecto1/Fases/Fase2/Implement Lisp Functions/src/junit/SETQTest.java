@@ -25,7 +25,8 @@ class SETQTest {
 		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(setq value1 value)"), vs);
 		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(setq value1 velo)"), vs);
 		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(setq 1 value)"), vs);
-		
+		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(juan val 90)"), vs);
+		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(setq val 90 3 4)"), vs);
 		
 		assertEquals(vs.getVariableStorage().get("value"), "1");
 		assertEquals(vs.getVariableStorage().get("value1"), "1");
