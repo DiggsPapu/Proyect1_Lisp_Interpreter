@@ -10,12 +10,6 @@ public class VariableStorage {
 		return variableStorage;
 	}
 
-
-
-	public void setVariableStorage(TreeMap<String, String> variableStorage) {
-		this.variableStorage = variableStorage;
-	}
-
 	public VariableStorage(){
 		variableStorage = new TreeMap<>();
 	}
