@@ -204,7 +204,7 @@ public class Calculator {
 				   return null;
 				   
 			   //En el caso de que sea cualquier otra cosa se add   
-			   }else if (evaluateLista.getFirst().equals(Patterns.EQUAL) || evaluateLista.getFirst().startsWith("=")) {
+			   }else if (evaluateLista.getFirst().equals(Patterns.EQUAL) || evaluateLista.getFirst().startsWith("=") || evaluateLista.getFirst().equals("equal")) {
 				   finalLista.add("=");
 				   evaluateLista.removeFirst();
 				   

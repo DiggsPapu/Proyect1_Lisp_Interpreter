@@ -1,10 +1,14 @@
-package function;
+package junit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
+
+import function.Calculator;
+import function.VariableStorage;
+import function.tokenizer;
 
 class CalculatorTest {
 
