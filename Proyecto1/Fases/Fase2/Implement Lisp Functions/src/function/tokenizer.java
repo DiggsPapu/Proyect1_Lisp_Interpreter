@@ -68,7 +68,7 @@ public class tokenizer {
 					}
 					if (k>= lista.size()-1) {
 						//En el caso de que no haya encontrado otro parentesis es invalido
-						System.out.print("No hay igualdad de comillas");
+						System.out.print("No hay igualdad de comillas\n");
 						return null;
 					}
 					corrected.add(quotation);

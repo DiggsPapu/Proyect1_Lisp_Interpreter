@@ -16,36 +16,41 @@ public static LinkedList<String> evaluateList(LinkedList<String> lista, Variable
 				listaEvaluar.removeFirst();
 				listaEvaluar.removeFirst();
 //				System.out.print(listaEvaluar+"\n");
-				
-				int size = listaEvaluar.size();
-				int counter = 0 ;
-				while (counter < size) {
-					//Si es un parentesis en posicion 1 entonces es una operacion
-//					System.out.print(listaEvaluar+"\n");
-					if (listaEvaluar.getFirst().equals("(")) {
-						continue;
-					//Si se encuentra un patron valido de nombre en la primera posicion	
-					}else if(listaEvaluar.getFirst().matches(Patterns.VALID_NAME)) {
-						
-						//Unico caso o esta el almacenada la variable para el valor o no lo esta
-						if (variableStorage.getVariableStorage().containsKey(listaEvaluar.getFirst())) {
-							//Se crea y se almacena en el map la nueva variable con el valor de la variable anterior
-							listaFinal.add(variableStorage.getVariableStorage().get(listaEvaluar.getFirst()));
-							//Se remueve el primero de la fila
-							listaEvaluar.removeFirst();
+				if (!listaEvaluar.isEmpty()) {
+					int size = listaEvaluar.size();
+					int counter = 0 ;
+					while (counter < size) {
+						//Si es un parentesis en posicion 1 entonces es una operacion
+//						System.out.print(listaEvaluar+"\n");
+						if (listaEvaluar.getFirst().equals("(")) {
+							continue;
+						//Si se encuentra un patron valido de nombre en la primera posicion	
+						}else if(listaEvaluar.getFirst().matches(Patterns.VALID_NAME)) {
+							
+							//Unico caso o esta el almacenada la variable para el valor o no lo esta
+							if (variableStorage.getVariableStorage().containsKey(listaEvaluar.getFirst())) {
+								//Se crea y se almacena en el map la nueva variable con el valor de la variable anterior
+								listaFinal.add(variableStorage.getVariableStorage().get(listaEvaluar.getFirst()));
+								//Se remueve el primero de la fila
+								listaEvaluar.removeFirst();
+							}else {
+								System.out.print("No fue posible almacenar la variable dado que no existe la variable para el valor\n");
+								return null;
+							}
+							
 						}else {
-							System.out.print("No fue posible almacenar la variable dado que no existe la variable para el valor\n");
-							return null;
+//							System.out.print(listaEvaluar.getFirst());
+							listaFinal.add(listaEvaluar.getFirst());
+							listaEvaluar.remove();
 						}
-						
-					}else {
-						System.out.print(listaEvaluar.getFirst());
-						listaFinal.add(listaEvaluar.getFirst());
-						listaEvaluar.remove();
+						counter++;
 					}
-					counter++;
+					return listaFinal;
+				}else {
+					System.out.print("La lista no tenia suficientes argumentos\n");
+					return null;
 				}
-				return listaFinal;
+				
 				
 			}else {
 				System.out.print("No es lista\n");
@@ -71,7 +76,7 @@ public static LinkedList<String> evaluateAtom(LinkedList<String> lista, Variable
 			listaEvaluar.removeFirst();
 //			System.out.print(listaEvaluar+"\n");
 //			System.out.print(listaEvaluar==null);
-			if(listaEvaluar.getFirst()!=null) {
+			if(!listaEvaluar.isEmpty()) {
 				//En el caso de que sea operacion
 				if (listaEvaluar.getFirst().equals("(")) {
 					return lista;
@@ -128,9 +133,10 @@ public static LinkedList<String> evaluateAtom(LinkedList<String> lista, Variable
 		VariableStorage vs = new VariableStorage();
 		vs.CreateVariable("value", "8293");
 		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list 1 2 value )"), vs)+"\n");
+		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  )"), vs)+"\n");
 		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom 1)"), vs) +"\n");
 		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom value)"), vs) + "\n");
-		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom 12 3)"), vs) + "\n");
+		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom )"), vs) + "\n");
 		System.out.print("Ingrese un atom que sea valido con comillas: ");
 		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
 		System.out.print("Ingrese un atom que no sea valido con comillas: ");
