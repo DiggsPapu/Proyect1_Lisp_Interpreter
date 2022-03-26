@@ -17,6 +17,11 @@ class PredicatesTest {
 		Scanner scann = new Scanner(System.in);
 		VariableStorage vs = new VariableStorage();
 		vs.CreateVariable("value", "8293");
+		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2) )")).get(0), "(");
+		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2) 2 fd )")).get(5), "2");
+		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2 )")), null);
+		System.out.print("Ingrese un quote valido con string o comillas: ");
+		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis(scann.nextLine())).get(1), "kfjlds");//Por ejemplo (QUOTE "1 2 fdjksl" kfjlds)
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list 1 2 value )"), vs).get(2), vs.getVariableStorage().get("value"));
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list  )"), vs) , null);
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list (+ 1 2) 3 4 value )"), vs).get(0), "3.0");

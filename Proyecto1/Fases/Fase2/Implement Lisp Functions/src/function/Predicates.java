@@ -198,6 +198,37 @@ public static LinkedList<String> evaluateAtom(LinkedList<String> lista, Variable
 		return null;
 	}
 	
+	
+}
+
+public static LinkedList<String> caseQuote(LinkedList<String> lista){
+	if (lista!=null) {
+		if (lista.get(1).equals(Patterns.QUOTE) || lista.get(1).equals("quote")) {
+			lista.removeFirst();
+			lista.removeFirst();
+			lista.removeLast();
+			String quote = new String();
+			for (int k = 0; k < lista.size() ; k++ ) {
+				if (lista.get(k).startsWith("\"")) {
+					quote = quote + lista.get(k);
+					
+				}else {
+					quote = quote + " " + lista.get(k);
+					
+				}
+			}
+
+			System.out.print(quote+"\n");
+			return lista;
+		}else {
+			System.out.print("No es quote\n");
+			return lista;
+		}
+		
+	}else {
+		System.out.print("La lista era nula entonces no se pudo imprimir \n");
+		return null;
+	}
 }
 //	public static void main(String[] args) {
 //		Scanner scann = new Scanner(System.in);
