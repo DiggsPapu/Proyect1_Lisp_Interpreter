@@ -199,31 +199,31 @@ public static LinkedList<String> evaluateAtom(LinkedList<String> lista, Variable
 	}
 	
 }
-	public static void main(String[] args) {
-		Scanner scann = new Scanner(System.in);
-		VariableStorage vs = new VariableStorage();
-		vs.CreateVariable("value", "8293");
-		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list 1 2 value )"), vs)+"\n");
-		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  )"), vs)+"\n");
-		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom 1)"), vs) +"\n");
-		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom value)"), vs) + "\n");
-		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom )"), vs) + "\n");
-		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (+ 1 2))"), vs) + "\n");
-		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (= 1 value))"), vs) + "\n");
-		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list (+ 1 2) 3 4 value )"), vs)+"\n");
-		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (+ 100 value) 0 1 )"), vs)+"\n");
-		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (< 100 value) 0 1 )"), vs)+"\n");
-		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (> 100 value) 0 1 )"), vs)+"\n");
-		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (= 100 100) 0 1 )"), vs)+"\n");
-		
-		System.out.print("Ingrese un atom que sea valido con comillas: "); // por ejemplo (atom "fjdkls")
-		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
-		System.out.print("Ingrese un atom que no sea valido con comillas: "); // por ejemplo (atom "fjdkls)
-		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
-		System.out.print("Ingrese un lista valida con comillas: "); //por ejemplo (list (^ 23 (+ 2 3 )) "hola"  )
-		System.out.print("Lista2: "+ Predicates.evaluateList(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
-		
-		
-		scann.close();
-	}
+//	public static void main(String[] args) {
+//		Scanner scann = new Scanner(System.in);
+//		VariableStorage vs = new VariableStorage();
+//		vs.CreateVariable("value", "8293");
+//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list 1 2 value )"), vs)+"\n");
+//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  )"), vs)+"\n");
+//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom 1)"), vs) +"\n");
+//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom value)"), vs) + "\n");
+//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom )"), vs) + "\n");
+//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (+ 1 2))"), vs) + "\n");
+//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (= 1 value))"), vs) + "\n");
+//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list (+ 1 2) 3 4 value )"), vs)+"\n");
+//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (+ 100 value) 0 1 )"), vs)+"\n");
+//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (< 100 value) 0 1 )"), vs)+"\n");
+//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (> 100 value) 0 1 )"), vs)+"\n");
+//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (= 100 100) 0 1 )"), vs)+"\n");
+//		
+//		System.out.print("Ingrese un atom que sea valido con comillas: "); // por ejemplo (atom "fjdkls")
+//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
+//		System.out.print("Ingrese un atom que no sea valido con comillas: "); // por ejemplo (atom "fjdkls)
+//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
+//		System.out.print("Ingrese un lista valida con comillas: "); //por ejemplo (list (^ 23 (+ 2 3 )) "hola"  )
+//		System.out.print("Lista2: "+ Predicates.evaluateList(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
+//		
+//		
+//		scann.close();
+//	}
 }
