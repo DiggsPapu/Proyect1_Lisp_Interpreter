@@ -62,11 +62,15 @@ public class tokenizer {
 					k++;
 					
 					String quotation = new String();
-					while (!lista.get(k).equals("\"")) {
+					while (!lista.get(k).equals("\"") && k<lista.size()-1) {
 						quotation = quotation+ " " + lista.get(k);
 						k++;
 					}
-					
+					if (k>= lista.size()-1) {
+						//En el caso de que no haya encontrado otro parentesis es invalido
+						System.out.print("No hay igualdad de comillas");
+						return null;
+					}
 					corrected.add(quotation);
 				}else {
 					corrected.add(lista.get(k));
