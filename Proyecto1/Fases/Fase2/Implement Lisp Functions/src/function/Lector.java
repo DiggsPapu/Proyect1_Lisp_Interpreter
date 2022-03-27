@@ -161,8 +161,11 @@ public class Lector {
 		System.out.print("Instruccion22: ");//(cond (()) (()) (t()) )
 		lector.readInstruccion("(cond ((= 1 2) (setq value3 \"hola soy diego\")) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) (+ 1 1)) ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
 		
-		System.out.print("Instruccion22: ");//(cond (()) (()) (t()) )
+		System.out.print("Instruccion23: ");//(cond (()) (()) (t()) )
 		lector.readInstruccion("(cond ((= 1 2) (setq value3 \"hola soy diego\")) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) \"funciona\") ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
+		
+		System.out.print("Instruccion24: ");//(cond (()) (()) (t()) )
+		lector.readInstruccion("(cond ((= 1 1) (cond ((= 4 5) \"Hola soy guapo\") ((= 2 2) (list 1 2)) (t(setq value7 1)) )) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) \"funciona\") ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
 		
 	}
 }

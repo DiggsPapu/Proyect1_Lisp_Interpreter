@@ -14,7 +14,7 @@ public class Patterns {
 	protected static final String LIST = "LIST";
 	protected static final String SETQ = "SETQ";
 	protected static final String QUOTE = "QUOTE";
-	protected static final String DEFUN = "DEFUN";
+	protected static final String DEFUN = "(?i)(\\W|^)(defun|DEFUN)(\\W|$)";
 	protected static final String COND = "COND";
 	protected static final String EQUAL = "EQUAL";
 	protected static final String OPARENTHESIS = "[(].";
