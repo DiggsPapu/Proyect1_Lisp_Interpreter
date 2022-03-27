@@ -47,46 +47,127 @@ public class Function {
 		}
 	}
 	
-//	public static String functionExecution(LinkedList<String> callF, FunctionStorage fun, VariableStorage var) {
-//		//Diferente de nulo
-//		if (callF != null) {
-//			//Verificar par de parentesis y que sea funcion almacenada
-//			if (callF.getFirst().equals("(") && callF.getFirst().equals(")") && fun.getFunction().containsKey(callF.get(1))) {
-//				//Se crea una lista con las instrucciones almacenadas
-//				LinkedList<String> ins = new LinkedList<String>(fun.getFunction().get(callF.get(1)));
-//				if (ins.getFirst().equals("n")) {
-//					ins.removeFirst();
-//					Function.notRecursive(callF,ins, var, fun);
-//						
-//				}
-//				else {
-//					//Esto lo modificare luego porque es para recursivas
-//					return null;
-//				}
-//				
-//				
-//			}
+	public static String functionExecution(LinkedList<String> callF, FunctionStorage fun, VariableStorage var) {
+		//Diferente de nulo
+		if (callF != null) {
+			//Verificar par de parentesis y que sea funcion almacenada
+			System.out.print(callF.get(1));
+			System.out.print(fun.getFunction().containsKey(callF.get(1)));
+			if (callF.getFirst().equals("(") && callF.getLast().equals(")") && fun.getFunction().containsKey(callF.get(1))) {
+				//Se crea una lista con las instrucciones almacenadas
+				LinkedList<String> ins = new LinkedList<String>(fun.getFunction().get(callF.get(1)));
+				if (ins.getFirst().equals("n")) {
+					ins.removeFirst();
+					return Function.notRecursive(callF,ins, var, fun);
+						
+				}
+				else {
+					//Esto lo modificare luego porque es para recursivas
+
+					System.out.print("Nulo1");
+					return null;
+				}
+				
+				
+			}
+			else {
+				System.out.print("Nulo2");
+				return null;
+			}
+		}
+		else {
+			System.out.print("Nulo3");
+			return null;
+		}
+	}
+	private static String notRecursive(LinkedList<String> call,LinkedList<String> ins, VariableStorage var, FunctionStorage fun){
+		//Se deja a la lista llamada solo con los argumentos, se le quitan los parentesis y el nombre
+		call.removeFirst();
+		call.removeFirst();
+		call.removeLast();
+		//Se crea una lista con los parametros y otra con las instrucciones
+		LinkedList<String> inst = new LinkedList<String>(Function.separate(ins).get(0));
+		LinkedList<String> param = new LinkedList<String>(Function.separate(ins).get(1));
+		//Aqui se cambian los argumentos
+		call = Function.variableCases(call, var, fun);
+		System.out.print("\n\n"+ call + "\n\n");
+		param.removeFirst();
+		param.removeLast();
+		System.out.print(param);
+		System.out.print(inst);
+		
+		//La cantidad de argumentos ingresados coincide con la cantidad de parametros almacenados
+		if (call.size()==param.size()) {
+			System.out.print("Ingreso aqui");
+			//Se cambian los argumentos en las instrucciones
+			inst = Function.changeArgs(call, param, inst, var, fun);
+			return Function.executeCases(inst, var, fun);
+		}
+		else {
+			return null;
+		}
+	}
+	
+	private static String executeCases(LinkedList<String> ins, VariableStorage var, FunctionStorage fun) {
+		System.out.print("Ejecuto caso\n");
+		if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("quote") || ins.get(1).equals("QUOTE"))) {
+			return Predicates.caseQuote(ins).toString();
+						
+		}
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("setq") || ins.get(1).equals("SETQ"))) {
+			SETQ.evaluateSETQ(ins, var);
+			return var.getVariableStorage().get(ins.get(2));
+		}
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("atom") || ins.get(1).equals("ATOM"))) {
+			return Predicates.evaluateAtom(ins, var).toString();
+		}
+
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("list") || ins.get(1).equals("LIST"))) {
+			return Predicates.evaluateList(ins, var).toString();
+			
+			
+		}
+
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("equal") || ins.get(1).equals("EQUAL") || ins.get(1).matches(Patterns.LOGICAL))) {
+			Predicates.caseEqual(ins, var);
+			if (Predicates.caseEqual(ins, var) ==null) {
+				System.out.print("La expresion no es correcta\n");
+				return null;
+			}else if(Predicates.caseEqual(ins, var)==false) {
+				return "false";
+			}else {
+				return "true";
+			}
+		}
+
+		else if (ins.size()==3) {
+			return ins.get(1);
+		}
+
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) ) {
+			System.out.print("Entro a la calculadora\n");
+			Calculator calc = new Calculator (ins, var);
+			
+			if (ins.get(1).matches(Patterns.LOGICAL)) {
+				return Boolean.toString(calc.ResultComp());
+			}else if (ins.get(1).matches(Patterns.ARITHMETIC)) {
+				return Float.toString(calc.Result());
+			}else {
+				System.out.print("No es operacion valida");
+				return null;
+			}
+		}
+		else {
+			return null;
+		}
+//		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("cond") || ins.get(1).equals("COND"))) {
+//			CONDI.COND(ins, var);
 //		}
-//		else {
-//			return null;
-//		}
-//	}
-//	private static LinkedList<String> notRecursive(LinkedList<String> call,LinkedList<String> ins, VariableStorage var, FunctionStorage fun){
-//		//Se deja a la lista llamada solo con los argumentos, se le quitan los parentesis y el nombre
-//		call.removeFirst();
-//		call.removeFirst();
-//		call.removeLast();
-//		//Se crea una lista con los parametros y otra con las instrucciones
-//		LinkedList<String> param = new LinkedList<String>(Function.separate(ins).get(0));
-//		LinkedList<String> inst = new LinkedList<String>(Function.separate(ins).get(1));
-//		//Aqui se cambian los argumentos
-//		call = Function.changeArgs(call, param, inst, var, fun);
-//		//La cantidad de argumentos ingresados coincide con la cantidad de parametros almacenados
-//		if (call.size()==param.size()) {
-//			Function.changeArgs(call, param, inst, var, fun);
-//		}
-//	}
-//	
+		
+	}
+	
+	
+	
 	private static LinkedList<String> changeArgs(LinkedList<String> call,LinkedList<String> params,LinkedList<String> inst, VariableStorage var, FunctionStorage fun){
 		System.out.print(params.size()+" "+call.size());
 		//Es para ir moviendose de parametro en parametro
@@ -275,12 +356,15 @@ public class Function {
 		}
 	}
 	
+	
+	
 	public static void main(String[] args) {
 		VariableStorage var = new VariableStorage();
 		FunctionStorage fu = new FunctionStorage();
 		
-		Function.Defun(tokenizer.equalParenthesis("(DEFUN valor (arg arg1 arg2) (+ arg (- arg1 arg2)) )"), var, fu);
-		System.out.print(fu.getFunction().get("valor"));
+		Function.Defun(tokenizer.equalParenthesis("(DEFUN operacion1 (arg arg1 arg2) (+ arg1 (* arg2 (^ arg2 arg1))) )"), var, fu);
+		System.out.print(fu.getFunction().get("operacion1"));
+		System.out.print(Function.functionExecution(tokenizer.equalParenthesis("(operacion1 4 3 2)"), fu, var));
 		LinkedList<String> list = tokenizer.equalParenthesis("(1 (+ 1 2) 9)");
 		list.removeFirst();
 		list.removeLast();
@@ -297,6 +381,7 @@ public class Function {
 		
 		LinkedList<String> list4 = tokenizer.equalParenthesis("(+ arg1 (* arg2 (^ arg2 arg1)))");
 		System.out.print(Function.changeArgs(call, params, list4, var, fu));
+		
 		
 	}
 }
