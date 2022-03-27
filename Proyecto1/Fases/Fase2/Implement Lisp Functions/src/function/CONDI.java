@@ -210,11 +210,13 @@ public class CONDI {
 			SETQ.evaluateSETQ(ins, variableStorage);
 		}
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("atom") || ins.get(1).equals("ATOM"))) {
-			Predicates.evaluateAtom(ins, variableStorage);
+			System.out.print(Predicates.evaluateAtom(ins, variableStorage));
 		}
 
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("list") || ins.get(1).equals("LIST"))) {
 			Predicates.evaluateList(ins, variableStorage);
+			System.out.print(Predicates.evaluateList(ins, variableStorage));
+			
 		}
 
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("equal") || ins.get(1).equals("EQUAL") || ins.get(1).matches(Patterns.LOGICAL))) {
@@ -280,6 +282,12 @@ public class CONDI {
 		
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= value4 value4) (SETQ value3 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
 		System.out.print(variableStorage.getVariableStorage().get("value3"));
+		CONDI.COND(tokenizer.equalParenthesis("(COND ((= value4 value4) (list 1 2 3 ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
+		
+		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 2 value4) (list 1 2 3 ) ) ( ( = 1 1) (atom 3892) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
+		
+		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 6 value4) (list 1 2 3 ) ) ( ( = 1 1) (- 3 (* 2 3)) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
+
 	}
 	
 	
