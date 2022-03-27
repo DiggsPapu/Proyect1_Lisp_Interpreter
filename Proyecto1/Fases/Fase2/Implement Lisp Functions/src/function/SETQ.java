@@ -4,7 +4,9 @@ import java.util.LinkedList;
 //import java.util.Scanner;
 
 public class SETQ {
-	
+	public SETQ() {
+		
+	}
 	public static void evaluateSETQ(LinkedList<String> lista, VariableStorage variableStorage) {
 		
 		if (lista!= null) {

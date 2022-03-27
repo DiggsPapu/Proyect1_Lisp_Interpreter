@@ -38,6 +38,7 @@ public class tokenizer {
 				i = j;
 			}
 //			System.out.print(tokenList);
+//			System.out.print(tokenList.hashCode());
 			return tokenList;
 		}else {
 			System.out.print("EXCEPTION no puso par de parentesis encerrando su funcion\n");
@@ -137,8 +138,7 @@ public class tokenizer {
 //	public static void main(String[] args) {
 //		Scanner scanner = new Scanner(System.in);
 //		
-////		System.out.println(lector.getCase(lector.tokenize(scanner.nextLine())));
-//		tokenizer.equalParenthesis(scanner.nextLine());
+//		System.out.print(tokenizer.equalParenthesis(scanner.nextLine()));
 //		scanner.close();
 //	}
 }

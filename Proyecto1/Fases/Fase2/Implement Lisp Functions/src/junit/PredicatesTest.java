@@ -37,6 +37,7 @@ class PredicatesTest {
 		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= (1) 2 3 )"), vs), null);
 		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(lista 2 3 )"), vs), null);
 		
+		
 		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2) )")).get(0), "(");
 		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2) 2 fd )")).get(5), "2");
 		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2 )")), null);

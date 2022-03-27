@@ -19,6 +19,7 @@ public class Patterns {
 	protected static final String EQUAL = "EQUAL";
 	protected static final String OPARENTHESIS = "[(].";
 	protected static final String CPARENTHESIS = "[)].";
+	protected static final String LOGICAL = "[\\<\\>\\=]?";
 	
 	
 }
