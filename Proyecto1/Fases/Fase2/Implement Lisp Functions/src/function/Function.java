@@ -83,28 +83,30 @@ public class Function {
 //		call = Function.changeArgs(call, param, inst, var, fun);
 //		//La cantidad de argumentos ingresados coincide con la cantidad de parametros almacenados
 //		if (call.size()==param.size()) {
-//			
+//			Function.changeArgs(call, param, inst, var, fun);
 //		}
 //	}
 //	
-//	private static LinkedList<String> changeArgs(LinkedList<String> call,LinkedList<String> params,LinkedList<String> inst, VariableStorage var, FunctionStorage fun){
-//		
-//		//Es para ir moviendose de parametro en parametro
-//		for (int k = 0 ; k < params.size() ; k++) {
-//			//Es para ir moviendose en cada token de la instruccion
-//			for (int j = 0; j < inst.size() ; j++) {
-//				//En el caso de que el arg sea usado entonces se modifica por el argumento real
-//				if (inst.get(j).equals(params.get(k))) {
-//					
-//					inst.add(call.get(k));
-//					inst.remove(j+1);
-//				}
-//				//En cualquier otro caso no sucede nada
-//			
-//			}
-//			
-//		}
-//	}
+	private static LinkedList<String> changeArgs(LinkedList<String> call,LinkedList<String> params,LinkedList<String> inst, VariableStorage var, FunctionStorage fun){
+		System.out.print(params.size()+" "+call.size());
+		//Es para ir moviendose de parametro en parametro
+		for (int k = 0 ; k < params.size() ; k++) {
+			//Es para ir moviendose en cada token de la instruccion
+			for (int j = 0; j < inst.size() ; j++) {
+				//En el caso de que el arg sea usado entonces se modifica por el argumento real
+				if (inst.get(j).equals(params.get(k))) {
+					//Se add en la posicion j el param real y se remueve el valor falso en el j+1
+					inst.add(j, call.get(k));
+					inst.remove(j+1);
+				}
+				//En cualquier otro caso no sucede nada
+			
+			}
+			
+		}
+		System.out.print(inst);
+		return inst;
+	}
 	
 	private static LinkedList<String> variableCases(LinkedList<String> call, VariableStorage var, FunctionStorage fun){
 		LinkedList<String> list = new LinkedList<String>();
@@ -279,13 +281,22 @@ public class Function {
 		
 		Function.Defun(tokenizer.equalParenthesis("(DEFUN valor (arg arg1 arg2) (+ arg (- arg1 arg2)) )"), var, fu);
 		System.out.print(fu.getFunction().get("valor"));
-		LinkedList<String> list = tokenizer.equalParenthesis("(1 (+ 1 2) 3)");
+		LinkedList<String> list = tokenizer.equalParenthesis("(1 (+ 1 2) 9)");
 		list.removeFirst();
 		list.removeLast();
-		System.out.print(Function.variableCases(list, var, fu));
 		LinkedList<String> list1 = tokenizer.equalParenthesis("(2 (= 1 2) 4 \"hola\")");
 		list1.removeFirst();
 		list1.removeLast();
 		System.out.print(Function.variableCases(list1, var, fu));
+		
+		LinkedList<String> call = new LinkedList<String>(Function.variableCases(list, var, fu));
+		System.out.print("\n"+call);
+		LinkedList<String> params = tokenizer.equalParenthesis("(arg1 arg2 arg3)");
+		params.removeFirst();
+		params.removeLast();
+		
+		LinkedList<String> list4 = tokenizer.equalParenthesis("(+ arg1 (* arg2 (^ arg2 arg1)))");
+		System.out.print(Function.changeArgs(call, params, list4, var, fu));
+		
 	}
 }
