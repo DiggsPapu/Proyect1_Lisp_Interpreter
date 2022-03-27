@@ -17,6 +17,26 @@ class PredicatesTest {
 		Scanner scann = new Scanner(System.in);
 		VariableStorage vs = new VariableStorage();
 		vs.CreateVariable("value", "8293");
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 1 2)"), vs), false);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 1 1)"), vs), true);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(equal 1 2)"), vs), false);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(equal 1 1)"), vs), true);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= 1 2)"), vs), false);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= 2 2)"), vs), true);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL value 2)"), vs), false);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 1 value)"), vs), false);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 8293 value)"), vs), true);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= value valor)"), vs), false);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= value value)"), vs), true);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= \"jfkdsl\" 2)"), vs), false);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= \"jfkdsl\"  \"jfkdsl\")"), vs), true);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= (+ 1 2)  (+ 1 2) )"), vs), true);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= (+ 2 2)  (+ 1 2) )"), vs), false);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= (+ 2 2)  (+ 1 2)"), vs), null);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= 1 2 3 )"), vs), null);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(= (1) 2 3 )"), vs), null);
+		assertEquals(Predicates.caseEqual(tokenizer.equalParenthesis("(lista 2 3 )"), vs), null);
+		
 		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2) )")).get(0), "(");
 		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2) 2 fd )")).get(5), "2");
 		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2 )")), null);
@@ -32,7 +52,6 @@ class PredicatesTest {
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list  (= 100 value) 0 1 )"), vs).get(0), "false");
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list  (+ valor value) 0 1 )"), vs), null );
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list  (+ 1 value) jksimmons 1 )"), vs), null );
-		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(atom  (+ 1 value) jksimmons 1 )"), vs), tokenizer.equalParenthesis("(atom  (+ 1 value) jksimmons 1 )") );
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list (+1 value )"), vs), null);
 		System.out.print("Ingrese un lista valida con comillas: "); //por ejemplo (list (^ 23 (+ 2 3 )) "hola"  )
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis(scann.nextLine()), vs).get(1), " hola");
