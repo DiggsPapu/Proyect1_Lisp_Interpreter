@@ -51,8 +51,8 @@ public class Function {
 		//Diferente de nulo
 		if (callF != null) {
 			//Verificar par de parentesis y que sea funcion almacenada
-			System.out.print(callF.get(1));
-			System.out.print(fun.getFunction().containsKey(callF.get(1)));
+//			System.out.print(callF.get(1));
+//			System.out.print(fun.getFunction().containsKey(callF.get(1)));
 			if (callF.getFirst().equals("(") && callF.getLast().equals(")") && fun.getFunction().containsKey(callF.get(1))) {
 				//Se crea una lista con las instrucciones almacenadas
 				LinkedList<String> ins = new LinkedList<String>(fun.getFunction().get(callF.get(1)));
@@ -90,15 +90,15 @@ public class Function {
 		LinkedList<String> param = new LinkedList<String>(Function.separate(ins).get(1));
 		//Aqui se cambian los argumentos
 		call = Function.variableCases(call, var, fun);
-		System.out.print("\n\n"+ call + "\n\n");
+//		System.out.print("\n\n"+ call + "\n\n");
 		param.removeFirst();
 		param.removeLast();
-		System.out.print(param);
-		System.out.print(inst);
+//		System.out.print(param);
+//		System.out.print(inst);
 		
 		//La cantidad de argumentos ingresados coincide con la cantidad de parametros almacenados
 		if (call.size()==param.size()) {
-			System.out.print("Ingreso aqui");
+//			System.out.print("Ingreso aqui");
 			//Se cambian los argumentos en las instrucciones
 			inst = Function.changeArgs(call, param, inst, var, fun);
 			return Function.executeCases(inst, var, fun);
@@ -109,7 +109,7 @@ public class Function {
 	}
 	
 	private static String executeCases(LinkedList<String> ins, VariableStorage var, FunctionStorage fun) {
-		System.out.print("Ejecuto caso\n");
+//		System.out.print("Ejecuto caso\n");
 		if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("quote") || ins.get(1).equals("QUOTE"))) {
 			return Predicates.caseQuote(ins).toString();
 						
@@ -145,7 +145,7 @@ public class Function {
 		}
 
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) ) {
-			System.out.print("Entro a la calculadora\n");
+//			System.out.print("Entro a la calculadora\n");
 			Calculator calc = new Calculator (ins, var);
 			
 			if (ins.get(1).matches(Patterns.LOGICAL)) {
@@ -169,7 +169,7 @@ public class Function {
 	
 	
 	private static LinkedList<String> changeArgs(LinkedList<String> call,LinkedList<String> params,LinkedList<String> inst, VariableStorage var, FunctionStorage fun){
-		System.out.print(params.size()+" "+call.size());
+//		System.out.print(params.size()+" "+call.size());
 		//Es para ir moviendose de parametro en parametro
 		for (int k = 0 ; k < params.size() ; k++) {
 			//Es para ir moviendose en cada token de la instruccion
@@ -185,7 +185,7 @@ public class Function {
 			}
 			
 		}
-		System.out.print(inst);
+//		System.out.print(inst);
 		return inst;
 	}
 	
@@ -331,7 +331,7 @@ public class Function {
 			ev.removeFirst();
 			counter++;
 		}
-		System.out.print(lista1);
+//		System.out.print(lista1);
 		op++;
 		counter++;
 		lista2.add(ev.getFirst());
@@ -363,8 +363,25 @@ public class Function {
 		FunctionStorage fu = new FunctionStorage();
 		
 		Function.Defun(tokenizer.equalParenthesis("(DEFUN operacion1 (arg arg1 arg2) (+ arg1 (* arg2 (^ arg2 arg1))) )"), var, fu);
-		System.out.print(fu.getFunction().get("operacion1"));
-		System.out.print(Function.functionExecution(tokenizer.equalParenthesis("(operacion1 4 3 2)"), fu, var));
+		System.out.print(fu.getFunction().get("operacion1")+"\n");
+		System.out.print(Function.functionExecution(tokenizer.equalParenthesis("(operacion1 4 3 2)"), fu, var)+"\n");
+		System.out.print(Function.functionExecution(tokenizer.equalParenthesis("(operacion1 3 3 7)"), fu, var)+"\n");
+		
+		Function.Defun(tokenizer.equalParenthesis("(DEFUN valorNuevo (arg0 arg1 arg2 arg3) (setq valor1 (/ arg3 (- arg2 (* arg1 arg3)))) )"), var, fu);
+		Function.functionExecution(tokenizer.equalParenthesis("(valorNuevo 5 3 1 900)"), fu, var);
+		System.out.print(var.getVariableStorage().get("valor1")+"\n");
+		
+		Function.Defun(tokenizer.equalParenthesis("(DEFUN listaNueva (arg0 arg1 arg2 arg3) (list (/ arg3 (- arg2 (* arg1 arg3))) valor1 9 \"listaa\")  )"), var, fu);
+		Function.functionExecution(tokenizer.equalParenthesis("(listaNueva 5 3 1 2)"), fu, var);
+		
+		Function.Defun(tokenizer.equalParenthesis("(DEFUN atomNuevo (arg0 arg1 arg2 arg3) (atom 7)  )"), var, fu);
+		Function.functionExecution(tokenizer.equalParenthesis("(atomNuevo 5 3 1 2)"), fu, var);
+		
+		Function.Defun(tokenizer.equalParenthesis("(DEFUN quoteNuevo (arg0 arg1 arg2 arg3) (quote arg0 fdkssjl asjkl doe0)  )"), var, fu);
+		Function.functionExecution(tokenizer.equalParenthesis("(quoteNuevo 5 3 1 2)"), fu, var);
+		
+		
+		System.out.print("\n");
 		LinkedList<String> list = tokenizer.equalParenthesis("(1 (+ 1 2) 9)");
 		list.removeFirst();
 		list.removeLast();
