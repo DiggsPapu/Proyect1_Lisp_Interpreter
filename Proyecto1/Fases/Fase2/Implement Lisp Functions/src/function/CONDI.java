@@ -39,27 +39,25 @@ public class CONDI {
 //						System.out.print(Float.valueOf(clist1.get(2))> Float.valueOf(clist1.get(3)));
 //						System.out.print(clist1.get(2)>clist1.get(3));
 						if (Predicates.caseEqual(clist1, variableStorage)) {
-							System.out.print("Entro al if\n");
+							System.out.print("Ingreso al if\n");
 							CONDI.getCases(plist1, variableStorage);
 							
 						}
 						else if (Predicates.caseEqual(clist2, variableStorage)) {
-							System.out.print("Entro al else if\n");	
+							System.out.print("Ingreso al else if\n");
 							CONDI.getCases(plist2, variableStorage);
 							
 						}
 						else {
-							System.out.print("Entro al else\n");
+							//Se remueve el parentesis abierto, cerrado y la t, listo para ingresar a los casos
+							System.out.print("Ingreso al else\n");
 							list3.removeFirst();
 							list3.removeFirst();
 							list3.removeLast();
 							
 							CONDI.getCases(list3, variableStorage);
 							
-							//Se remueve el parentesis abierto, cerrado y la t, listo para ingresar a los casos
-							list3.removeFirst();
-							list3.removeFirst();
-							list3.removeLast();
+							
 							
 						}
 					}
@@ -201,41 +199,57 @@ public class CONDI {
 	}
 	
 	public static void getCases(LinkedList<String> ins, VariableStorage variableStorage) {
-		if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("quote") || ins.get(1).equals("QUOTE"))) {
-			System.out.print("Ingreso quote\n");
-			Predicates.caseQuote(ins);
-		}
-		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("setq") || ins.get(1).equals("SETQ"))) {
-			System.out.print("Ingreso setq\n");
-			SETQ.evaluateSETQ(ins, variableStorage);
-		}
-		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("atom") || ins.get(1).equals("ATOM"))) {
-			System.out.print(Predicates.evaluateAtom(ins, variableStorage));
-		}
+		
+			if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("quote") || ins.get(1).equals("QUOTE"))) {
+				Predicates.caseQuote(ins);
+							
+			}
+			else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("setq") || ins.get(1).equals("SETQ"))) {
+				SETQ.evaluateSETQ(ins, variableStorage);
+				System.out.print(variableStorage.getVariableStorage().get(ins.get(2))+"\n");
+			}
+			else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("atom") || ins.get(1).equals("ATOM"))) {
+				Predicates.evaluateAtom(ins, variableStorage);
+			}
 
-		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("list") || ins.get(1).equals("LIST"))) {
-			Predicates.evaluateList(ins, variableStorage);
-			System.out.print(Predicates.evaluateList(ins, variableStorage));
+			else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("list") || ins.get(1).equals("LIST"))) {
+				Predicates.evaluateList(ins, variableStorage);
+				
+			}
+
+			else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("equal") || ins.get(1).equals("EQUAL") || ins.get(1).matches(Patterns.LOGICAL))) {
+				Predicates.caseEqual(ins, variableStorage);
+				if (Predicates.caseEqual(ins, variableStorage) ==null) {
+					System.out.print("La expresion no es correcta\n");
+				}else if(Predicates.caseEqual(ins, variableStorage)==false) {
+					System.out.print(false+"\n");
+				}else {
+					System.out.print(true+"\n");
+				}
+			}
+
+			else if (ins.size()==1) {
+				System.out.print(ins.get(0));
+			}
+
+			else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) ) {
+				System.out.print("Entro a la calculadora\n");
+				Calculator calc = new Calculator (ins, variableStorage);
+				
+				if (ins.get(1).matches(Patterns.LOGICAL)) {
+					System.out.print(calc.ResultComp());
+				}else if (ins.get(1).matches(Patterns.ARITHMETIC)) {
+					System.out.print(calc.Result());
+				}else {
+					System.out.print("No es operacion valida");
+				}
+			}
 			
-		}
-
-		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("equal") || ins.get(1).equals("EQUAL") || ins.get(1).matches(Patterns.LOGICAL))) {
-			System.out.print(Predicates.caseEqual(ins, variableStorage));
-		}
-
-		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("cond") || ins.get(1).equals("COND"))) {
-			CONDI.COND(ins, variableStorage);
-		}
-
-		else if (ins.size()==1) {
-			System.out.print(ins.get(0));
-		}
-
-		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) ) {
-			System.out.print("Entro a la calculadora\n");
-			Calculator calc = new Calculator (ins, variableStorage);
-			System.out.print(calc.Result());;
-		}
+			else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("cond") || ins.get(1).equals("COND"))) {
+				
+				CONDI.COND(ins, variableStorage);
+			}
+		
 	}
 	
 	public static void main(String[] args) {
@@ -255,21 +269,16 @@ public class CONDI {
 //		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 2 2) (SETQ value4 (< 3 2) ) ) ( (< 2 1a) 93 ) (t (setq value41 \"hola soy diego\")) )"), variableStorage);
 //		System.out.print(variableStorage.getVariableStorage().get("value4"));
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= \"hola\" \"hla\") (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hola\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
+		System.out.print("\n");
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= \"hola\" \"hola\") (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
+		System.out.print("\n");
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= \"hla\" \"hola\") (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 1 1) (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 1 2) (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 1 2) (SETQ value4 (< 33 2) ) ) ( (= \"kl\" \"kl\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
+		System.out.print("\n");
 		
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 23 49) (SETQ value4 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 44 44) (SETQ value4 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
+		System.out.print("\n");
+		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 44 44) (SETQ value4 (+ 1 2) ) ) ( ( = 1 12) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
+		System.out.print("\n");
 //		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 23 49) (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
 		
 //		CONDI.COND(tokenizer.equalParenthesis("(COND ((> 23 49) (SETQ value4 (> 33 2) ) ) ( ( > 22 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
@@ -277,17 +286,23 @@ public class CONDI {
 //		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 24 59) (SETQ value4 (> 45 1) ) ) ( ( < -1 0) 89203) (t (90)) )"), variableStorage);
 		
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 23 49) (SETQ value4 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
+		System.out.print("\n");
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 423879 value4) (SETQ value4 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
+		System.out.print("\n");
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= value4 value4) (SETQ value3 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
 		System.out.print(variableStorage.getVariableStorage().get("value3"));
+		System.out.print("\n");
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= value4 value4) (list 1 2 3 ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
+		System.out.print("\n");
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 2 value4) (list 1 2 3 ) ) ( ( = 1 1) (atom 3892) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
+		System.out.print("\n");
 		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 6 value4) (list 1 2 3 ) ) ( ( = 1 1) (- 3 (* 2 3)) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-
+		System.out.print("\n");
+		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 6 value4) (list 1 2 3 ) ) ( ( = 1 1) (= 2 3) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
+		System.out.print("\n");
+		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 6 value4) (list 1 2 3 ) ) ( ( = 1 1) (< 3 (* 2 3)) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
+		
+		
 	}
 	
 	

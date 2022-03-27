@@ -146,7 +146,7 @@ public class Calculator {
             return Final;
     }
         public boolean ResultComp(){
-        	System.out.print(Finalbool+"Hashcode final bool: "+ Finalbool);
+        	
             return Finalbool;
         }
         
@@ -221,7 +221,7 @@ public class Calculator {
 		   //Si son signos iguales entonces se retorna la lista
 		   if(op==cp) {
 //			   System.out.print(finalLista+"\n");
-			   System.out.print("Final: "+finalLista);
+			   
 			   return finalLista;
 		   //Si no son signos iguales entonces se retorna nulo
 		   }else {

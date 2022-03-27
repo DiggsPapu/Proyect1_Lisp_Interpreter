@@ -20,6 +20,7 @@ public class Patterns {
 	protected static final String OPARENTHESIS = "[(].";
 	protected static final String CPARENTHESIS = "[)].";
 	protected static final String LOGICAL = "[\\<\\>\\=]?";
+	protected static final String ARITHMETIC = "[\\+\\-\\*\\/\\^]?";
 	
 	
 }

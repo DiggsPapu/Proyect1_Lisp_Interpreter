@@ -191,7 +191,7 @@ public class Operations {
 			   }else {
 				   finalLista.add(evaluateLista.getFirst());
 				   evaluateLista.removeFirst();
-			   }
+			   } 
 			   
 			   counter++;
 		   }

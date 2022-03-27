@@ -128,7 +128,6 @@ public class tokenizer {
 				return null;
 			}
 		
-		//Si la listaes nula entonces devuelve null
 		}else {
 			
 			return null;
