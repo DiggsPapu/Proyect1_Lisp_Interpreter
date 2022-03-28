@@ -1,5 +1,7 @@
 package v2;
-
+/**
+* Este metodo se utiliza para almacenar las palabras y simbolos protegidos.
+*/
 public class Patterns {
 	protected static final String LETTER = "[a-zA-Z]";
 	protected static final String LITERAL = "[a-zA-Z0-9]+";
