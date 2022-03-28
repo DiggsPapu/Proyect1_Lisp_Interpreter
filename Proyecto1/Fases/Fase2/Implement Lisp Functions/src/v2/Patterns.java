@@ -1,9 +1,13 @@
 package v2;
 /**
+
  * 
  * @author Windows 10
  *Esta clase es para almacenar todos los patrones de string 
+ *Este metodo se utiliza para almacenar las palabras y simbolos protegidos.
  */
+
+
 public class Patterns {
 	protected static final String LETTER = "[a-zA-Z]";
 	protected static final String LITERAL = "[a-zA-Z0-9]+";
