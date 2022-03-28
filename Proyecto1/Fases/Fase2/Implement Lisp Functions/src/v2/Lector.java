@@ -2,8 +2,6 @@ package v2;
 
 import java.util.LinkedList;
 
-import v2.FunctionStorage;
-import v2.VariableStorage;
 
 public class Lector {
 	private VariableStorage variableStorage;
@@ -39,7 +37,7 @@ public class Lector {
 			
 		}else {
 //			System.out.print("No es nulo\n");
-			getCases(tokenizer.equalParenthesis(scan), getVariableStorage());
+			System.out.print(getCases(tokenizer.equalParenthesis(scan), getVariableStorage()));;
 			
 		}
 		
@@ -55,7 +53,11 @@ public class Lector {
 			return getVariableStorage().getVariableStorage().get(ins.get(2));
 		}
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("atom") || ins.get(1).equals("ATOM"))) {
-			return Predicates.evaluateAtom(ins, variableStorage).toString();
+			if (Predicates.evaluateAtom(ins, variableStorage)!= null) {
+				return Predicates.evaluateAtom(ins, variableStorage).toString();
+			}else {
+				return null;
+			}
 		}
 
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("list") || ins.get(1).equals("LIST"))) {
@@ -77,6 +79,9 @@ public class Lector {
 			return ins.get(1);
 		}else if (ins.size()==1) {
 			return ins.get(0);
+		}else if (ins.size()==1 && getVariableStorage().getVariableStorage().containsKey(ins.get(0))) {
+			System.out.print(ins.get(0));
+			return getVariableStorage().getVariableStorage().get(ins.get(0));
 		}
 
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) ) {
@@ -84,10 +89,10 @@ public class Lector {
 			Calculator calc = new Calculator (ins, variableStorage);
 			
 			if (ins.get(1).matches(Patterns.LOGICAL)) {
-				System.out.print(Boolean.toString(calc.ResultComp()));
+//				System.out.print(Boolean.toString(calc.ResultComp()));
 				return Boolean.toString(calc.ResultComp());
 			}else if (ins.get(1).matches(Patterns.ARITHMETIC)) {
-				System.out.print(Float.toString(calc.Result()));
+//				System.out.print(Float.toString(calc.Result()));
 				return Float.toString(calc.Result());
 			}else {
 				System.out.print("No es operacion valida");
@@ -97,6 +102,17 @@ public class Lector {
 		
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("cond") || ins.get(1).equals("COND"))) {
 			return CONDI.COND(ins, variableStorage);
+		}
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("defun") || ins.get(1).equals("DEFUN"))) {
+			Function.Defun(ins, variableStorage, functionStorage);
+			if (functionStorage.getFunction().containsKey(ins.get(2))) {
+				return "true";
+			}else {
+				return "false";
+			}
+		}
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (functionStorage.getFunction().containsKey(ins.get(1))) ) {
+			return Function.functionExecution(ins, functionStorage, variableStorage);
 		}
 		else {
 			return null;
