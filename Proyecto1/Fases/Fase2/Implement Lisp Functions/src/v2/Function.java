@@ -6,7 +6,12 @@ import java.util.LinkedList;
 
 public class Function {
 	
-	
+	/**
+	 * 
+	 * @param lista
+	 * @param variableStorage
+	 * @param functionStorage
+	 */
 	public static void Defun(LinkedList<String> lista, VariableStorage variableStorage, FunctionStorage functionStorage) {
 		if (lista != null ) {
 			//Cumple con los requisitos de parentesis, defun|DEFUN y nombre valido

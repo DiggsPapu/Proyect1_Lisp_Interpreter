@@ -7,6 +7,12 @@ public class SETQ {
 	public SETQ() {
 		
 	}
+	/**
+	 * Es un metodo para evaluar si se puede o no hacer un setq (subida de una variable)
+	 * @param lista
+	 * @param variableStorage
+	 * @return None, no retorna nada
+	 */
 	public static void evaluateSETQ(LinkedList<String> lista, VariableStorage variableStorage) {
 		
 		if (lista!= null) {
