@@ -8,29 +8,48 @@ public class Lector {
 	private FunctionStorage functionStorage;
 	
 	
-	
+	/**
+	 * Este metodo es para obtener la VariableStorage dado que es privada
+	 * @return
+	 */
 	public VariableStorage getVariableStorage() {
 		return variableStorage;
 	}
-
+/**
+ * Este metodo es para asignar un valor a la VariableStorage daod que es privada.
+ * @param variableStorage
+ */
 	public void setVariableStorage(VariableStorage variableStorage) {
 		this.variableStorage = variableStorage;
 	}
-
+/**
+ * Este metodo es para obtener la FunctionStorage dado que es privada
+ * @return
+ */
 	public FunctionStorage getFunctionStorage() {
 		return functionStorage;
 	}
-
+/**
+ * Este metodo es para asignarle un valor a la function Storage dado que es privado
+ * @param functionStorage
+ */
 	public void setFunctionStorage(FunctionStorage functionStorage) {
 		this.functionStorage = functionStorage;
 	}
-
+/**
+ * Este metodo es un constructor para inicializar el lector.
+ * Notese que el lector trae el Parser y el interprete en 1 solo
+ */
 	public Lector () {
 		this.variableStorage = new VariableStorage();
 		this.functionStorage = new FunctionStorage();
 		
 	}
-	
+	/**
+	 * Este metodo sirve para evaluar una entrada basado en lisp
+	 * @param scan string
+	 * @return none, es void.
+	 */
 	public void readInstruccion(String scan) {
 		if (tokenizer.equalParenthesis(scan)==null) {
 //			System.out.print("Es nulo\n");
@@ -42,7 +61,14 @@ public class Lector {
 		}
 		
 	}
-	
+	/**
+	 * Este metodo sirve para encontrar los casos que se puedan presentar, si es una quote, si es una funcion
+	 * Si se esta definiendo una funcion o un setq, etc. 
+	 * Llama los metodos estaticos de las otras clases para un desempenio mas ordenado.
+	 * @param ins
+	 * @param variableStorage
+	 * @return String del resultado que se haya obtenido
+	 */
 	private String getCases(LinkedList<String> ins, VariableStorage variableStorage) {
 		if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("quote") || ins.get(1).equals("QUOTE"))) {
 			return Predicates.caseQuote(ins).toString();
