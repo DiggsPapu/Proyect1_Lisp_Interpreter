@@ -15,7 +15,11 @@ public class Calculator {
     String OPType = "None";
     boolean Finalbool = true ;
     
-  
+    /**
+     * Este metodo constructor para generar las operaciones
+     * @param lista
+     * @param variableStorage
+     */
     public Calculator(LinkedList<String> lista, VariableStorage variableStorage){
         Stack = new Stack<String>();
         LinkedList<String> list = fixList(lista, variableStorage);
@@ -29,6 +33,10 @@ public class Calculator {
         	System.out.print("No se pudo realizar la operacion, no es valida. calculator\n");
         }
     }
+    /**
+     * Este metodo sirve para operar cada parte del stack.
+     * @return None, no retorna nada al ser void
+     */
     private void Interpret(){
         String tok;
         Stack<String> EvaluateStack = new Stack<String>();
@@ -38,7 +46,11 @@ public class Calculator {
         }
         Evaluate(EvaluateStack);
     }
-  
+    /**
+     * Este metodo sirve para evaluar el stack generado a partir de los parentesis
+     * @param callStack
+     * @return no retorna nada al ser void
+     */
     private void Evaluate(Stack<String> callStack){
         String func = callStack.pop();
         if(func.equals("+")) {
@@ -75,31 +87,55 @@ public class Calculator {
             OPType = "=";
         }
     }
-  
+    /**
+     * Este metodo sirve para sumar llamando al stack
+     * @param callStack
+     * @return
+     */
     private float Plus(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
         Final = a+b;
         return(a+b);
     }
+    /**
+     * Es una funcion privada para operar resta
+     * @param callStack
+     * @return Float de laresta entre los dos de stack
+     */
     private float Minus(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
         Final = a-b;
         return(a-b);
     }
+    /**
+     * Es una funcion privada para operar la multiplicacion
+     * @param callStack
+     * @return float de la multiplicacion
+     */
     private float Multi(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
         Final = a*b;
         return(a*b);
     }
+    /**
+     * Es una funcion privada para operar una division
+     * @param callStack
+     * @return float de division
+     */
     private float Div(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
         Final = a/b;
         return(a/b);
     }
+    /**
+     * Es una funcion privada para elevar
+     * @param callStack
+     * @return un float de un exponente
+     */
     private float Pow(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
@@ -107,7 +143,11 @@ public class Calculator {
         return((float)Math.pow(a, b));
     }
     
-    
+    /**
+     * Es una desigualdad >
+     * @param callStack
+     * @return Booleano si es mayor que
+     */
     private boolean GreaterThan(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
@@ -118,6 +158,11 @@ public class Calculator {
         }
         return Finalbool;
     }
+    /**
+     * Es una desigualdad<
+     * @param callStack
+     * @return Booleano si es menor que aunque es relativa
+     */
     private boolean SmallerThan(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
@@ -128,6 +173,11 @@ public class Calculator {
         }
         return Finalbool;
     }
+    /**
+     * Es una igualdad
+     * @param callStack
+     * @return Booleano en caso de que sea igual
+     */
     private boolean Equals(Stack<String> callStack){
         float a = Float.parseFloat(callStack.pop());
         float b = Float.parseFloat(callStack.pop());
@@ -138,18 +188,35 @@ public class Calculator {
         }
         return Finalbool;
     }
+    /**
+     * Es para obtener el tipo de operando
+     * @return el tipo de operando, suma, resta mult, div o pow
+     */
         public String getOpType(){
             return OPType;
         }
+        /**
+         * En caso de que sea una operacion aritmetica se retorna dicho float
+         * @return float de la operacion
+         */
         public float Result(){
         	
             return Final;
     }
+        /**
+         * En caso de que sea una operacion booleana entonces se retorna el booleano final
+         * @return
+         */
         public boolean ResultComp(){
         	
             return Finalbool;
         }
-        
+        /**
+         * Es un algoritmo para ordenar y hacer valida la lista. Se trabaja por colas
+         * @param lista
+         * @param variableStorage
+         * @return una lista, lista para ser operada
+         */
    private LinkedList<String> fixList(LinkedList<String> lista, VariableStorage variableStorage){
 	   if ( lista!=null) {
 
