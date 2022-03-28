@@ -5,7 +5,7 @@ package v2;
  * @author Windows 10
  *Esta clase es para almacenar todos los patrones de string 
  *Este metodo se utiliza para almacenar las palabras y simbolos protegidos.
- */
+ */ 
 
 
 public class Patterns {
