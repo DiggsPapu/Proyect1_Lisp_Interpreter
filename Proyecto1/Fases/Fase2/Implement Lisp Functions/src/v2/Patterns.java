@@ -9,7 +9,7 @@ public class Patterns {
 	protected static final String OPERATIONS =  "[\\+\\-\\*\\^\\/\\<\\>\\=]?";
 	protected static final String SYMBOL = "[().]";
 	protected static final String QUOTATION = "[\"]";
-    protected static final String CONS = "CONS";
+    	protected static final String CONS = "CONS";
 	protected static final String ATOM = "ATOM";
 	protected static final String LIST = "LIST";
 	protected static final String SETQ = "SETQ";
