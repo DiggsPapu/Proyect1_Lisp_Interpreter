@@ -128,6 +128,27 @@ public class Function {
 			
 		}
 
+		else if (ins.size()==3) {
+			return ins.get(1);
+		}
+
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) || ins.get(1).matches(Patterns.LOGICAL) ) {
+//			System.out.print("Entro a la calculadora\n");
+			System.out.print(ins);
+			Calculator calc = new Calculator (ins, var);
+//			System.out.print("entro");
+			if (ins.get(1).matches(Patterns.LOGICAL)) {
+				
+				return Boolean.toString(calc.ResultComp());
+			}else if (ins.get(1).matches(Patterns.ARITHMETIC)) {
+				return Float.toString(calc.Result());
+			}else {
+				System.out.print("No es operacion valida");
+				return null;
+			}
+			
+			
+		}
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("equal") || ins.get(1).equals("EQUAL"))) {
 			Predicates.caseEqual(ins, var);
 			if (Predicates.caseEqual(ins, var) ==null) {
@@ -139,31 +160,18 @@ public class Function {
 				return "true";
 			}
 		}
-
-		else if (ins.size()==3) {
-			return ins.get(1);
+		
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("cond") || ins.get(1).equals("COND"))) {
+			return CONDI.COND(ins, var);
 		}
-
-		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) || ins.get(1).matches(Patterns.LOGICAL) ) {
-//			System.out.print("Entro a la calculadora\n");
-			System.out.print(ins);
-			Calculator calc = new Calculator (ins, var);
-			
-			if (ins.get(1).matches(Patterns.LOGICAL)) {
-				return Boolean.toString(calc.ResultComp());
-			}else if (ins.get(1).matches(Patterns.ARITHMETIC)) {
-				return Float.toString(calc.Result());
-			}else {
-				System.out.print("No es operacion valida");
-				return null;
-			}
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && fun.getFunction().containsKey(ins.get(1))) {
+			return Function.functionExecution(ins, fun, var);
 		}
+		
 		else {
 			return null;
 		}
-//		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("cond") || ins.get(1).equals("COND"))) {
-//			CONDI.COND(ins, var);
-//		}
+		
 		
 	}
 	

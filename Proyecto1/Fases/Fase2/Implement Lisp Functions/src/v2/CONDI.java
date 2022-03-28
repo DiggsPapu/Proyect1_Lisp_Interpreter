@@ -111,7 +111,7 @@ public class CONDI {
 		}
 	}
 	
-	public static LinkedList<LinkedList<String>> getIfs(LinkedList<String> lista){
+	private static LinkedList<LinkedList<String>> getIfs(LinkedList<String> lista){
 		//Creacion de las tres sublistas y la lista a evaluar
 //		System.out.print(lista+"\n");
 		LinkedList<String> lista1 = new LinkedList<String>();
@@ -182,7 +182,7 @@ public class CONDI {
 		
 	}
 	
-	public static LinkedList<LinkedList<String>> getConditional(LinkedList<String> lista){
+	private static LinkedList<LinkedList<String>> getConditional(LinkedList<String> lista){
 		//Se crea una lista para la condicion del if, otra para las instrucciones a ejecutar, la que se evaluara y una final
 		LinkedList<String> conditional = new LinkedList<String>();
 		LinkedList<String> eva = new LinkedList<String>(lista);
@@ -232,7 +232,7 @@ public class CONDI {
 		}
 	}
 	
-	public static String getCases(LinkedList<String> ins, VariableStorage var) {
+	private static String getCases(LinkedList<String> ins, VariableStorage var) {
 //		System.out.print("Ejecuto caso\n");
 		if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("quote") || ins.get(1).equals("QUOTE"))) {
 			return Predicates.caseQuote(ins).toString();
@@ -263,6 +263,9 @@ public class CONDI {
 			}else {
 				return "true";
 			}
+		}
+		else if (ins.size()==3||ins.size()==1 && var.getVariableStorage().containsKey(ins.get(0))){
+			return var.getVariableStorage().get(ins.get(0));
 		}
 
 		else if (ins.size()==1) {
@@ -298,57 +301,57 @@ public class CONDI {
 		
 	}
 	
-	public static void main(String[] args) {
-		//Este print solo si se hace el metodo publico
-		VariableStorage variableStorage = new VariableStorage();
-		System.out.print("\n\n(COND ((< 14 2) (+ 1 2) ) ( (= 22 1) 93 ) (t (quote kjflds 1 2 3 dkf)) )");
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 14 2) (+ 1 2) ) ( (= 22 1) 93 ) (t (quote kjflds 1 2 3 dkf)) )"), variableStorage);
-		System.out.print("\n\n(COND ((< 1 21) (+ 1 2) ) ( (= 1 15) 093 ) (t (quote kjfldkjljs 1 2 3 dkf)) )");
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 1 21) (+ 1 2) ) ( (= 1 15) 093 ) (t (quote kjfldkjljs 1 2 3 dkf)) )"), variableStorage);
-		System.out.print("\n\n(COND ((= 2 23) (+ 1 2) ) ( (> 1 11) 1093 ) (t (quote kjflds 1 2 3 dkf jkl)) )");
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 2 23) (+ 1 2) ) ( (> 1 11) 1093 ) (t (quote kjflds 1 2 3 dkf jkl)) )"), variableStorage);
-		System.out.print("\n\n(COND ((< 24 2) (+ 1 (* 8 9)) ) ( (> 11 1) 4893 ) (t (quote kjflds 1 2 3 dkf)) )");
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 24 2) (+ 1 (* 8 9)) ) ( (> 11 1) 4893 ) (t (quote kjflds 1 2 3 dkf)) )"), variableStorage);
-		System.out.print("\n\n(COND ((< 24 2) (+ 1 (* 8 9)) ) ( (> 11 1) 4893 ) (t (quote kjflds 1 2 3 dkf)) )");
-		CONDI.COND(tokenizer.equalParenthesis("(COND (( 2 2) (SETQ value4 (> 3 2) ) ) ( (> 1 15) 2093 ) (t (quote kjflds 1 2 3 dkf)) )"), variableStorage);
-		System.out.print("Vlaue4: "+variableStorage.getVariableStorage().get("value4")+"\n");
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 2 2) (SETQ value4 (< 3 2) ) ) ( (< 2 1a) 93 ) (t (setq value41 \"hola soy diego\")) )"), variableStorage);
-		System.out.print(variableStorage.getVariableStorage().get("value4"));
-		
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= \"hola\" \"hla\") (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hola\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
-		
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= \"hola\" \"hola\") (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= \"hla\" \"hola\") (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
-		
-		
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 23 49) (SETQ value4 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
-		
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 44 44) (SETQ value4 (+ 1 2) ) ) ( ( = 1 12) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 23 49) (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((> 23 49) (SETQ value4 (> 33 2) ) ) ( ( > 22 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
-		
-		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 24 59) (SETQ value4 (> 45 1) ) ) ( ( < -1 0) 89203) (t (90)) )"), variableStorage);
-///////		
-		
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 23 49) (SETQ value4 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
-		
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 423879 value4) (SETQ value4 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= value4 value4) (SETQ value3 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\\n");
-		System.out.print(variableStorage.getVariableStorage().get("value3"));
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= value4 value4) (list 1 2 3 ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
-		
-		System.out.print("\n");
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 2 value4) (list 1 2 3 ) ) ( ( = 1 1) (atom 3892) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage));
-		System.out.print("\n");
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 6 value4) (list 1 2 3 ) ) ( ( = 1 1) (- 3 (* 2 3)) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage));;
-		System.out.print("\n");
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 6 value4) (list 1 2 3 ) ) ( ( = 1 1) (= 2 3) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage));;
-		System.out.print("\n");
-		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 6 value4) (list 1 2 3 ) ) ( ( = 1 1) (< 3 (* 2 3)) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage));;
-		
-		
-	}
+//	public static void main(String[] args) {
+//		//Este print solo si se hace el metodo publico
+//		VariableStorage variableStorage = new VariableStorage();
+//		System.out.print("\n\n(COND ((< 14 2) (+ 1 2) ) ( (= 22 1) 93 ) (t (quote kjflds 1 2 3 dkf)) )");
+//		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 14 2) (+ 1 2) ) ( (= 22 1) 93 ) (t (quote kjflds 1 2 3 dkf)) )"), variableStorage);
+//		System.out.print("\n\n(COND ((< 1 21) (+ 1 2) ) ( (= 1 15) 093 ) (t (quote kjfldkjljs 1 2 3 dkf)) )");
+//		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 1 21) (+ 1 2) ) ( (= 1 15) 093 ) (t (quote kjfldkjljs 1 2 3 dkf)) )"), variableStorage);
+//		System.out.print("\n\n(COND ((= 2 23) (+ 1 2) ) ( (> 1 11) 1093 ) (t (quote kjflds 1 2 3 dkf jkl)) )");
+//		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 2 23) (+ 1 2) ) ( (> 1 11) 1093 ) (t (quote kjflds 1 2 3 dkf jkl)) )"), variableStorage);
+//		System.out.print("\n\n(COND ((< 24 2) (+ 1 (* 8 9)) ) ( (> 11 1) 4893 ) (t (quote kjflds 1 2 3 dkf)) )");
+//		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 24 2) (+ 1 (* 8 9)) ) ( (> 11 1) 4893 ) (t (quote kjflds 1 2 3 dkf)) )"), variableStorage);
+//		System.out.print("\n\n(COND ((< 24 2) (+ 1 (* 8 9)) ) ( (> 11 1) 4893 ) (t (quote kjflds 1 2 3 dkf)) )");
+//		CONDI.COND(tokenizer.equalParenthesis("(COND (( 2 2) (SETQ value4 (> 3 2) ) ) ( (> 1 15) 2093 ) (t (quote kjflds 1 2 3 dkf)) )"), variableStorage);
+//		System.out.print("Vlaue4: "+variableStorage.getVariableStorage().get("value4")+"\n");
+//		CONDI.COND(tokenizer.equalParenthesis("(COND ((= 2 2) (SETQ value4 (< 3 2) ) ) ( (< 2 1a) 93 ) (t (setq value41 \"hola soy diego\")) )"), variableStorage);
+//		System.out.print(variableStorage.getVariableStorage().get("value4"));
+//		
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= \"hola\" \"hla\") (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hola\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
+//		
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= \"hola\" \"hola\") (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= \"hla\" \"hola\") (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
+//		
+//		
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 23 49) (SETQ value4 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
+//		
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 44 44) (SETQ value4 (+ 1 2) ) ) ( ( = 1 12) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
+//		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 23 49) (SETQ value4 (< 33 2) ) ) ( (= \"hola\" \"hla\") 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
+//		
+//		CONDI.COND(tokenizer.equalParenthesis("(COND ((> 23 49) (SETQ value4 (> 33 2) ) ) ( ( > 22 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage);
+//		
+//		CONDI.COND(tokenizer.equalParenthesis("(COND ((< 24 59) (SETQ value4 (> 45 1) ) ) ( ( < -1 0) 89203) (t (90)) )"), variableStorage);
+/////////		
+//		
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 23 49) (SETQ value4 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
+//		
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 423879 value4) (SETQ value4 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= value4 value4) (SETQ value3 (= 33 2) ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\\n");
+//		System.out.print(variableStorage.getVariableStorage().get("value3"));
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= value4 value4) (list 1 2 3 ) ) ( ( = 1 1) 0993 ) (t (setq value42 \"hola soy diego\")) )"), variableStorage)+"\n");
+//		
+//		System.out.print("\n");
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 2 value4) (list 1 2 3 ) ) ( ( = 1 1) (atom 3892) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage));
+//		System.out.print("\n");
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 6 value4) (list 1 2 3 ) ) ( ( = 1 1) (- 3 (* 2 3)) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage));;
+//		System.out.print("\n");
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 6 value4) (list 1 2 3 ) ) ( ( = 1 1) (= 2 3) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage));;
+//		System.out.print("\n");
+//		System.out.print(CONDI.COND(tokenizer.equalParenthesis("(COND ((= 6 value4) (list 1 2 3 ) ) ( ( = 1 1) (< 3 (* 2 3)) ) (t (setq value42 \"hola soy diego\")) )"), variableStorage));;
+//		
+//		
+//	}
 	
 	
 }
