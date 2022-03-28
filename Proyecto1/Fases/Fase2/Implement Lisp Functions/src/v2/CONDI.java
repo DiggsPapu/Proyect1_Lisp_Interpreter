@@ -4,6 +4,13 @@ import java.util.LinkedList;
 
 public class CONDI {
 	//, VariableStorage variableStorage
+	/**
+	 * Es el metodo para evaluar cond (cond es un if de 3 opciones)
+	 * Tiene parametros de la lista cond a ser valuada, y del almacenamiento de variables
+	 * @param lista
+	 * @param variableStorage
+	 * @return String, con el resultado de la operacion que se haya realizado
+	 */
 	public static String COND(LinkedList<String> lista , VariableStorage variableStorage) {
 		if (lista != null) {
 			if (lista.getFirst().equals("(") && lista.getLast().equals(")") && ( lista.get(1).equals("cond") || lista.get(1).equals(Patterns.COND) )) {
@@ -110,7 +117,13 @@ public class CONDI {
 			
 		}
 	}
-	
+	/**
+	 * Es una funcion (no un metodo) que regresa una lista
+	 * Es basado en que las condicionales estan colocadas entre parentesis entonces en base a esos parentesis
+	 * se obtienen las sublistas de cada uno de los ifs del cond 
+	 * @param lista
+	 * @return lista de listas con sublistas de la lista original
+	 */
 	private static LinkedList<LinkedList<String>> getIfs(LinkedList<String> lista){
 		//Creacion de las tres sublistas y la lista a evaluar
 //		System.out.print(lista+"\n");
@@ -181,7 +194,12 @@ public class CONDI {
 		}
 		
 	}
-	
+	/**
+	 * Condicional, es una funcion privada y estatica que sirve para obtener el condicional de un if especifico
+	 * y las instrucciones a ejecutar.
+	 * @param lista
+	 * @return
+	 */
 	private static LinkedList<LinkedList<String>> getConditional(LinkedList<String> lista){
 		//Se crea una lista para la condicion del if, otra para las instrucciones a ejecutar, la que se evaluara y una final
 		LinkedList<String> conditional = new LinkedList<String>();
@@ -231,7 +249,13 @@ public class CONDI {
 			return null;
 		}
 	}
-	
+	/**
+	 * Son los casos que se puede presentar en un if, quote, setq, atom, list, equal, variable, operaciones booleanas y numericas
+	 * Y llamarse en cond
+	 * @param ins
+	 * @param var
+	 * @return
+	 */
 	private static String getCases(LinkedList<String> ins, VariableStorage var) {
 //		System.out.print("Ejecuto caso\n");
 		if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("quote") || ins.get(1).equals("QUOTE"))) {
