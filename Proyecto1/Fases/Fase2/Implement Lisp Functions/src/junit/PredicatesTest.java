@@ -41,8 +41,8 @@ class PredicatesTest {
 		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2) )")).get(0), "(");
 		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2) 2 fd )")).get(5), "2");
 		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(quote (+ 1 2 )")), null);
-		System.out.print("Ingrese un quote valido con string o comillas: ");
-		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis(scann.nextLine())).get(1), "kfjlds");//Por ejemplo (QUOTE "1 2 fdjksl" kfjlds)
+//		System.out.print("Ingrese un quote valido con string o comillas: ");
+		assertEquals(Predicates.caseQuote(tokenizer.equalParenthesis("(QUOTE \"1 2 fdjksl\" kfjlds)")).get(1), "kfjlds");//Por ejemplo (QUOTE "1 2 fdjksl" kfjlds)
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list 1 2 value )"), vs).get(2), vs.getVariableStorage().get("value"));
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list  )"), vs) , null);
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list (+ 1 2) 3 4 value )"), vs).get(0), "3.0");
@@ -55,7 +55,7 @@ class PredicatesTest {
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list  (+ 1 value) jksimmons 1 )"), vs), null );
 		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list (+1 value )"), vs), null);
 		System.out.print("Ingrese un lista valida con comillas: "); //por ejemplo (list (^ 23 (+ 2 3 )) "hola"  )
-		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis(scann.nextLine()), vs).get(1), " hola");
+		assertEquals(Predicates.evaluateList(tokenizer.equalParenthesis("(list (^ 23 (+ 2 3 )) \"hola\"  )"), vs).get(1), " hola");
 		assertEquals(Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom 1)"), vs).get(0), "1");
 		assertEquals(Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom value)"), vs).get(0), "8293");
 		assertEquals(Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom )"), vs), null);
@@ -66,10 +66,10 @@ class PredicatesTest {
 		assertEquals(Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (> 2 1))"), vs).getLast(), "true");
 		assertEquals(Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (< 1 1))"), vs).getLast(), "false");
 		assertEquals(Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (< -1 1))"), vs).getFirst(), "true");
-		System.out.print("Ingrese un atom que sea valido con comillas: "); // por ejemplo (atom "fjdkls")
-		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
+//		System.out.print("Ingrese un atom que sea valido con comillas: "); // por ejemplo (atom "fjdkls")
+		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom \"fjdkls\")"), vs) + "\n");
 		System.out.print("Ingrese un atom que no sea valido con comillas: "); // por ejemplo (atom "fjdkls)
-		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
+		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom \"fjdkls)"), vs) + "\n");
 		
 		scann.close();
 	}

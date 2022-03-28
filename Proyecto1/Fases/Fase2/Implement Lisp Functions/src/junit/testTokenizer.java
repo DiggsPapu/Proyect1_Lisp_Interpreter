@@ -18,9 +18,9 @@ class testTokenizer {
 		assertEquals(tokenizer.equalParenthesis("exit"), null);
 		assertEquals(tokenizer.equalParenthesis("e"), null);
 		System.out.print("Ingresar un input que contenga comillas balanceadas: "); //(setq fkdls "fjksdl fdsa")
-		assertNotEquals(tokenizer.equalParenthesis(scann.nextLine()), null);
+		assertNotEquals(tokenizer.equalParenthesis("(value())"), null);
 		System.out.print("Ingresar un input que contenga comillas desbalanceadas: "); //(setq fkdls "fjksdl )
-		assertNull(tokenizer.equalParenthesis(scann.nextLine()));
+		assertNull(tokenizer.equalParenthesis("(value ()"));
 		scann.close();
 	}
 

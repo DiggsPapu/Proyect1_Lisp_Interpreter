@@ -23,7 +23,9 @@ public class CONDI {
 					LinkedList<String> list3 = new LinkedList<String> (CONDI.getIfs(lista).get(2));
 					
 //					System.out.print(( clist1.getFirst().equals("(") && clist1.getLast().equals(")")  && (clist1.get(1).matches(Patterns.LOGICAL) || clist1.get(1).equals("EQUAL") || clist1.get(1).equals("equal")) ) );
-					
+					boolean cond11= ( clist1.getFirst().equals("(") && clist1.getLast().equals(")")  && (clist1.get(1).matches(Patterns.LOGICAL) )); 
+					boolean cond22 = ( clist2.getFirst().equals("(") && clist2.getLast().equals(")")  && (clist2.get(1).matches(Patterns.LOGICAL) ) )  ;
+					boolean cond33 = list3.getFirst().equals("(") && list3.getLast().equals(")") && list3.get(1).equals("t");
 					
 					boolean cond1= ( clist1.getFirst().equals("(") && clist1.getLast().equals(")")  && (clist1.get(1).equals("=") || clist1.get(1).equals("EQUAL") || clist1.get(1).equals("equal")) ); 
 //					System.out.print(( clist2.getFirst().equals("(") && clist2.getLast().equals(")")  && (clist2.get(1).matches(Patterns.LOGICAL) || clist2.get(1).equals("EQUAL") || clist2.get(1).equals("equal")) ) );
@@ -59,6 +61,30 @@ public class CONDI {
 							
 							
 							
+						}
+					}
+					else if (cond11 & cond22 & cond33) {
+						Calculator calc1 = new Calculator(clist1, variableStorage);
+						Calculator calc2 = new Calculator(clist2, variableStorage);
+						
+						if (calc1.ResultComp()) {
+							System.out.print("Ingreso al if\n");
+							return CONDI.getCases(plist1, variableStorage);
+							
+						}
+						else if (calc2.ResultComp()) {
+							System.out.print("Ingreso al else if\n");
+							return CONDI.getCases(plist2, variableStorage);
+							
+						}
+						else {
+							//Se remueve el parentesis abierto, cerrado y la t, listo para ingresar a los casos
+							System.out.print("Ingreso al else\n");
+							list3.removeFirst();
+							list3.removeFirst();
+							list3.removeLast();
+							
+							return CONDI.getCases(list3, variableStorage);
 						}
 					}
 					else {

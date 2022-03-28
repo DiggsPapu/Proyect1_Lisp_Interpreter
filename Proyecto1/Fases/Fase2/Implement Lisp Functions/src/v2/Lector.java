@@ -65,13 +65,13 @@ public class Lector {
 			
 		}
 
-		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("equal") || ins.get(1).equals("EQUAL") || ins.get(1).matches(Patterns.LOGICAL))) {
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("equal") || ins.get(1).equals("EQUAL"))) {
 			if (Predicates.caseEqual(ins, variableStorage) ==null) {
 				return null;
 			}else if(Predicates.caseEqual(ins, variableStorage)==false) {
-				return "false";
+				return "";
 			}else {
-				return "true";
+				return "";
 			}
 		}
 
@@ -87,7 +87,7 @@ public class Lector {
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) ) {
 			System.out.print("Entro a la calculadora\n");
 			Calculator calc = new Calculator (ins, variableStorage);
-			
+			System.out.print(ins.get(1).matches(Patterns.LOGICAL));
 			if (ins.get(1).matches(Patterns.LOGICAL)) {
 //				System.out.print(Boolean.toString(calc.ResultComp()));
 				return Boolean.toString(calc.ResultComp());
@@ -106,9 +106,9 @@ public class Lector {
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("defun") || ins.get(1).equals("DEFUN"))) {
 			Function.Defun(ins, variableStorage, functionStorage);
 			if (functionStorage.getFunction().containsKey(ins.get(2))) {
-				return "true";
+				return "";
 			}else {
-				return "false";
+				return "";
 			}
 		}
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (functionStorage.getFunction().containsKey(ins.get(1))) ) {

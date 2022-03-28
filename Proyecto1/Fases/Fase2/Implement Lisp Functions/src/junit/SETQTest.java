@@ -50,12 +50,12 @@ class SETQTest {
 		assertEquals(vs.getVariableStorage().get("value7"), "false");
 		assertEquals(vs.getVariableStorage().get("value8"), "true");
 		
-		System.out.print("Ingrese uno que aplique a setq con valor de comillas valido: ");//POr ejemplo (SETQ val " hola mi nombre es")
-		String value = scann.nextLine();
-		SETQ.evaluateSETQ(tokenizer.equalParenthesis(value), vs);
-		System.out.print("Ingrese uno que aplique a setq con valor de comillas invalido: ");// Por ejemplo (setq val "hola mi nombre es)
-		String value1 = scann.nextLine();
-		SETQ.evaluateSETQ(tokenizer.equalParenthesis(value1), vs);
+//		System.out.print("Ingrese uno que aplique a setq con valor de comillas valido: ");//POr ejemplo (SETQ val " hola mi nombre es")
+//		String value = scann.nextLine();
+		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(SETQ val \" hola mi nombre es\")"), vs);
+//		System.out.print("Ingrese uno que aplique a setq con valor de comillas invalido: ");// Por ejemplo (setq val "hola mi nombre es)
+//		String value1 = scann.nextLine();
+		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(setq val \"hola mi nombre es)"), vs);
 		scann.close();
 		
 		

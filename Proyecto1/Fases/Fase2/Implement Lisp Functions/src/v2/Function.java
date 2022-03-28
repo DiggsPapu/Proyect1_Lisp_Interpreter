@@ -128,7 +128,7 @@ public class Function {
 			
 		}
 
-		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("equal") || ins.get(1).equals("EQUAL") || ins.get(1).matches(Patterns.LOGICAL))) {
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("equal") || ins.get(1).equals("EQUAL"))) {
 			Predicates.caseEqual(ins, var);
 			if (Predicates.caseEqual(ins, var) ==null) {
 				System.out.print("La expresion no es correcta\n");
@@ -144,8 +144,9 @@ public class Function {
 			return ins.get(1);
 		}
 
-		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) ) {
+		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) || ins.get(1).matches(Patterns.LOGICAL) ) {
 //			System.out.print("Entro a la calculadora\n");
+			System.out.print(ins);
 			Calculator calc = new Calculator (ins, var);
 			
 			if (ins.get(1).matches(Patterns.LOGICAL)) {
