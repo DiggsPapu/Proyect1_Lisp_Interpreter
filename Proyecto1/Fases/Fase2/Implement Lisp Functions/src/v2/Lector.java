@@ -37,7 +37,7 @@ public class Lector {
 			
 		}else {
 //			System.out.print("No es nulo\n");
-			System.out.print(getCases(tokenizer.equalParenthesis(scan), getVariableStorage()));;
+			System.out.print(getCases(tokenizer.equalParenthesis(scan), getVariableStorage()));
 			
 		}
 		
@@ -118,81 +118,81 @@ public class Lector {
 			return null;
 		}
 	}
-	public static void main(String[] args) {
-		Lector lector = new Lector();
-		
-		System.out.print("Instruccion1: ");
-		lector.readInstruccion("(QUOTE jkl jkl)");
-		
-		System.out.print("Instruccion2: ");
-		lector.readInstruccion("(QUOTE \"jkl jkl\")");
-		
-
-		System.out.print("Instruccion3: ");
-		lector.readInstruccion("(setq valor0 (+ 1 ( * 2 (^ 3 9))) )");
-		System.out.print(lector.getVariableStorage().getVariableStorage().get("valor0"));
-		
-		System.out.print("Instruccion4: ");
-		lector.readInstruccion("(atom 29)");
-		
-		System.out.print("Instruccion5: ");
-		lector.readInstruccion("(atom 29)");
-		
-		System.out.print("Instruccion6: ");
-		lector.readInstruccion("(list 1 2 \"fdjks\" )");
-		
-		System.out.print("Instruccion7: ");
-		lector.readInstruccion("(list 1 2 \"fdjks\" (- 57 valor0 ) )");
-		
-		System.out.print("Instruccion8: ");
-		lector.readInstruccion("(= \" fdjskl\" 8)");
-		
-		System.out.print("Instruccion9: ");
-		lector.readInstruccion("(= 8 8)");
-		
-		System.out.print("Instruccion10: ");
-		lector.readInstruccion("(= valor0 39367.0)");
-		
-		System.out.print("Instruccion11: ");
-		lector.readInstruccion("(= \"sjdk\" 8)");
-		
-		System.out.print("Instruccion12: ");
-		lector.readInstruccion("(= \"sjdk\" 8)");
-		
-		System.out.print("Instruccion13: ");
-		lector.readInstruccion("(= \"sjdk\" \"8\")");
-		
-		System.out.print("Instruccion14: ");
-		lector.readInstruccion("(= \"8\" \"8\")");
-		
-		System.out.print("Instruccion15: ");
-		lector.readInstruccion("( \"8\" )");
-
-		System.out.print("Instruccion16: ");
-		lector.readInstruccion("( + 1 ( ^ 4 ( / 5 6)) )");
-		
-		System.out.print("Instruccion17: ");
-		lector.readInstruccion("( setq value1 \"sjdk\")");
-		
-		System.out.print("Instruccion18: ");
-		lector.readInstruccion("( setq value2 (^ 2 (+ 50 1)))");
-		
-		System.out.print("Instruccion19: ");//(cond (()) (()) (t()) )
-		lector.readInstruccion("(cond ((= value1 value2) (setq value3 \"hola soy diego\")) ((= value1 value1) (+ 1 23)) (t(quote value1)) )");
-		
-		System.out.print("Instruccion20: ");//(cond (()) (()) (t()) )
-		lector.readInstruccion("(cond ((= value1 value1) (setq value3 \"hola soy diego\")) ((= value1 value2) (+ 1 23)) (t(quote value1)) )");
-		
-		System.out.print("Instruccion21: ");//(cond (()) (()) (t()) )
-		lector.readInstruccion("(cond ((= value1 value2) (setq value3 \"hola soy diego\")) ((= value2 value1) (+ 1 23)) (t(quote value1)) )");
-		
-		System.out.print("Instruccion22: ");//(cond (()) (()) (t()) )
-		lector.readInstruccion("(cond ((= 1 2) (setq value3 \"hola soy diego\")) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) (+ 1 1)) ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
-		
-		System.out.print("Instruccion23: ");//(cond (()) (()) (t()) )
-		lector.readInstruccion("(cond ((= 1 2) (setq value3 \"hola soy diego\")) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) \"funciona\") ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
-		System.out.print("Instruccion24: ");//(cond (()) (()) (t()) )
-		lector.readInstruccion("(cond ((= 1 1) (cond ((= 4 5) \"Hola soy guapo\") ((= 2 2) (list 1 2)) (t(setq value7 1)) )) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) \"funciona\") ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
-		
-	}
+//	public static void main(String[] args) {
+//		Lector lector = new Lector();
+//		
+//		System.out.print("Instruccion1: ");
+//		lector.readInstruccion("(QUOTE jkl jkl)");
+//		
+//		System.out.print("Instruccion2: ");
+//		lector.readInstruccion("(QUOTE \"jkl jkl\")");
+//		
+//
+//		System.out.print("Instruccion3: ");
+//		lector.readInstruccion("(setq valor0 (+ 1 ( * 2 (^ 3 9))) )");
+//		System.out.print(lector.getVariableStorage().getVariableStorage().get("valor0"));
+//		
+//		System.out.print("Instruccion4: ");
+//		lector.readInstruccion("(atom 29)");
+//		
+//		System.out.print("Instruccion5: ");
+//		lector.readInstruccion("(atom 29)");
+//		
+//		System.out.print("Instruccion6: ");
+//		lector.readInstruccion("(list 1 2 \"fdjks\" )");
+//		
+//		System.out.print("Instruccion7: ");
+//		lector.readInstruccion("(list 1 2 \"fdjks\" (- 57 valor0 ) )");
+//		
+//		System.out.print("Instruccion8: ");
+//		lector.readInstruccion("(= \" fdjskl\" 8)");
+//		
+//		System.out.print("Instruccion9: ");
+//		lector.readInstruccion("(= 8 8)");
+//		
+//		System.out.print("Instruccion10: ");
+//		lector.readInstruccion("(= valor0 39367.0)");
+//		
+//		System.out.print("Instruccion11: ");
+//		lector.readInstruccion("(= \"sjdk\" 8)");
+//		
+//		System.out.print("Instruccion12: ");
+//		lector.readInstruccion("(= \"sjdk\" 8)");
+//		
+//		System.out.print("Instruccion13: ");
+//		lector.readInstruccion("(= \"sjdk\" \"8\")");
+//		
+//		System.out.print("Instruccion14: ");
+//		lector.readInstruccion("(= \"8\" \"8\")");
+//		
+//		System.out.print("Instruccion15: ");
+//		lector.readInstruccion("( \"8\" )");
+//
+//		System.out.print("Instruccion16: ");
+//		lector.readInstruccion("( + 1 ( ^ 4 ( / 5 6)) )");
+//		
+//		System.out.print("Instruccion17: ");
+//		lector.readInstruccion("( setq value1 \"sjdk\")");
+//		
+//		System.out.print("Instruccion18: ");
+//		lector.readInstruccion("( setq value2 (^ 2 (+ 50 1)))");
+//		
+//		System.out.print("Instruccion19: ");//(cond (()) (()) (t()) )
+//		lector.readInstruccion("(cond ((= value1 value2) (setq value3 \"hola soy diego\")) ((= value1 value1) (+ 1 23)) (t(quote value1)) )");
+//		
+//		System.out.print("Instruccion20: ");//(cond (()) (()) (t()) )
+//		lector.readInstruccion("(cond ((= value1 value1) (setq value3 \"hola soy diego\")) ((= value1 value2) (+ 1 23)) (t(quote value1)) )");
+//		
+//		System.out.print("Instruccion21: ");//(cond (()) (()) (t()) )
+//		lector.readInstruccion("(cond ((= value1 value2) (setq value3 \"hola soy diego\")) ((= value2 value1) (+ 1 23)) (t(quote value1)) )");
+//		
+//		System.out.print("Instruccion22: ");//(cond (()) (()) (t()) )
+//		lector.readInstruccion("(cond ((= 1 2) (setq value3 \"hola soy diego\")) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) (+ 1 1)) ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
+//		
+//		System.out.print("Instruccion23: ");//(cond (()) (()) (t()) )
+//		lector.readInstruccion("(cond ((= 1 2) (setq value3 \"hola soy diego\")) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) \"funciona\") ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
+//		System.out.print("Instruccion24: ");//(cond (()) (()) (t()) )
+//		lector.readInstruccion("(cond ((= 1 1) (cond ((= 4 5) \"Hola soy guapo\") ((= 2 2) (list 1 2)) (t(setq value7 1)) )) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) \"funciona\") ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
+//		
+//	}
 }

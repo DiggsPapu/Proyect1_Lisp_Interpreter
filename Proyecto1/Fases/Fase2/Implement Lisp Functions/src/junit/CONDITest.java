@@ -37,6 +37,8 @@ class CONDITest {
 		assertEquals(cond11, "1");
 		String cond12 =CONDI.COND(tokenizer.equalParenthesis("(cond  ((>11 2) (setq value 23) ) ((= 1 1) (list 1 2 3) ) (t (quote 1 2 3)) )"), var);
 		assertEquals(cond12, "23"); 
+		String cond13 =CONDI.COND(tokenizer.equalParenthesis("(cond  ((<11 2) (setq value 23) ) ((< 1 1) (list 1 2 3) ) (t (quote 1 2 3)) )"), var);
+		assertEquals(cond13, "[1, 2, 3]"); 
 		
 		
 		//"(cond  (() ) (() ) (() ))"

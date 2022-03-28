@@ -1,7 +1,7 @@
 package v2;
 
 import java.util.LinkedList;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class SETQ {
 	public SETQ() {
@@ -59,17 +59,17 @@ public class SETQ {
 			System.out.print("La lista no es valida\n");
 		}
 	}
-	public static void main(String[] args) {
-		Scanner scann = new Scanner(System.in);
-		VariableStorage vs = new VariableStorage();
-		
-		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(setq valor1 (+ 1 2 ))"), vs);
-		System.out.print(vs.getVariableStorage().get("valor1")+"\n");
-		
-		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(setq valor2 (< 1 2))"), vs);
-		System.out.print(vs.getVariableStorage().get("valor2")+"\n");
-		
-		scann.close();
-	}
+//	public static void main(String[] args) {
+//		Scanner scann = new Scanner(System.in);
+//		VariableStorage vs = new VariableStorage();
+//		
+//		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(setq valor1 (+ 1 2 ))"), vs);
+//		System.out.print(vs.getVariableStorage().get("valor1")+"\n");
+//		
+//		SETQ.evaluateSETQ(tokenizer.equalParenthesis("(setq valor2 (< 1 2))"), vs);
+//		System.out.print(vs.getVariableStorage().get("valor2")+"\n");
+//		
+//		scann.close();
+//	}
 	
 }

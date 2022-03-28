@@ -138,7 +138,6 @@ public class Function {
 			Calculator calc = new Calculator (ins, var);
 //			System.out.print("entro");
 			if (ins.get(1).matches(Patterns.LOGICAL)) {
-				
 				return Boolean.toString(calc.ResultComp());
 			}else if (ins.get(1).matches(Patterns.ARITHMETIC)) {
 				return Float.toString(calc.Result());
