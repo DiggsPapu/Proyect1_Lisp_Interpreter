@@ -3,7 +3,14 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Predicates {
-
+/**
+ * Este metodo es para evaluar una lista que se comporta como cola
+ * La caracteristica principal es que este metodo evalua en caso la lista tenga el patron lista.
+ * De manera que se retorna una lista con los parametros indicados de la lista
+ * @param lista0
+ * @param variableStorage
+ * @return lista de string
+ */
 public static LinkedList<String> evaluateList(LinkedList<String> lista0, VariableStorage variableStorage) {
 		
 		if (lista0!= null) {
@@ -116,7 +123,13 @@ public static LinkedList<String> evaluateList(LinkedList<String> lista0, Variabl
 	}
 
 
-
+/**
+ * Evaluacion de atom, esta funcion sirve para evaluar un set de instrucciones que se comporte como un atom.
+ * De manera que evalue si es atom y devuelva una lista con los valores del atom.
+ * @param lista1
+ * @param variableStorage
+ * @return lista de string
+ */
 public static LinkedList<String> evaluateAtom(LinkedList<String> lista1, VariableStorage variableStorage) {
 	if ( lista1!= null ) {
 		if ( lista1.get(1).equals(Patterns.ATOM) || lista1.get(1).equals("atom")) {
@@ -200,7 +213,11 @@ public static LinkedList<String> evaluateAtom(LinkedList<String> lista1, Variabl
 	
 	
 }
-
+/**
+ * En el caso de que sea un quote solo retornara una lista con los elementos que habian en el quote sin ejecutarlos
+ * @param lista2
+ * @return lista de string
+ */
 public static LinkedList<String> caseQuote(LinkedList<String> lista2){
 	if (lista2!=null) {
 		if (lista2.get(1).equals(Patterns.QUOTE) || lista2.get(1).equals("quote")) {
@@ -231,7 +248,13 @@ public static LinkedList<String> caseQuote(LinkedList<String> lista2){
 	}
 	
 }
-
+/**
+ * Este es el metodo que sirve para evaluar igualdades no solo de numeros si no que tambien de string
+ * Asi mismo, esta funcion tiene un algoritmo basado en colas.
+ * @param lista3
+ * @param variableStorage
+ * @return
+ */
 public static Boolean caseEqual(LinkedList<String> lista3, VariableStorage variableStorage) {
 	if (lista3!= null) {
 		if (lista3.get(1).equals("EQUAL") || lista3.get(1).equals("equal") || lista3.get(1).equals("=")) {
