@@ -1,6 +1,6 @@
 package v2;
 /**
-* Este metodo se utiliza para almacenar las palabras y simbolos protegidos
+* Este metodo se utiliza para almacenar las palabras y simbolos protegidos.
 */
 public class Patterns {
 	protected static final String LETTER = "[a-zA-Z]";
