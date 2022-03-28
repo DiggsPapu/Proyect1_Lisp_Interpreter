@@ -41,7 +41,7 @@ class CalculatorTest {
 		   assertEquals(calc6.Result(),0.0);
 		   
 		   System.out.print("Ingrese una operacion con comillas"); //como este (+ 1 "fkjds")
-		   Calculator calc7 = new Calculator(tokenizer.equalParenthesis(scann.nextLine()),variableStorage);
+		   Calculator calc7 = new Calculator(tokenizer.equalParenthesis("(+ 1 \"fkjds\")"),variableStorage);
 		   assertEquals(calc7.Result(), 0.0);
 		   
 		   Calculator calc8 = new Calculator(tokenizer.equalParenthesis("(> (^ 10 3) (* 9 valor))"),variableStorage);

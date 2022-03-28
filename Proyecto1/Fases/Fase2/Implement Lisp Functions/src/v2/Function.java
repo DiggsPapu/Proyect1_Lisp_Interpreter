@@ -367,47 +367,47 @@ public class Function {
 	
 	
 	
-	public static void main(String[] args) {
-		VariableStorage var = new VariableStorage();
-		FunctionStorage fu = new FunctionStorage();
-		
-		Function.Defun(tokenizer.equalParenthesis("(DEFUN operacion1 (arg arg1 arg2) (+ arg1 (* arg2 (^ arg2 arg1))) )"), var, fu);
-		System.out.print(fu.getFunction().get("operacion1")+"\n");
-		System.out.print(Function.functionExecution(tokenizer.equalParenthesis("(operacion1 4 3 2)"), fu, var)+"\n");
-		System.out.print(Function.functionExecution(tokenizer.equalParenthesis("(operacion1 3 3 7)"), fu, var)+"\n");
-		
-		Function.Defun(tokenizer.equalParenthesis("(DEFUN valorNuevo (arg0 arg1 arg2 arg3) (setq valor1 (/ arg3 (- arg2 (* arg1 arg3)))) )"), var, fu);
-		Function.functionExecution(tokenizer.equalParenthesis("(valorNuevo 5 3 1 900)"), fu, var);
-		System.out.print(var.getVariableStorage().get("valor1")+"\n");
-		
-		Function.Defun(tokenizer.equalParenthesis("(DEFUN listaNueva (arg0 arg1 arg2 arg3) (list (/ arg3 (- arg2 (* arg1 arg3))) valor1 9 \"listaa\")  )"), var, fu);
-		Function.functionExecution(tokenizer.equalParenthesis("(listaNueva 5 3 1 2)"), fu, var);
-		
-		Function.Defun(tokenizer.equalParenthesis("(DEFUN atomNuevo (arg0 arg1 arg2 arg3) (atom 7)  )"), var, fu);
-		Function.functionExecution(tokenizer.equalParenthesis("(atomNuevo 5 3 1 2)"), fu, var);
-		
-		Function.Defun(tokenizer.equalParenthesis("(DEFUN quoteNuevo (arg0 arg1 arg2 arg3) (quote arg0 fdkssjl asjkl doe0)  )"), var, fu);
-		Function.functionExecution(tokenizer.equalParenthesis("(quoteNuevo 5 3 1 2)"), fu, var);
-		
-		
-		System.out.print("\n");
-		LinkedList<String> list = tokenizer.equalParenthesis("(1 (+ 1 2) 9)");
-		list.removeFirst();
-		list.removeLast();
-		LinkedList<String> list1 = tokenizer.equalParenthesis("(2 (= 1 2) 4 \"hola\")");
-		list1.removeFirst();
-		list1.removeLast();
-		System.out.print(Function.variableCases(list1, var, fu));
-		
-		LinkedList<String> call = new LinkedList<String>(Function.variableCases(list, var, fu));
-		System.out.print("\n"+call);
-		LinkedList<String> params = tokenizer.equalParenthesis("(arg1 arg2 arg3)");
-		params.removeFirst();
-		params.removeLast();
-		
-		LinkedList<String> list4 = tokenizer.equalParenthesis("(+ arg1 (* arg2 (^ arg2 arg1)))");
-		System.out.print(Function.changeArgs(call, params, list4, var, fu));
-		
-		
-	}
+//	public static void main(String[] args) {
+//		VariableStorage var = new VariableStorage();
+//		FunctionStorage fu = new FunctionStorage();
+//		
+//		Function.Defun(tokenizer.equalParenthesis("(DEFUN operacion1 (arg arg1 arg2) (+ arg1 (* arg2 (^ arg2 arg1))) )"), var, fu);
+//		System.out.print(fu.getFunction().get("operacion1")+"\n");
+//		System.out.print(Function.functionExecution(tokenizer.equalParenthesis("(operacion1 4 3 2)"), fu, var)+"\n");
+//		System.out.print(Function.functionExecution(tokenizer.equalParenthesis("(operacion1 3 3 7)"), fu, var)+"\n");
+//		
+//		Function.Defun(tokenizer.equalParenthesis("(DEFUN valorNuevo (arg0 arg1 arg2 arg3) (setq valor1 (/ arg3 (- arg2 (* arg1 arg3)))) )"), var, fu);
+//		Function.functionExecution(tokenizer.equalParenthesis("(valorNuevo 5 3 1 900)"), fu, var);
+//		System.out.print(var.getVariableStorage().get("valor1")+"\n");
+//		
+//		Function.Defun(tokenizer.equalParenthesis("(DEFUN listaNueva (arg0 arg1 arg2 arg3) (list (/ arg3 (- arg2 (* arg1 arg3))) valor1 9 \"listaa\")  )"), var, fu);
+//		Function.functionExecution(tokenizer.equalParenthesis("(listaNueva 5 3 1 2)"), fu, var);
+//		
+//		Function.Defun(tokenizer.equalParenthesis("(DEFUN atomNuevo (arg0 arg1 arg2 arg3) (atom 7)  )"), var, fu);
+//		Function.functionExecution(tokenizer.equalParenthesis("(atomNuevo 5 3 1 2)"), fu, var);
+//		
+//		Function.Defun(tokenizer.equalParenthesis("(DEFUN quoteNuevo (arg0 arg1 arg2 arg3) (quote arg0 fdkssjl asjkl doe0)  )"), var, fu);
+//		Function.functionExecution(tokenizer.equalParenthesis("(quoteNuevo 5 3 1 2)"), fu, var);
+//		
+//		
+//		System.out.print("\n");
+//		LinkedList<String> list = tokenizer.equalParenthesis("(1 (+ 1 2) 9)");
+//		list.removeFirst();
+//		list.removeLast();
+//		LinkedList<String> list1 = tokenizer.equalParenthesis("(2 (= 1 2) 4 \"hola\")");
+//		list1.removeFirst();
+//		list1.removeLast();
+//		System.out.print(Function.variableCases(list1, var, fu));
+//		
+//		LinkedList<String> call = new LinkedList<String>(Function.variableCases(list, var, fu));
+//		System.out.print("\n"+call);
+//		LinkedList<String> params = tokenizer.equalParenthesis("(arg1 arg2 arg3)");
+//		params.removeFirst();
+//		params.removeLast();
+//		
+//		LinkedList<String> list4 = tokenizer.equalParenthesis("(+ arg1 (* arg2 (^ arg2 arg1)))");
+//		System.out.print(Function.changeArgs(call, params, list4, var, fu));
+//		
+//		
+//	}
 }

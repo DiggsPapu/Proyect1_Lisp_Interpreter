@@ -235,31 +235,31 @@ public class Calculator {
 		   return null;
 	   }
    }
-   public static void main(String[] args) {
-	   VariableStorage variableStorage = new VariableStorage();
-	   Scanner scann = new Scanner(System.in);
-	   Calculator calc = new Calculator(tokenizer.equalParenthesis("(+ 1 (* 9 4))"),variableStorage);
-	   System.out.print(calc.Result()+"\n");
-	   variableStorage.CreateVariable("valor", "50");
-	   Calculator calc1 = new Calculator(tokenizer.equalParenthesis("(+ 1 (* valor 4))"),variableStorage);
-	   System.out.print(calc1.Result()+"\n");
-	   Calculator calc0 = new Calculator(tokenizer.equalParenthesis("(+ 1 (/ valor 0))"),variableStorage);
-	   System.out.print(calc0.Result()+"\n");
-	   Calculator calc2 = new Calculator(tokenizer.equalParenthesis("(< 1 9)"),variableStorage);
-	   System.out.print(calc2.ResultComp()+"\n");
-	   Calculator calc3 = new Calculator(tokenizer.equalParenthesis("(> 1 9)"),variableStorage);
-	   System.out.print(calc3.ResultComp()+"\n");
-	   Calculator calc4 = new Calculator(tokenizer.equalParenthesis("(> (^ 1 8) (* 9 valor))"),variableStorage);
-	   System.out.print(calc4.ResultComp()+"\n");
-	   Calculator calc5 = new Calculator(tokenizer.equalParenthesis("(< (^ 1 8) (* 9 valor))"),variableStorage);
-	   System.out.print(calc5.ResultComp()+"\n");
-	   Calculator calc6 = new Calculator(tokenizer.equalParenthesis("(+ 1 (/ valor 0)))"),variableStorage);
-	   System.out.print(calc6.Result()+"\n");
-	   System.out.print("Ingrese una operacion con comillas");
-	   Calculator calc7 = new Calculator(tokenizer.equalParenthesis(scann.nextLine()),variableStorage);
-	   System.out.print(calc7.Result()+"\n");
-	   scann.close();
-   }
+//   public static void main(String[] args) {
+//	   VariableStorage variableStorage = new VariableStorage();
+//	   Scanner scann = new Scanner(System.in);
+//	   Calculator calc = new Calculator(tokenizer.equalParenthesis("(+ 1 (* 9 4))"),variableStorage);
+//	   System.out.print(calc.Result()+"\n");
+//	   variableStorage.CreateVariable("valor", "50");
+//	   Calculator calc1 = new Calculator(tokenizer.equalParenthesis("(+ 1 (* valor 4))"),variableStorage);
+//	   System.out.print(calc1.Result()+"\n");
+//	   Calculator calc0 = new Calculator(tokenizer.equalParenthesis("(+ 1 (/ valor 0))"),variableStorage);
+//	   System.out.print(calc0.Result()+"\n");
+//	   Calculator calc2 = new Calculator(tokenizer.equalParenthesis("(< 1 9)"),variableStorage);
+//	   System.out.print(calc2.ResultComp()+"\n");
+//	   Calculator calc3 = new Calculator(tokenizer.equalParenthesis("(> 1 9)"),variableStorage);
+//	   System.out.print(calc3.ResultComp()+"\n");
+//	   Calculator calc4 = new Calculator(tokenizer.equalParenthesis("(> (^ 1 8) (* 9 valor))"),variableStorage);
+//	   System.out.print(calc4.ResultComp()+"\n");
+//	   Calculator calc5 = new Calculator(tokenizer.equalParenthesis("(< (^ 1 8) (* 9 valor))"),variableStorage);
+//	   System.out.print(calc5.ResultComp()+"\n");
+//	   Calculator calc6 = new Calculator(tokenizer.equalParenthesis("(+ 1 (/ valor 0)))"),variableStorage);
+//	   System.out.print(calc6.Result()+"\n");
+//	   System.out.print("Ingrese una operacion con comillas");
+//	   Calculator calc7 = new Calculator(tokenizer.equalParenthesis(scann.nextLine()),variableStorage);
+//	   System.out.print(calc7.Result()+"\n");
+//	   scann.close();
+//   }
 }
 
 
