@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import function.Calculator;
-import function.VariableStorage;
-import function.tokenizer;
+import v2.VariableStorage;
+import v2.Calculator;
+import v2.tokenizer;
 
 class CalculatorTest {
 

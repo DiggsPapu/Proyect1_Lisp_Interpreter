@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import function.Predicates;
-import function.VariableStorage;
-import function.tokenizer;
+import v2.VariableStorage;
+import v2.Predicates;
+import v2.tokenizer;
 
 class PredicatesTest {
 

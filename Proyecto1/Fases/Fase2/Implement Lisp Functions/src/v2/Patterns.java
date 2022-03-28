@@ -1,4 +1,4 @@
-package function;
+package v2;
 
 public class Patterns {
 	protected static final String LETTER = "[a-zA-Z]";

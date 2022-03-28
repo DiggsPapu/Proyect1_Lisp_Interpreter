@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import function.tokenizer;
+import v2.tokenizer;
 
 import java.util.Scanner;
 class testTokenizer {

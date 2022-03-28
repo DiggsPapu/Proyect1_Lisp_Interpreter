@@ -1,4 +1,4 @@
-package function;
+package v2;
 
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -235,10 +235,80 @@ public static LinkedList<String> caseQuote(LinkedList<String> lista2){
 	}
 	
 }
-
+//public static Boolean caseIgualdades(LinkedList<String> lista4, VariableStorage var, FunctionStorage fun) {
+//	if (lista3!= null) {
+//		if (lista3.get(1).equals("EQUAL") || lista3.get(1).equals("equal") || lista3.get(1).equals("=")) {
+//			//Se remueven los parentesis que encierran la expresion y se remueve el equal o un igual
+//			LinkedList<String> evaluateList = new LinkedList<String>(lista3);
+//			evaluateList.removeFirst();
+//			evaluateList.removeFirst();
+//			evaluateList.removeLast();
+//			// Si es un equal deben de quedar solo dos tokens a menos que sea operaciones
+//			if (evaluateList.size()==2) {
+//				//Si los dos tienen nombres validos 
+//				if (evaluateList.getFirst().matches(Patterns.VALID_NAME) && evaluateList.getLast().matches(Patterns.VALID_NAME)) {
+//					//Se hace un try and catch en el caso de que alguno sea nulo entonces dara error y no se mostrara.
+//					try{
+//						//Si son iguales se retorna true
+//						if (variableStorage.getVariableStorage().get(evaluateList.getFirst()).equals(variableStorage.getVariableStorage().get(evaluateList.getLast()))  ) {
+////							System.out.print("true");
+//							return true;
+//						}
+//						//Si no son iguales se retorna false
+//						else {
+////							System.out.print("false");
+//							return false;
+//						}
+//					}
+//					catch(Exception e) {
+//						System.out.print("Al menos uno de los valores ingresados no existe en el almacenamiento\n");
+//						return null;
+//					}
+//					
+//				} 
+//				//Si alguno es un patron de nombre valido
+//				else if ((evaluateList.getFirst().matches(Patterns.VALID_NAME) || evaluateList.getLast().matches(Patterns.VALID_NAME))) {
+//					
+//					if (variableStorage.getVariableStorage().containsKey(evaluateList.getFirst())) {
+////						System.out.print(variableStorage.getVariableStorage().get(evaluateList.getFirst()).equals(evaluateList.getLast()) );
+//						return variableStorage.getVariableStorage().get(evaluateList.getFirst()).equals(evaluateList.getLast()) ;
+//					}
+//					else if (variableStorage.getVariableStorage().containsKey(evaluateList.getLast())) {
+////						System.out.print(variableStorage.getVariableStorage().get(evaluateList.getLast()).equals(evaluateList.getFirst()) );
+//						return variableStorage.getVariableStorage().get(evaluateList.getLast()).equals(evaluateList.getFirst()) ;
+//					}
+//					else {
+//						return null;
+//					}
+//					
+//				}else if (evaluateList.getFirst().startsWith(" ") && !evaluateList.getLast().startsWith(" ")){
+//					return null;
+//				}
+//				else {
+////					System.out.print(evaluateList.getFirst().equals(evaluateList.getLast()));
+//					return evaluateList.getFirst().equals(evaluateList.getLast());
+//				}
+//			}else if((evaluateList.getFirst().equals("(") && evaluateList.getLast().equals(")") ) && evaluateList.get(1).matches(Patterns.OPERATIONS)) {
+//				Calculator calc = new Calculator (lista3, variableStorage);
+//				return calc.ResultComp();
+//			}
+//			else {
+//				System.out.print("Es un equal con mas de 1 argumento, no es valido\n");
+//				return null;
+//			}
+//			
+//		}else {
+//			System.out.print("No es un equal\n");
+//			return null;
+//		}
+//	}
+//	else {
+//		return null;
+//	}
+//}
 public static Boolean caseEqual(LinkedList<String> lista3, VariableStorage variableStorage) {
 	if (lista3!= null) {
-		if (lista3.get(1).equals("EQUAL") || lista3.get(1).equals("equal") || lista3.get(1).equals("=") || lista3.get(1).matches(Patterns.LOGICAL)) {
+		if (lista3.get(1).equals("EQUAL") || lista3.get(1).equals("equal") || lista3.get(1).equals("=")) {
 			//Se remueven los parentesis que encierran la expresion y se remueve el equal o un igual
 			LinkedList<String> evaluateList = new LinkedList<String>(lista3);
 			evaluateList.removeFirst();
@@ -268,7 +338,7 @@ public static Boolean caseEqual(LinkedList<String> lista3, VariableStorage varia
 					
 				} 
 				//Si alguno es un patron de nombre valido
-				else if (evaluateList.getFirst().matches(Patterns.VALID_NAME) || evaluateList.getLast().matches(Patterns.VALID_NAME)) {
+				else if ((evaluateList.getFirst().matches(Patterns.VALID_NAME) || evaluateList.getLast().matches(Patterns.VALID_NAME))) {
 					
 					if (variableStorage.getVariableStorage().containsKey(evaluateList.getFirst())) {
 //						System.out.print(variableStorage.getVariableStorage().get(evaluateList.getFirst()).equals(evaluateList.getLast()) );
@@ -307,61 +377,61 @@ public static Boolean caseEqual(LinkedList<String> lista3, VariableStorage varia
 		return null;
 	}
 }
-//	public static void main(String[] args) {
-//		Scanner scann = new Scanner(System.in);
-//		VariableStorage vs = new VariableStorage();
-//		vs.CreateVariable("value", "8293");
-//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list 1 2 value )"), vs)+"\n");
-//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  )"), vs)+"\n");
-//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom 1)"), vs) +"\n");
-//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom value)"), vs) + "\n");
-//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom )"), vs) + "\n");
-//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (+ 1 2))"), vs) + "\n");
-//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (= 1 value))"), vs) + "\n");
-//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list (+ 1 2) 3 4 value )"), vs)+"\n");
-//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (+ 100 value) 0 1 )"), vs)+"\n");
-//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (< 100 value) 0 1 )"), vs)+"\n");
-//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (> 100 value) 0 1 )"), vs)+"\n");
-//		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (= 100 100) 0 1 )"), vs)+"\n");
-//		
-//		System.out.print("Ingrese un atom que sea valido con comillas: "); // por ejemplo (atom "fjdkls")
-//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
-//		System.out.print("Ingrese un atom que no sea valido con comillas: "); // por ejemplo (atom "fjdkls)
-//		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
-//		System.out.print("Ingrese un lista valida con comillas: "); //por ejemplo (list (^ 23 (+ 2 3 )) "hola"  )
-//		System.out.print("Lista2: "+ Predicates.evaluateList(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
+	public static void main(String[] args) {
+		Scanner scann = new Scanner(System.in);
+		VariableStorage vs = new VariableStorage();
+		vs.CreateVariable("value", "8293");
+		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list 1 2 value )"), vs)+"\n");
+		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  )"), vs)+"\n");
+		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom 1)"), vs) +"\n");
+		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom value)"), vs) + "\n");
+		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom )"), vs) + "\n");
+		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (+ 1 2))"), vs) + "\n");
+		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis("(atom (= 1 value))"), vs) + "\n");
+		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list (+ 1 2) 3 4 value )"), vs)+"\n");
+		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (+ 100 value) 0 1 )"), vs)+"\n");
+		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (< 100 value) 0 1 )"), vs)+"\n");
+		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (> 100 value) 0 1 )"), vs)+"\n");
+		System.out.print("Lista: " + Predicates.evaluateList(tokenizer.equalParenthesis("(list  (= 100 100) 0 1 )"), vs)+"\n");
 		
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 1 2)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 1 1)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(equal 1 2)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(equal 1 1)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= 1 2)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= 2 2)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL value 2)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 1 value)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 8293 value)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= value valor)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= value value)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= \"jfkdsl\" 2)"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= \"jfkdsl\"  \"jfkdsl\")"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= (+ 1 2)  (+ 1 2) )"), vs));
-//		System.out.print("\n");
-//		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= (+ 2 2)  (+ 1 2) )"), vs));
-//		System.out.print("\n");
-//		
-//		scann.close();
-//	}
+		System.out.print("Ingrese un atom que sea valido con comillas: "); // por ejemplo (atom "fjdkls")
+		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
+		System.out.print("Ingrese un atom que no sea valido con comillas: "); // por ejemplo (atom "fjdkls)
+		System.out.print("Atom: " + Predicates.evaluateAtom(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
+		System.out.print("Ingrese un lista valida con comillas: "); //por ejemplo (list (^ 23 (+ 2 3 )) "hola"  )
+		System.out.print("Lista2: "+ Predicates.evaluateList(tokenizer.equalParenthesis(scann.nextLine()), vs) + "\n");
+		
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 1 2)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 1 1)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(equal 1 2)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(equal 1 1)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= 1 2)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= 2 2)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL value 2)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 1 value)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(EQUAL 8293 value)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= value valor)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= value value)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= \"jfkdsl\" 2)"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= \"jfkdsl\"  \"jfkdsl\")"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= (+ 1 2)  (+ 1 2) )"), vs));
+		System.out.print("\n");
+		System.out.print(Predicates.caseEqual(tokenizer.equalParenthesis("(= (+ 2 2)  (+ 1 2) )"), vs));
+		System.out.print("\n");
+		
+		scann.close();
+	}
 }

@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import function.SETQ;
-import function.VariableStorage;
-import function.tokenizer;
+import v2.VariableStorage;
+import v2.SETQ;
+import v2.tokenizer;
 
 class SETQTest {
 

@@ -1,6 +1,9 @@
-package function;
+package v2;
 
 import java.util.LinkedList;
+
+import v2.FunctionStorage;
+import v2.VariableStorage;
 
 public class Lector {
 	private VariableStorage variableStorage;
@@ -32,47 +35,48 @@ public class Lector {
 	
 	public void readInstruccion(String scan) {
 		if (tokenizer.equalParenthesis(scan)==null) {
-			System.out.print("Es nulo\n");
+//			System.out.print("Es nulo\n");
 			
 		}else {
-			System.out.print("No es nulo\n");
+//			System.out.print("No es nulo\n");
 			getCases(tokenizer.equalParenthesis(scan), getVariableStorage());
 			
 		}
 		
 	}
 	
-	private void getCases(LinkedList<String> ins, VariableStorage variableStorage) {
+	private String getCases(LinkedList<String> ins, VariableStorage variableStorage) {
 		if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("quote") || ins.get(1).equals("QUOTE"))) {
-			Predicates.caseQuote(ins);
+			return Predicates.caseQuote(ins).toString();
 						
 		}
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("setq") || ins.get(1).equals("SETQ"))) {
 			SETQ.evaluateSETQ(ins, getVariableStorage());
-			System.out.print(getVariableStorage().getVariableStorage().get(ins.get(2))+"\n");
+			return getVariableStorage().getVariableStorage().get(ins.get(2));
 		}
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("atom") || ins.get(1).equals("ATOM"))) {
-			Predicates.evaluateAtom(ins, variableStorage);
+			return Predicates.evaluateAtom(ins, variableStorage).toString();
 		}
 
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("list") || ins.get(1).equals("LIST"))) {
-			Predicates.evaluateList(ins, variableStorage);
+			return Predicates.evaluateList(ins, variableStorage).toString();
 			
 		}
 
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("equal") || ins.get(1).equals("EQUAL") || ins.get(1).matches(Patterns.LOGICAL))) {
-			Predicates.caseEqual(ins, variableStorage);
 			if (Predicates.caseEqual(ins, variableStorage) ==null) {
-				System.out.print("La expresion no es correcta\n");
+				return null;
 			}else if(Predicates.caseEqual(ins, variableStorage)==false) {
-				System.out.print(false+"\n");
+				return "false";
 			}else {
-				System.out.print(true+"\n");
+				return "true";
 			}
 		}
 
 		else if (ins.size()==3) {
-			System.out.print(ins.get(1));
+			return ins.get(1);
+		}else if (ins.size()==1) {
+			return ins.get(0);
 		}
 
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && ins.get(1).matches(Patterns.OPERATIONS) ) {
@@ -80,29 +84,37 @@ public class Lector {
 			Calculator calc = new Calculator (ins, variableStorage);
 			
 			if (ins.get(1).matches(Patterns.LOGICAL)) {
-				System.out.print(calc.ResultComp());
+				System.out.print(Boolean.toString(calc.ResultComp()));
+				return Boolean.toString(calc.ResultComp());
 			}else if (ins.get(1).matches(Patterns.ARITHMETIC)) {
-				System.out.print(calc.Result());
+				System.out.print(Float.toString(calc.Result()));
+				return Float.toString(calc.Result());
 			}else {
 				System.out.print("No es operacion valida");
+				return null;
 			}
 		}
 		
 		else if (ins.getFirst().equals("(") && ins.getLast().equals(")") && (ins.get(1).equals("cond") || ins.get(1).equals("COND"))) {
-			CONDI.COND(ins, variableStorage);
+			return CONDI.COND(ins, variableStorage);
+		}
+		else {
+			return null;
 		}
 	}
 	public static void main(String[] args) {
 		Lector lector = new Lector();
+		
 		System.out.print("Instruccion1: ");
 		lector.readInstruccion("(QUOTE jkl jkl)");
 		
 		System.out.print("Instruccion2: ");
-		lector.readInstruccion("(QUOTE \"jkl jkl)");
+		lector.readInstruccion("(QUOTE \"jkl jkl\")");
 		
 
 		System.out.print("Instruccion3: ");
-		lector.readInstruccion("(SETQ valor0 (+ 1 ( * 2 (^ 3 9))))");
+		lector.readInstruccion("(setq valor0 (+ 1 ( * 2 (^ 3 9))) )");
+		System.out.print(lector.getVariableStorage().getVariableStorage().get("valor0"));
 		
 		System.out.print("Instruccion4: ");
 		lector.readInstruccion("(atom 29)");
@@ -111,7 +123,7 @@ public class Lector {
 		lector.readInstruccion("(atom 29)");
 		
 		System.out.print("Instruccion6: ");
-		lector.readInstruccion("(list 1 2 \"fdjks\" (- 57 value ) )");
+		lector.readInstruccion("(list 1 2 \"fdjks\" )");
 		
 		System.out.print("Instruccion7: ");
 		lector.readInstruccion("(list 1 2 \"fdjks\" (- 57 valor0 ) )");
@@ -163,7 +175,6 @@ public class Lector {
 		
 		System.out.print("Instruccion23: ");//(cond (()) (()) (t()) )
 		lector.readInstruccion("(cond ((= 1 2) (setq value3 \"hola soy diego\")) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) \"funciona\") ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
-		
 		System.out.print("Instruccion24: ");//(cond (()) (()) (t()) )
 		lector.readInstruccion("(cond ((= 1 1) (cond ((= 4 5) \"Hola soy guapo\") ((= 2 2) (list 1 2)) (t(setq value7 1)) )) ((= 5 6) (+ 1 23)) (t(cond ((= 1 1) \"funciona\") ((= 3 4) \"jdf\") (t(setq value5 23)) )) )");
 		
