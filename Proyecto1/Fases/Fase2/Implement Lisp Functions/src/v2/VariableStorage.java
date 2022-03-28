@@ -3,7 +3,7 @@ package v2;
 
 import java.util.TreeMap;
 /**
-* Este metodo constructor para generar las operaciones
+* Este metodo constructor
 */
 public class VariableStorage {
 	private TreeMap<String, String> variableStorage;
