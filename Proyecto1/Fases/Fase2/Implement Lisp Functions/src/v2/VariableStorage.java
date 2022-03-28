@@ -3,7 +3,7 @@ package v2;
 
 import java.util.TreeMap;
 /**
-* Este metodo constructor
+* Es el metodo constructor
 */
 public class VariableStorage {
 	private TreeMap<String, String> variableStorage;
