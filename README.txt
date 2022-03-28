@@ -1,0 +1,1 @@
+para utilizarlo simplemente correr el Main que se encuentra en \Proyecto1\Fases\Fase2\Implement Lisp Functions\src\v2 e ingresar las instrucciones que se desean realizar
