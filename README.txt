@@ -8,3 +8,6 @@ Diagrama de Usos:			https://app.diagrams.net/?src=about#HDiggsPapu%2FProyect1_Li
 
 Para acceder al repositorio dirigirse al siguiente link:
 https://github.com/DiggsPapu/Proyect1_Lisp_Interpreter
+
+Link del video de explicación:
+https://drive.google.com/drive/folders/1UWixAP5Q4Vx77dgxezNzRQoX0Bj7-T3-?usp=sharing
